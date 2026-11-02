@@ -10,9 +10,8 @@
   "lodging": 25,
   "institutional_lodging": 1,
   "hotel": 20,
-  "apartments": 1,
-  "tenement": 20,
-  "apartment": 2
+  "apartments": 3,
+  "tenement": 20
  },
  "geojson": "el_paso_1908_lodging.geojson"
 }

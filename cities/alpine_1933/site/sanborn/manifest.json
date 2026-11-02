@@ -1,0 +1,70 @@
+[
+ {
+  "sheet": 2,
+  "file": "sanborn/sheet_2.webp",
+  "topleft": [
+   30.362901008690567,
+   -103.66511786666354
+  ],
+  "topright": [
+   30.3617963143383,
+   -103.65853167141367
+  ],
+  "bottomleft": [
+   30.35616051687464,
+   -103.66663627503804
+  ],
+  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+ },
+ {
+  "sheet": 3,
+  "file": "sanborn/sheet_3.webp",
+  "topleft": [
+   30.36197507444463,
+   -103.66237298185312
+  ],
+  "topright": [
+   30.360870380092365,
+   -103.65578665039503
+  ],
+  "bottomleft": [
+   30.3552345826287,
+   -103.66389142162964
+  ],
+  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+ },
+ {
+  "sheet": 4,
+  "file": "sanborn/sheet_4.webp",
+  "topleft": [
+   30.364965409736445,
+   -103.65046494752592
+  ],
+  "topright": [
+   30.36386071538418,
+   -103.64387830293167
+  ],
+  "bottomleft": [
+   30.358224917920516,
+   -103.65198345949412
+  ],
+  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+ },
+ {
+  "sheet": 5,
+  "file": "sanborn/sheet_5.webp",
+  "topleft": [
+   30.366369327689913,
+   -103.66572842213596
+  ],
+  "topright": [
+   30.36526463333765,
+   -103.65914196687325
+  ],
+  "bottomleft": [
+   30.359628835873984,
+   -103.66724689045489
+  ],
+  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+ }
+]

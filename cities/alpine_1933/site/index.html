@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet-imageoverlay-rotated@0.2.1/Leaflet.ImageOverlay.Rotated.min.js"></script>
 <style>
 :root {
   --parchment: #EAE3D2; --parchment-deep: #DFD6BF; --ink: #2B2420;
@@ -99,7 +100,8 @@ a.back:hover { text-decoration: underline; }
     <div class="sidebar">
       <div class="card">
         <h2>About this map</h2>
-        <p>Points mark structures labeled on the printed Sanborn plates (Hotel, Rooming, Boarding, Apartments). Positions are placed by a single-landmark, scale-bar + compass-rose transform per sheet &mdash; block-level accuracy, not parcel-level. See <code>pipeline/georef.py</code> for the method.</p>
+        <p>Points mark structures labeled on the printed Sanborn plates (Hotel, Rooming, Boarding, Apartments). Positions and the four sheet images are placed by a single-landmark, scale-bar + compass-rose transform per sheet &mdash; block-level accuracy, not parcel-level. See <code>pipeline/georef.py</code> for the method. <span id="sheetLoadStatus">loading sheets&hellip;</span></p>
+        <p style="margin-top:10px;">Sheet opacity <input type="range" id="sheetOpacity" min="0" max="100" value="80" style="vertical-align:middle;"></p>
       </div>
       <div class="card">
         <h2>Selected</h2>
@@ -112,11 +114,67 @@ a.back:hover { text-decoration: underline; }
   </footer>
 </div>
 <script>
-const COLORS = { hotel: '#A6531C', boarding: '#3D5A6C', apartments: '#6B7A3A', tenements: '#8B3A62' };
+const TYPES = {
+  hotel:                 { label: "Hotel",                color: "#A6531C" },
+  boarding:              { label: "Boarding House",       color: "#3D5A6C" },
+  lodging:               { label: "Lodgings",             color: "#8A7B4E" },
+  tenement:              { label: "Tenement",             color: "#6B3F3F" },
+  apartments:            { label: "Apartments",           color: "#4E7A5C" },
+  institutional_lodging: { label: "Institutional (Y.M.C.A.)", color: "#5B5245" }
+};
+function typeInfo(t) { return TYPES[t] || { label: t.replace(/_/g,' '), color: "#8A7B4E" }; }
+const COLORS = Object.fromEntries(Object.entries(TYPES).map(([k,v]) => [k, v.color]));
 const map = L.map('map', { scrollWheelZoom: true }).setView([30.3598, -103.6600], 15);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+
+// ---- basemaps: street map + present-day aerial imagery (aerial default, matching El Paso) ----
+var streetBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '&copy; Esri &mdash; Esri, HERE, Garmin, FAO, NOAA, USGS',
+  maxZoom: 19
+});
+var aerialBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Aerial imagery &copy; Esri &mdash; Maxar, Earthstar Geographics, and the GIS User Community',
+  maxZoom: 20
 }).addTo(map);
+
+map.createPane('sanbornPane');
+map.getPane('sanbornPane').style.zIndex = 350;
+
+// ---- historic overlay: Feb 1933 Sanborn sheets, hand-georeferenced (single landmark + scale bar + compass rose per sheet) ----
+var sanbornGroup = L.layerGroup();
+var sheetOpacityVal = 0.80;
+var loadStatusEl = document.getElementById('sheetLoadStatus');
+
+fetch('sanborn/manifest.json')
+  .then(function(r) { return r.json(); })
+  .then(function(manifest) {
+    manifest.forEach(function(m) {
+      var overlay = L.imageOverlay.rotated(m.file, L.latLng(m.topleft), L.latLng(m.topright), L.latLng(m.bottomleft), {
+        opacity: sheetOpacityVal,
+        interactive: false,
+        pane: 'sanbornPane',
+        attribution: 'Sanborn Map Co. / Library of Congress'
+      });
+      overlay.addTo(sanbornGroup);
+    });
+    if (loadStatusEl) loadStatusEl.textContent = manifest.length + ' sheets loaded';
+    sanbornGroup.addTo(map);
+  })
+  .catch(function(err) {
+    console.warn('Could not load Sanborn sheet manifest:', err);
+    if (loadStatusEl) loadStatusEl.textContent = 'sheets unavailable (manifest not found)';
+  });
+
+var baseLayers = { 'Aerial imagery (present-day)': aerialBase, 'Street map': streetBase };
+var overlayLayers = { '1933 Sanborn sheets': sanbornGroup };
+L.control.layers(baseLayers, overlayLayers, { collapsed: false }).addTo(map);
+
+var opacitySlider = document.getElementById('sheetOpacity');
+if (opacitySlider) {
+  opacitySlider.addEventListener('input', function() {
+    sheetOpacityVal = Number(opacitySlider.value) / 100;
+    sanbornGroup.eachLayer(function(l) { l.setOpacity(sheetOpacityVal); });
+  });
+}
 
 fetch('../alpine_1933_lodging.geojson').then(r => r.json()).then(gj => {
   const counts = {};
@@ -145,11 +203,11 @@ fetch('../alpine_1933_lodging.geojson').then(r => r.json()).then(gj => {
   const statsEl = document.getElementById('stats');
   statsEl.innerHTML = `<div class="stat"><div class="n">6</div><div class="l">sheets digitized</div></div>
     <div class="stat"><div class="n">${gj.features.length}</div><div class="l">structures recorded</div></div>` +
-    Object.keys(counts).map(k => `<div class="stat"><div class="n">${counts[k]}</div><div class="l">${k.replace(/_/g,' ')}</div></div>`).join('');
+    Object.keys(counts).map(k => `<div class="stat"><div class="n">${counts[k]}</div><div class="l">${typeInfo(k).label}</div></div>`).join('');
 
   const legendEl = document.getElementById('legend');
   legendEl.innerHTML = Object.keys(counts).map(k =>
-    `<span class="row"><span class="dot" style="background:${COLORS[k]||'#666'}"></span>${k.replace(/_/g,' ')} (${counts[k]})</span>`
+    `<span class="row"><span class="dot" style="background:${typeInfo(k).color}"></span>${typeInfo(k).label} (${counts[k]})</span>`
   ).join('');
 });
 </script>

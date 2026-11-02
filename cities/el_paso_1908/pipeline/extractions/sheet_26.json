@@ -1,0 +1,17 @@
+[
+ {"sheet":26,"tile":"tile_004_x0_y1650.png","fx":0.62,"fy":0.04,"label":"\"LAKOTA\"","type":"boarding","note":"Named boarding house","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_004_x0_y1650.png","fx":0.72,"fy":0.33,"label":"Lodgings (316)","type":"lodging","note":"D.2 - lodgings over 2-story dwelling","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_004_x0_y1650.png","fx":0.78,"fy":0.42,"label":"Boarding (unnamed)","type":"boarding","note":"Unnamed boarding house","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_004_x0_y1650.png","fx":0.80,"fy":0.80,"label":"Summit Place","type":"boarding","note":"Named boarding house","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_004_x0_y1650.png","fx":0.52,"fy":0.92,"label":"Y.M.C.A.","type":"institutional_lodging","note":"Club Rm 1st, Furnished Rms 2nd/3rd","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_001_x1650_y0.png","fx":0.63,"fy":0.43,"label":"Lodgings (318)","type":"lodging","note":"Lodgings, 2 stories","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_001_x1650_y0.png","fx":0.50,"fy":0.68,"label":"The \"RAMONA\"","type":"boarding","note":"Named boarding house, dining room in basement","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_005_x1650_y1650.png","fx":0.72,"fy":0.18,"label":"Hotel \"LIMA\"","type":"hotel","note":"N. Stanton St","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_005_x1650_y1650.png","fx":0.33,"fy":0.52,"label":"The \"BRAZOS\" Apartments","type":"apartments","note":"Named apartment building","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_005_x1650_y1650.png","fx":0.13,"fy":0.78,"label":"Lodgings (frame)","type":"lodging","note":"Frame construction, 1 & 2 story","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_005_x1650_y1650.png","fx":0.82,"fy":0.80,"label":"Hotel Delmar","type":"hotel","note":"Named hotel","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_006_x3300_y1650.png","fx":0.18,"fy":0.12,"label":"Lodgings (Kansas)","type":"lodging","note":"Near 1635 Kansas St","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_009_x1650_y3300.png","fx":0.23,"fy":0.05,"label":"The \"Alvarado\"","type":"hotel","note":"Named hotel/apartments","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_009_x1650_y3300.png","fx":0.28,"fy":0.90,"label":"Hotel \"Plaza\"","type":"hotel","note":"Named hotel","confidence":"medium-high"},
+ {"sheet":26,"tile":"tile_009_x1650_y3300.png","fx":0.62,"fy":0.65,"label":"Hotel \"Angelus\"","type":"hotel","note":"Adjoins Crawford Theatre","confidence":"medium-high"}
+]

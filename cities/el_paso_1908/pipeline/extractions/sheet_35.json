@@ -1,0 +1,7 @@
+[
+  {"sheet": 35, "tile": "tile_007_x6300_y3150.png", "fx": 0.13, "fy": 0.50, "label": "Orndorff Hotel", "type": "hotel", "note": "300-310 Mesa Ave; large hotel with Dining Room, Hotel Office, kitchen", "confidence": "high"},
+  {"sheet": 35, "tile": "tile_007_x6300_y3150.png", "fx": 0.70, "fy": 0.72, "label": "Hotel Beaumont", "type": "hotel", "note": "200-206 St. Louis Ave", "confidence": "high"},
+  {"sheet": 35, "tile": "tile_007_x6300_y3150.png", "fx": 0.90, "fy": 0.56, "label": "Hotel West", "type": "hotel", "note": "208-214 St. Louis Ave, adjacent to Evening News building", "confidence": "high"},
+  {"sheet": 35, "tile": "tile_008_x9450_y3150.png", "fx": 0.40, "fy": 0.60, "label": "Melrose House", "type": "lodging", "note": "207-213 N. Stanton St", "confidence": "high"},
+  {"sheet": 35, "tile": "tile_011_x3150_y6300.png", "fx": 0.60, "fy": 0.50, "label": "Sheldon Hotel", "type": "hotel", "note": "100-104 San Francisco/Little Plaza; lobby, dining room, writing room, barber passage, kitchen - large full-service hotel", "confidence": "high"}
+]

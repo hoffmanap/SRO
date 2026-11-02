@@ -1,0 +1,5 @@
+[
+  {"sheet": 41, "tile": "tile_006_x0_y3300.png", "fx": 0.60, "fy": 0.22, "label": "Tenements", "type": "tenement", "note": "206 S. Stanton St, adobe, near Fire Dept Headquarters/City Jail block (1795)", "confidence": "high"},
+  {"sheet": 41, "tile": "tile_006_x0_y3300.png", "fx": 0.62, "fy": 0.42, "label": "Tenements", "type": "tenement", "note": "208-214 S. Stanton St, adobe row near 'Printing' shop", "confidence": "high"},
+  {"sheet": 41, "tile": "tile_006_x0_y3300.png", "fx": 0.70, "fy": 0.55, "label": "Tenements", "type": "tenement", "note": "216-218 S. Stanton St, adobe, near Brunswick-Balke-Collender Co.", "confidence": "high"}
+]

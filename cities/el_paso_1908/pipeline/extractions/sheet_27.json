@@ -1,0 +1,7 @@
+[
+  {"sheet": 27, "tile": "tile_002_x6300_y0.png", "fx": 0.60, "fy": 0.90, "label": "Ochoa Ho.", "type": "boarding", "note": "609 N. Florence St, 'Boarding' label", "confidence": "high"},
+  {"sheet": 27, "tile": "tile_015_x0_y9450.png", "fx": 0.50, "fy": 0.78, "label": "Storage & Bunk Ho.", "type": "lodging", "note": "513 N. Kansas St area, bunk house attached to storage", "confidence": "medium"},
+  {"sheet": 27, "tile": "tile_011_x3150_y6300.png", "fx": 0.70, "fy": 0.75, "label": "Lodgings", "type": "lodging", "note": "619/620 block near 1609 N. Campbell", "confidence": "high"},
+  {"sheet": 27, "tile": "tile_017_x6300_y9450.png", "fx": 0.70, "fy": 0.78, "label": "Franklin St. Ho.", "type": "boarding", "note": "405-407 E. Franklin St, 'Boarding' label", "confidence": "high"},
+  {"sheet": 27, "tile": "tile_017_x6300_y9450.png", "fx": 0.25, "fy": 0.68, "label": "Monte Vista", "type": "lodging", "note": "near E. Franklin & N. Kansas, 'Furnished Rooms'", "confidence": "high"}
+]

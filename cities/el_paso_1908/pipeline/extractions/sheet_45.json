@@ -1,0 +1,4 @@
+[
+  {"sheet": 45, "tile": "tile_004_x0_y1650.png", "fx": 0.78, "fy": 0.25, "label": "Boarding", "type": "boarding", "note": "1314 block, near 1731/Texas St, 2-story brick building marked 2", "confidence": "high"},
+  {"sheet": 45, "tile": "tile_005_x1650_y1650.png", "fx": 0.57, "fy": 0.26, "label": "Boarding", "type": "boarding", "note": "near 1310 block, N. Brown/Myrtle intersection area", "confidence": "high"}
+]

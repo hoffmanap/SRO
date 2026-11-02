@@ -1,0 +1,5 @@
+[
+  {"sheet": 32, "tile": "tile_030_x4950_y4950.png", "fx": 0.35, "fy": 0.3, "label": "Hotel Greentree", "type": "hotel", "note": "addresses 600-608", "confidence": "high"},
+  {"sheet": 32, "tile": "tile_039_x4950_y6600.png", "fx": 0.5, "fy": 0.25, "label": "Tenements", "type": "tenement", "note": "adobe construction, near 1627 block", "confidence": "high"},
+  {"sheet": 32, "tile": "tile_058_x6600_y9900.png", "fx": 0.45, "fy": 0.55, "label": "Tenements", "type": "tenement", "note": "adobe construction, near 1761 block", "confidence": "high"}
+]

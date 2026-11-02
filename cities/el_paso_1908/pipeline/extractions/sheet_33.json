@@ -1,0 +1,11 @@
+[
+  {"sheet": 33, "tile": "tile_007_x6300_y3150.png", "fx": 0.30, "fy": 0.70, "label": "Rooms", "type": "lodging", "note": "near 100 block N. Chihuahua St / W. Main St corner, adobe building", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_011_x3150_y6300.png", "fx": 0.45, "fy": 0.35, "label": "Hotel Carlyle", "type": "hotel", "note": "416-412 block on S. Durango St, large pink hotel, above 1st on wooden posts, full-size hotel with hose/hydrant markings", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_011_x3150_y6300.png", "fx": 0.65, "fy": 0.70, "label": "Furnished Rooms", "type": "lodging", "note": "near 1672 block, adobe building, separate from Hotel Carlyle", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_012_x6300_y6300.png", "fx": 0.20, "fy": 0.30, "label": "Tenements", "type": "tenement", "note": "S. Leon St, 1673 block, adobe row near 121½ address and Out Ho.", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_012_x6300_y6300.png", "fx": 0.40, "fy": 0.50, "label": "Tenements", "type": "tenement", "note": "S. Leon St, 1673 block, plain adobe row", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_012_x6300_y6300.png", "fx": 0.60, "fy": 0.65, "label": "Tenements", "type": "tenement", "note": "S. Leon St, near 126/128 addresses", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_017_x6300_y9450.png", "fx": 0.70, "fy": 0.60, "label": "Tenements", "type": "tenement", "note": "adobe, S.P. (stone pier), near 315 address, between Tin Shop and Cornice Shop, 1764 block near W. Overland/Sonora", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_018_x9450_y9450.png", "fx": 0.20, "fy": 0.25, "label": "Tenements", "type": "tenement", "note": "near address 207, 1764 block", "confidence": "high"},
+  {"sheet": 33, "tile": "tile_018_x9450_y9450.png", "fx": 0.25, "fy": 0.45, "label": "Tenements ADOBE", "type": "tenement", "note": "near 303½ address, 1764 block, further down same long block", "confidence": "high"}
+]

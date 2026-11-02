@@ -1,0 +1,7 @@
+[
+  {"sheet": 37, "tile": "tile_002_x3300_y0.png", "fx": 0.35, "fy": 0.55, "label": "St. George Hotel", "type": "hotel", "note": "301-305 block, near Cleaning & Pressing shop", "confidence": "high"},
+  {"sheet": 37, "tile": "tile_002_x3300_y0.png", "fx": 0.60, "fy": 0.60, "label": "Hotel St. Louis", "type": "hotel", "note": "labeled with '2nd Hand S.'/Storage use at time of survey, 301-305 block", "confidence": "medium"},
+  {"sheet": 37, "tile": "tile_005_x1650_y1650.png", "fx": 0.30, "fy": 0.35, "label": "The D.R. Francis Hotel", "type": "hotel", "note": "309-319 block", "confidence": "high"},
+  {"sheet": 37, "tile": "tile_005_x1650_y1650.png", "fx": 0.70, "fy": 0.30, "label": "Hotel Belvidere", "type": "hotel", "note": "401-409 N. Kansas St", "confidence": "high"},
+  {"sheet": 37, "tile": "tile_009_x1650_y3300.png", "fx": 0.55, "fy": 0.10, "label": "Furnished Rooms", "type": "lodging", "note": "308 block, near Furn. Rms and Gas Coffee Roaster/Elec Motor shop, S. Stanton St area near E. San Antonio", "confidence": "high"}
+]

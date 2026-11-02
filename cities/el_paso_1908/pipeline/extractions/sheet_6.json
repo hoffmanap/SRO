@@ -1,0 +1,4 @@
+[
+  {"sheet": 6, "tile": "tile_012_x6300_y6300.png", "fx": 0.30, "fy": 0.45, "label": "Apartments", "type": "apartment", "note": "521 block, pink 2-story building with yellow trim", "confidence": "high"},
+  {"sheet": 6, "tile": "tile_012_x6300_y6300.png", "fx": 0.55, "fy": 0.55, "label": "LE ROY Apartments", "type": "apartment", "note": "526/550 block, 2-story stone/brick building labeled '2.SB'", "confidence": "high"}
+]

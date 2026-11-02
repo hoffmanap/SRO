@@ -1,0 +1,16 @@
+[
+  {"sheet": 49, "tile": "tile_006_x3150_y3150.png", "fx": 0.30, "fy": 0.40, "label": "Lodgings", "type": "lodging", "note": "300s block S. El Paso St, pink building with rooms labeled 'S' and 'Wall Only'", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_007_x6300_y3150.png", "fx": 0.75, "fy": 0.45, "label": "Rooms", "type": "lodging", "note": "219 block, adobe building labeled 'Rooms', near Paper Ware Ho.", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_007_x6300_y3150.png", "fx": 0.20, "fy": 0.85, "label": "Lodgings", "type": "lodging", "note": "226 block, Chine S. laundry area", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_011_x3150_y6300.png", "fx": 0.25, "fy": 0.70, "label": "Lodgings", "type": "lodging", "note": "416-418 S. El Paso St block, near Whol. Liquors buildings, 'Store Rm' adobe", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_012_x6300_y6300.png", "fx": 0.55, "fy": 0.35, "label": "Rooms", "type": "lodging", "note": "313-314 block S. Oregon St, adobe building labeled 'Rooms'", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_012_x6300_y6300.png", "fx": 0.55, "fy": 0.45, "label": "Lodging", "type": "lodging", "note": "S. Oregon St near 314 block, pink building labeled 'Lodging'", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_016_x3150_y9450.png", "fx": 0.60, "fy": 0.65, "label": "Tenements", "type": "tenement", "note": "514-520 block, large pink/gray building 'Tenements', wall to roof", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_016_x3150_y9450.png", "fx": 0.75, "fy": 0.85, "label": "Tenements ADOBE", "type": "tenement", "note": "528-526 block, near DG & Notions shop", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_017_x6300_y9450.png", "fx": 0.55, "fy": 0.10, "label": "Chinese Tong Ho.", "type": "lodging", "note": "402-404 block, Chinese association/lodging house", "confidence": "medium"},
+  {"sheet": 49, "tile": "tile_017_x6300_y9450.png", "fx": 0.70, "fy": 0.10, "label": "Lodgings", "type": "lodging", "note": "402 block, adobe 1st, near Chinese Tong Ho.", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_017_x6300_y9450.png", "fx": 0.65, "fy": 0.20, "label": "Tenements", "type": "tenement", "note": "408½ block, adobe, S.P.", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_017_x6300_y9450.png", "fx": 0.75, "fy": 0.25, "label": "Tenements", "type": "tenement", "note": "410½ block, adobe, S.P.", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_017_x6300_y9450.png", "fx": 0.15, "fy": 0.40, "label": "Tenements Undertak's", "type": "tenement", "note": "409-411 block, adobe, combined tenement/undertaker building", "confidence": "high"},
+  {"sheet": 49, "tile": "tile_017_x6300_y9450.png", "fx": 0.70, "fy": 0.65, "label": "Tenements", "type": "tenement", "note": "418-420 block, adobe", "confidence": "high"}
+]

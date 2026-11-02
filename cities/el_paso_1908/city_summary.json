@@ -1,0 +1,18 @@
+{
+ "city": "el_paso",
+ "city_label": "El Paso, TX",
+ "state": "TX",
+ "survey_year": 1908,
+ "sheets_digitized": 36,
+ "total_buildings": 86,
+ "counts_by_type": {
+  "boarding": 17,
+  "lodging": 25,
+  "institutional_lodging": 1,
+  "hotel": 20,
+  "apartments": 1,
+  "tenement": 20,
+  "apartment": 2
+ },
+ "geojson": "el_paso_1908_lodging.geojson"
+}

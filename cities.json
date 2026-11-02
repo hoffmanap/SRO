@@ -1,0 +1,17 @@
+{
+  "description": "Registry of cities covered by this project. Each entry's stats come from that city's city_summary.json -- read that file, don't recompute from the per-building GeoJSON, since it also carries the digitization-coverage denominator (sheets_digitized) needed to compare prevalence across cities fairly.",
+  "cities": [
+    {
+      "slug": "el_paso_1908",
+      "city": "el_paso",
+      "city_label": "El Paso, TX",
+      "state": "TX",
+      "survey_year": 1908,
+      "status": "complete",
+      "path": "cities/el_paso_1908",
+      "site": "cities/el_paso_1908/site/index.html",
+      "summary": "cities/el_paso_1908/city_summary.json",
+      "geojson": "cities/el_paso_1908/el_paso_1908_lodging.geojson"
+    }
+  ]
+}

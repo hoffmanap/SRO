@@ -1,0 +1,4 @@
+[
+  {"sheet": 36, "tile": "tile_012_x6300_y6300.png", "fx": 0.18, "fy": 0.60, "label": "Tenements", "type": "tenement", "note": "S. Stanton St block, 110-116 area, adobe row", "confidence": "high"},
+  {"sheet": 36, "tile": "tile_016_x3150_y9450.png", "fx": 0.85, "fy": 0.20, "label": "Zeiger Hotel", "type": "hotel", "note": "111-119 E. Overland/San Antonio block; Hotel Office, Dining Room, Private Dining Rooms, Barber & Baths, W.U. Telegraph Office in same building - large full-service hotel", "confidence": "high"}
+]

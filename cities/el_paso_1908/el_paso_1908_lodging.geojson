@@ -1,0 +1,1811 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4832881702061,
+     31.77321123464651
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding",
+    "building_type": "boarding",
+    "note": "1208 block, adobe building near E. California/Noble area",
+    "year": 1908,
+    "sheet": 14,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4896309375763,
+     31.763816801829574
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding",
+    "building_type": "boarding",
+    "note": "712 N. Stanton St area, near Chapel Undertaking building",
+    "year": 1908,
+    "sheet": 15,
+    "source_tile": "tile_015_x9450_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49080105125906,
+     31.76306423971735
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "2 Lodging",
+    "building_type": "lodging",
+    "note": "706/704 block, E. Boulevard/N. Mesa area",
+    "year": 1908,
+    "sheet": 15,
+    "source_tile": "tile_020_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4901439100504,
+     31.76301577906857
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "2. Boarding",
+    "building_type": "boarding",
+    "note": "706/700/708 block, pink dwellings with yellow trim",
+    "year": 1908,
+    "sheet": 15,
+    "source_tile": "tile_021_x9450_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48968793451786,
+     31.762870396969976
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "2. Boarding - OPEN 1ST",
+    "building_type": "boarding",
+    "note": "215 Wyoming St area",
+    "year": 1908,
+    "sheet": 15,
+    "source_tile": "tile_021_x9450_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48917668534995,
+     31.76481839050016
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Brick 1st Boarding",
+    "building_type": "boarding",
+    "note": "415 N. Campbell St area, near St. Clement's Church",
+    "year": 1908,
+    "sheet": 16,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49049925365524,
+     31.762460972380822
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "\"LAKOTA\"",
+    "building_type": "boarding",
+    "note": "Named boarding house",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_004_x0_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49030937285848,
+     31.76199278410825
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings (316)",
+    "building_type": "lodging",
+    "note": "D.2 - lodgings over 2-story dwelling",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_004_x0_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49019544438042,
+     31.76184748381792
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding (unnamed)",
+    "building_type": "boarding",
+    "note": "Unnamed boarding house",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_004_x0_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49015746822106,
+     31.761233991188163
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Summit Place",
+    "building_type": "boarding",
+    "note": "Named boarding house",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_004_x0_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49068913445201,
+     31.7610402558286
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Y.M.C.A.",
+    "building_type": "institutional_lodging",
+    "note": "Club Rm 1st, Furnished Rms 2nd/3rd",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_004_x0_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48873969160522,
+     31.76331123927879
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings (318)",
+    "building_type": "lodging",
+    "note": "Lodgings, 2 stories",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_001_x1650_y0.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.488986536641,
+     31.762907632548067
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "The \"RAMONA\"",
+    "building_type": "boarding",
+    "note": "Named boarding house, dining room in basement",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_001_x1650_y0.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48856879888812,
+     31.76223495075185
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel \"LIMA\"",
+    "building_type": "hotel",
+    "note": "N. Stanton St",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48930933399551,
+     31.761686038783324
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "The \"BRAZOS\" Apartments",
+    "building_type": "apartments",
+    "note": "Named apartment building",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48968909558903,
+     31.761266280375324
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings (frame)",
+    "building_type": "lodging",
+    "note": "Frame construction, 1 & 2 story",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48837891809137,
+     31.761233991188163
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel Delmar",
+    "building_type": "hotel",
+    "note": "Named hotel",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4878535812203,
+     31.76233181723186
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings (Kansas)",
+    "building_type": "lodging",
+    "note": "Near 1635 Kansas St",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_006_x3300_y1650.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48949921479226,
+     31.760964914190346
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "The \"Alvarado\"",
+    "building_type": "hotel",
+    "note": "Named hotel/apartments",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_009_x1650_y3300.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48940427439389,
+     31.759592609332714
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel \"Plaza\"",
+    "building_type": "hotel",
+    "note": "Named hotel",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_009_x1650_y3300.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48875867968489,
+     31.759996230520706
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel \"Angelus\"",
+    "building_type": "hotel",
+    "note": "Adjoins Crawford Theatre",
+    "year": 1908,
+    "sheet": 26,
+    "source_tile": "tile_009_x1650_y3300.png",
+    "confidence": "medium-high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48622319102287,
+     31.764738111961698
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Ochoa Ho.",
+    "building_type": "boarding",
+    "note": "609 N. Florence St, 'Boarding' label",
+    "year": 1908,
+    "sheet": 27,
+    "source_tile": "tile_002_x6300_y0.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48844942450522,
+     31.762160586973618
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Storage & Bunk Ho.",
+    "building_type": "lodging",
+    "note": "513 N. Kansas St area, bunk house attached to storage",
+    "year": 1908,
+    "sheet": 27,
+    "source_tile": "tile_015_x0_y9450.png",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48716531693935,
+     31.763087614844743
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings",
+    "building_type": "lodging",
+    "note": "619/620 block near 1609 N. Campbell",
+    "year": 1908,
+    "sheet": 27,
+    "source_tile": "tile_011_x3150_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48610919713974,
+     31.762160586973618
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Franklin St. Ho.",
+    "building_type": "boarding",
+    "note": "405-407 E. Franklin St, 'Boarding' label",
+    "year": 1908,
+    "sheet": 27,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48662216961385,
+     31.762257509141453
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Monte Vista",
+    "building_type": "lodging",
+    "note": "near E. Franklin & N. Kansas, 'Furnished Rooms'",
+    "year": 1908,
+    "sheet": 27,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4948733150959,
+     31.75755039533206
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel Greentree",
+    "building_type": "hotel",
+    "note": "addresses 600-608",
+    "year": 1908,
+    "sheet": 32,
+    "source_tile": "tile_030_x4950_y4950.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49478279054165,
+     31.75710567016792
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "adobe construction, near 1627 block",
+    "year": 1908,
+    "sheet": 32,
+    "source_tile": "tile_039_x4950_y6600.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49425975978374,
+     31.75601095296845
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "adobe construction, near 1761 block",
+    "year": 1908,
+    "sheet": 32,
+    "source_tile": "tile_058_x6600_y9900.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49214416742323,
+     31.757903893297268
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Rooms",
+    "building_type": "lodging",
+    "note": "near 100 block N. Chihuahua St / W. Main St corner, adobe building",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_007_x6300_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49302929639815,
+     31.75734513782951
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel Carlyle",
+    "building_type": "hotel",
+    "note": "416-412 block on S. Durango St, large pink hotel, above 1st on wooden posts, full-size hotel with hose/hydrant markings",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_011_x3150_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4928013086319,
+     31.757005891792748
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Furnished Rooms",
+    "building_type": "lodging",
+    "note": "near 1672 block, adobe building, separate from Hotel Carlyle",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_011_x3150_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49225816130638,
+     31.75739360144754
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "S. Leon St, 1673 block, adobe row near 121\u00bd address and Out Ho.",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49203017354012,
+     31.757199746823147
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "S. Leon St, 1673 block, plain adobe row",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49180218577385,
+     31.757054355588405
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "S. Leon St, near 126/128 addresses",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49168819189072,
+     31.756204810082505
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "adobe, S.P. (stone pier), near 315 address, between Tin Shop and Cornice Shop, 1764 block near W. Overland/Sonora",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49120204150675,
+     31.756544059055198
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "near address 207, 1764 block",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_018_x9450_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4911450445652,
+     31.756350202651628
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements ADOBE",
+    "building_type": "tenement",
+    "note": "near 303\u00bd address, 1764 block, further down same long block",
+    "year": 1908,
+    "sheet": 33,
+    "source_tile": "tile_018_x9450_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48943312466145,
+     31.759264277710425
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel St. Regis",
+    "building_type": "hotel",
+    "note": "100-104 N. Oregon St; sample room, grill & bar, hotel office, dining room, kitchen",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_002_x6300_y0.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48817181587219,
+     31.759235200130323
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Alberta Hotel",
+    "building_type": "hotel",
+    "note": "201-209, N. Santa Fe/San Francisco corner",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_003_x9450_y0.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4893989264965,
+     31.758220900001742
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Grand Central Hotel",
+    "building_type": "hotel",
+    "note": "100-108 San Francisco St, 2nd & 3rd floors",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_007_x6300_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49066023528577,
+     31.757303516113755
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Chicago Hotel",
+    "building_type": "hotel",
+    "note": "Boarding, S. Santa Fe St block",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_011_x3150_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48837700486183,
+     31.757439214241348
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Adobe Rooms",
+    "building_type": "lodging",
+    "note": "near 1701 S. Santa Fe",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_013_x9450_y6300.png",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49079702794552,
+     31.757219702464983
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings",
+    "building_type": "lodging",
+    "note": "215 S. Chihuahua St, near Chicago Hotel",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49062603712083,
+     31.756715678650163
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding",
+    "building_type": "boarding",
+    "note": "202 Sonora St",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49047784507275,
+     31.756735064232256
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding",
+    "building_type": "boarding",
+    "note": "202.5 Sonora St",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49051204323769,
+     31.756405508784624
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings",
+    "building_type": "lodging",
+    "note": "211-219 Sonora St",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49011306464672,
+     31.756831992081793
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "203 Sonora St",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48919373750688,
+     31.756570286655094
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "W. Overland House Lodgings",
+    "building_type": "lodging",
+    "note": "207-209 W. Overland St",
+    "year": 1908,
+    "sheet": 34,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48804642260075,
+     31.759776269683023
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Orndorff Hotel",
+    "building_type": "hotel",
+    "note": "300-310 Mesa Ave; large hotel with Dining Room, Hotel Office, kitchen",
+    "year": 1908,
+    "sheet": 35,
+    "source_tile": "tile_007_x6300_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4873966574669,
+     31.759563035063096
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel Beaumont",
+    "building_type": "hotel",
+    "note": "200-206 St. Louis Ave",
+    "year": 1908,
+    "sheet": 35,
+    "source_tile": "tile_007_x6300_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48716866970064,
+     31.75971811483539
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel West",
+    "building_type": "hotel",
+    "note": "208-214 St. Louis Ave, adjacent to Evening News building",
+    "year": 1908,
+    "sheet": 35,
+    "source_tile": "tile_007_x6300_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48668251931669,
+     31.75967934491669
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Melrose House",
+    "building_type": "lodging",
+    "note": "207-213 N. Stanton St",
+    "year": 1908,
+    "sheet": 35,
+    "source_tile": "tile_008_x9450_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48856677114964,
+     31.758878286344157
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Sheldon Hotel",
+    "building_type": "hotel",
+    "note": "100-104 San Francisco/Little Plaza; lobby, dining room, writing room, barber passage, kitchen - large full-service hotel",
+    "year": 1908,
+    "sheet": 35,
+    "source_tile": "tile_011_x3150_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48747444152832,
+     31.75732176125173
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "S. Stanton St block, 110-116 area, adobe row",
+    "year": 1908,
+    "sheet": 36,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48776680231094,
+     31.756811466192712
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Zeiger Hotel",
+    "building_type": "hotel",
+    "note": "111-119 E. Overland/San Antonio block; Hotel Office, Dining Room, Private Dining Rooms, Barber & Baths, W.U. Telegraph Office in same building - large full-service hotel",
+    "year": 1908,
+    "sheet": 36,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48441289843136,
+     31.76166193902821
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "St. George Hotel",
+    "building_type": "hotel",
+    "note": "301-305 block, near Cleaning & Pressing shop",
+    "year": 1908,
+    "sheet": 37,
+    "source_tile": "tile_002_x3300_y0.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48395129411908,
+     31.76158344363379
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel St. Louis",
+    "building_type": "hotel",
+    "note": "labeled with '2nd Hand S.'/Storage use at time of survey, 301-305 block",
+    "year": 1908,
+    "sheet": 37,
+    "source_tile": "tile_002_x3300_y0.png",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48619776843883,
+     31.760536832013035
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "The D.R. Francis Hotel",
+    "building_type": "hotel",
+    "note": "309-319 block",
+    "year": 1908,
+    "sheet": 37,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.4854592015392,
+     31.760615328295135
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Hotel Belvidere",
+    "building_type": "hotel",
+    "note": "401-409 N. Kansas St",
+    "year": 1908,
+    "sheet": 37,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48573616412655,
+     31.75949020855653
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Furnished Rooms",
+    "building_type": "lodging",
+    "note": "308 block, near Furn. Rms and Gas Coffee Roaster/Elec Motor shop, S. Stanton St area near E. San Antonio",
+    "year": 1908,
+    "sheet": 37,
+    "source_tile": "tile_009_x1650_y3300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48010083082434,
+     31.7625645492102
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding",
+    "building_type": "boarding",
+    "note": "near N. Ochoa/N. Virginia, Myrtle Ave block, 2-story brick building marked 2B",
+    "year": 1908,
+    "sheet": 39,
+    "source_tile": "tile_006_x3300_y1650.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48565303917353,
+     31.75717743885103
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "206 S. Stanton St, adobe, near Fire Dept Headquarters/City Jail block (1795)",
+    "year": 1908,
+    "sheet": 41,
+    "source_tile": "tile_006_x0_y3300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48561598200801,
+     31.756862346313405
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "208-214 S. Stanton St, adobe row near 'Printing' shop",
+    "year": 1908,
+    "sheet": 41,
+    "source_tile": "tile_006_x0_y3300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48546775334596,
+     31.756657535588765
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "216-218 S. Stanton St, adobe, near Brunswick-Balke-Collender Co.",
+    "year": 1908,
+    "sheet": 41,
+    "source_tile": "tile_006_x0_y3300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.47712678764528,
+     31.765074285097413
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding",
+    "building_type": "boarding",
+    "note": "1314 block, near 1731/Texas St, 2-story brick building marked 2",
+    "year": 1908,
+    "sheet": 45,
+    "source_tile": "tile_004_x0_y1650.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.47577878470887,
+     31.765058066832317
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Boarding",
+    "building_type": "boarding",
+    "note": "near 1310 block, N. Brown/Myrtle intersection area",
+    "year": 1908,
+    "sheet": 45,
+    "source_tile": "tile_005_x1650_y1650.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48822210729121,
+     31.756662083196215
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings",
+    "building_type": "lodging",
+    "note": "300s block S. El Paso St, pink building with rooms labeled 'S' and 'Wall Only'",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_006_x3150_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48665301501751,
+     31.75661361919517
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Rooms",
+    "building_type": "lodging",
+    "note": "219 block, adobe building labeled 'Rooms', near Paper Ware Ho.",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_007_x6300_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48727998137474,
+     31.756225906273365
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings",
+    "building_type": "lodging",
+    "note": "226 block, Chine S. laundry area",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_007_x6300_y3150.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48827910423279,
+     31.755473282436434
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings",
+    "building_type": "lodging",
+    "note": "416-418 S. El Paso St block, near Whol. Liquors buildings, 'Store Rm' adobe",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_011_x3150_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48688100278378,
+     31.755812534090104
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Rooms",
+    "building_type": "lodging",
+    "note": "313-314 block S. Oregon St, adobe building labeled 'Rooms'",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48688100278378,
+     31.75571560517307
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodging",
+    "building_type": "lodging",
+    "note": "S. Oregon St near 314 block, pink building labeled 'Lodging'",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48788012564182,
+     31.754623722419964
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "514-520 block, large pink/gray building 'Tenements', wall to roof",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48770913481712,
+     31.75442986199481
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements ADOBE",
+    "building_type": "tenement",
+    "note": "528-526 block, near DG & Notions shop",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_016_x3150_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48688100278378,
+     31.755156836495857
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Chinese Tong Ho.",
+    "building_type": "lodging",
+    "note": "402-404 block, Chinese association/lodging house",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48671001195908,
+     31.755156836495857
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Lodgings",
+    "building_type": "lodging",
+    "note": "402 block, adobe 1st, near Chinese Tong Ho.",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48676700890064,
+     31.755059906892242
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "408\u00bd block, adobe, S.P.",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48665301501751,
+     31.75501144205237
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "410\u00bd block, adobe, S.P.",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48733697831629,
+     31.75486604738052
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements Undertak's",
+    "building_type": "tenement",
+    "note": "409-411 block, adobe, combined tenement/undertaker building",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48671001195908,
+     31.754623722419964
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "418-420 block, adobe",
+    "year": 1908,
+    "sheet": 49,
+    "source_tile": "tile_017_x6300_y9450.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48548290133476,
+     31.755302800883943
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "2B. Furnished Rooms",
+    "building_type": "lodging",
+    "note": "near S. Stanton, addresses 310-312",
+    "year": 1908,
+    "sheet": 50,
+    "source_tile": "tile_057_x4950_y9900.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48327007889748,
+     31.755405431956483
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Tenements",
+    "building_type": "tenement",
+    "note": "pink/brick building labeled Tenements",
+    "year": 1908,
+    "sheet": 50,
+    "source_tile": "tile_061_x11550_y9900.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.48354165256023,
+     31.75431069464962
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Female Boarding",
+    "building_type": "boarding",
+    "note": "near address 1832 block",
+    "year": 1908,
+    "sheet": 50,
+    "source_tile": "tile_079_x11550_y13200.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49471908807756,
+     31.759510581551872
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "Apartments",
+    "building_type": "apartment",
+    "note": "521 block, pink 2-story building with yellow trim",
+    "year": 1908,
+    "sheet": 6,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.49443410336973,
+     31.75941365650729
+    ]
+   },
+   "properties": {
+    "city": "el_paso",
+    "city_label": "El Paso, TX",
+    "label": "LE ROY Apartments",
+    "building_type": "apartment",
+    "note": "526/550 block, 2-story stone/brick building labeled '2.SB'",
+    "year": 1908,
+    "sheet": 6,
+    "source_tile": "tile_012_x6300_y6300.png",
+    "confidence": "high"
+   }
+  }
+ ]
+}

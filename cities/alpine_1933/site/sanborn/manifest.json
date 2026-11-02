@@ -1,70 +1,66 @@
 [
  {
   "sheet": 2,
-  "file": "sanborn/sheet_2.webp",
+  "file": "sheet_2.webp",
   "topleft": [
-   30.362901008690567,
-   -103.66511786666354
+   30.359224245434902,
+   -103.66559365172307
   ],
   "topright": [
-   30.3617963143383,
-   -103.65853167141367
+   30.36032284036453,
+   -103.66241052947026
   ],
   "bottomleft": [
-   30.35616051687464,
-   -103.66663627503804
-  ],
-  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+   30.355966551321664,
+   -103.66408362703802
+  ]
  },
  {
   "sheet": 3,
-  "file": "sanborn/sheet_3.webp",
+  "file": "sheet_3.webp",
   "topleft": [
-   30.36197507444463,
-   -103.66237298185312
+   30.36023712826028,
+   -103.66254480694839
   ],
   "topright": [
-   30.360870380092365,
-   -103.65578665039503
+   30.36133572318991,
+   -103.65936161886586
   ],
   "bottomleft": [
-   30.3552345826287,
-   -103.66389142162964
-  ],
-  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+   30.35697943414704,
+   -103.66103475103472
+  ]
  },
  {
   "sheet": 4,
-  "file": "sanborn/sheet_4.webp",
+  "file": "sheet_4.webp",
   "topleft": [
-   30.364965409736445,
-   -103.65046494752592
+   30.36213646972233,
+   -103.65114707498333
   ],
   "topright": [
-   30.36386071538418,
-   -103.64387830293167
+   30.36433361654669,
+   -103.64478065132938
   ],
   "bottomleft": [
-   30.358224917920516,
-   -103.65198345949412
-  ],
-  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+   30.35562120910844,
+   -103.64812694062799
+  ]
  },
  {
   "sheet": 5,
-  "file": "sanborn/sheet_5.webp",
+  "file": "sheet_5.webp",
   "topleft": [
-   30.366369327689913,
-   -103.66572842213596
+   30.364866672183254,
+   -103.6687863006755
   ],
   "topright": [
-   30.36526463333765,
-   -103.65914196687325
+   30.367063819007615,
+   -103.6624199295367
   ],
   "bottomleft": [
-   30.359628835873984,
-   -103.66724689045489
-  ],
-  "corners_note": "lat,lon for topleft/topright/bottomleft, per Leaflet.ImageOverlay.Rotated"
+   30.358351411569362,
+   -103.66576619123256
+  ]
  }
 ]

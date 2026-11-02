@@ -9,18 +9,20 @@
   "pixel_xy": [
    3300,
    5600
-  ]
+  ],
+  "sheet": 2
  },
  {
   "label": "Hotel Holland Annex",
   "type": "hotel",
   "note": "Annex to Hotel Holland with offices and bank",
   "confidence": "high",
-  "lat": 30.35746649622082,
-  "lon": -103.66215627794634,
+  "lat": 30.35759747959049,
+  "lon": -103.66257839800762,
   "pixel_xy": [
    3950,
    5400
-  ]
+  ],
+  "sheet": 2
  }
 ]

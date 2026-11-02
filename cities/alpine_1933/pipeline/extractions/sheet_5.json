@@ -4,11 +4,12 @@
   "type": "boarding",
   "note": "Labeled Boarding, block 61 near N. 7th St / West Av A",
   "confidence": "medium",
-  "lat": 30.361980243167515,
-  "lon": -103.66545608647476,
+  "lat": 30.361226613999282,
+  "lon": -103.66573649852279,
   "pixel_xy": [
    1190,
    4750
-  ]
+  ],
+  "sheet": 5
  }
 ]

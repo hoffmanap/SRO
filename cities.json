@@ -12,6 +12,18 @@
       "site": "cities/el_paso_1908/site/index.html",
       "summary": "cities/el_paso_1908/city_summary.json",
       "geojson": "cities/el_paso_1908/el_paso_1908_lodging.geojson"
+    },
+    {
+      "slug": "alpine_1933",
+      "city": "alpine",
+      "city_label": "Alpine, TX",
+      "state": "TX",
+      "survey_year": 1933,
+      "status": "complete",
+      "path": "cities/alpine_1933",
+      "site": "cities/alpine_1933/site/index.html",
+      "summary": "cities/alpine_1933/city_summary.json",
+      "geojson": "cities/alpine_1933/alpine_1933_lodging.geojson"
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+ "city": "alpine",
+ "city_label": "Alpine, TX",
+ "state": "TX",
+ "survey_year": 1933,
+ "sheets_digitized": 6,
+ "total_buildings": 8,
+ "counts_by_type": {
+  "hotel": 2,
+  "boarding": 5,
+  "apartments": 1
+ },
+ "geojson": "alpine_1933_lodging.geojson"
+}

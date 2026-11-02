@@ -1,0 +1,26 @@
+[
+ {
+  "label": "Hotel Holland",
+  "type": "hotel",
+  "note": "Fireproof hotel, built 1928; dining room, lobby, kitchen, sample rooms",
+  "confidence": "high",
+  "lat": 30.3574016,
+  "lon": -103.6628597,
+  "pixel_xy": [
+   3300,
+   5600
+  ]
+ },
+ {
+  "label": "Hotel Holland Annex",
+  "type": "hotel",
+  "note": "Annex to Hotel Holland with offices and bank",
+  "confidence": "high",
+  "lat": 30.35746649622082,
+  "lon": -103.66215627794634,
+  "pixel_xy": [
+   3950,
+   5400
+  ]
+ }
+]

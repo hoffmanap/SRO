@@ -1,0 +1,173 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.6628597,
+     30.3574016
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "Hotel Holland",
+    "building_type": "hotel",
+    "note": "Fireproof hotel, built 1928; dining room, lobby, kitchen, sample rooms",
+    "year": 1933,
+    "sheet": 2,
+    "source_tile": "n/a",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.66215627794634,
+     30.35746649622082
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "Hotel Holland Annex",
+    "building_type": "hotel",
+    "note": "Annex to Hotel Holland with offices and bank",
+    "year": 1933,
+    "sheet": 2,
+    "source_tile": "n/a",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.65976305797372,
+     30.360577202480762
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "Rooming House (E. Av C)",
+    "building_type": "boarding",
+    "note": "Labeled ROOMING, near E. Avenue C / Berkeley Hall block",
+    "year": 1933,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.66069547607387,
+     30.357661203056978
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "Rooming House (E. Holland Av)",
+    "building_type": "boarding",
+    "note": "Labeled ROOMING, near E. Holland Avenue",
+    "year": 1933,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.64860144177965,
+     30.362888072383875
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "College Apartments",
+    "building_type": "apartments",
+    "note": "Labeled COLLEGE APTS, Sul Ross State Teachers College campus housing",
+    "year": 1933,
+    "sheet": 4,
+    "source_tile": "n/a",
+    "confidence": "high"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.64597788018366,
+     30.362914400512675
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "Boarding House (N. Harrison)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block near N. Harrison / Railroad Ave",
+    "year": 1933,
+    "sheet": 4,
+    "source_tile": "n/a",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.64535268528631,
+     30.36277296843685
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "Rooming House (N. Harrison)",
+    "building_type": "boarding",
+    "note": "Labeled Rooming, block near N. Harrison / Railroad Ave",
+    "year": 1933,
+    "sheet": 4,
+    "source_tile": "n/a",
+    "confidence": "medium"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.66545608647476,
+     30.361980243167515
+    ]
+   },
+   "properties": {
+    "city": "alpine",
+    "city_label": "Alpine, TX",
+    "label": "Boarding House (N. 7th St)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block 61 near N. 7th St / West Av A",
+    "year": 1933,
+    "sheet": 5,
+    "source_tile": "n/a",
+    "confidence": "medium"
+   }
+  }
+ ]
+}

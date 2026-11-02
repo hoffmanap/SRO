@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alpine, TX &middot; 1933 &middot; The Lodging Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root {
+  --parchment: #EAE3D2; --parchment-deep: #DFD6BF; --ink: #2B2420;
+  --ink-soft: #5B5245; --rust: #A6531C; --slate: #3D5A6C;
+  --line: #C9BC9E; --paper-card: #F3EEE1; color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --parchment: #1C1812; --parchment-deep: #15110D; --ink: #E9E1CD;
+    --ink-soft: #B8AD93; --rust: #D97B3F; --slate: #7FA5BC;
+    --line: #3A3326; --paper-card: #231E17; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--parchment-deep); color: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  padding: 24px 16px;
+}
+.wrap {
+  max-width: 1320px; margin: 0 auto;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px; background-color: var(--parchment);
+  border: 1px solid var(--line); box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+header.masthead {
+  padding: 28px 32px 20px; border-bottom: 2px solid var(--ink);
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 16px; flex-wrap: wrap;
+}
+header.masthead h1 {
+  font-family: 'Special Elite', monospace;
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.3rem);
+  margin: 0 0 4px; text-wrap: balance;
+}
+header.masthead .sub { color: var(--ink-soft); font-size: 0.82rem; max-width: 60ch; line-height: 1.5; }
+header.masthead .plate {
+  font-family: 'Special Elite', monospace; font-size: 0.72rem; color: var(--ink-soft);
+  text-align: right; line-height: 1.6; border: 1px solid var(--line);
+  padding: 8px 12px; background: var(--paper-card);
+}
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1px; background: var(--ink); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+}
+.stat { background: var(--paper-card); padding: 12px 14px; text-align: center; }
+.stat .n { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--rust); line-height: 1.1; }
+.stat .l { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-top: 3px; }
+.body-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; }
+@media (max-width: 860px) { .body-grid { grid-template-columns: 1fr; } }
+.map-col { padding: 20px; min-width: 0; }
+.map-frame { border: 1px solid var(--ink); position: relative; }
+#map { height: min(78vh, 880px); width: 100%; background: var(--parchment-deep); }
+@media (max-width: 860px) { #map { height: 60vh; } }
+.sidebar { border-left: 1px solid var(--ink); padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+@media (max-width: 860px) { .sidebar { border-left: none; border-top: 1px solid var(--ink); } }
+.card { background: var(--paper-card); border: 1px solid var(--line); padding: 14px 16px; }
+.card h2 { font-family: 'Special Elite', monospace; font-size: 0.95rem; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+.card h2::before { content: ""; width: 6px; height: 6px; background: var(--rust); display: inline-block; }
+.card p { font-size: 0.78rem; line-height: 1.55; color: var(--ink-soft); }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 18px; padding: 12px 4px 4px; font-size: 0.72rem; }
+.legend .dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; display: inline-block; }
+.legend span.row { display: flex; align-items: center; gap: 6px; }
+footer { padding: 16px 32px 24px; font-size: 0.68rem; color: var(--ink-soft); border-top: 1px solid var(--line); line-height: 1.6; }
+a.back { color: var(--slate); text-decoration: none; }
+a.back:hover { text-decoration: underline; }
+.leaflet-popup-content { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; }
+.leaflet-popup-content b { font-family: 'Special Elite', monospace; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <div style="margin-bottom:8px;"><a class="back" href="../../../index.html">&larr; All cities</a></div>
+      <h1>Alpine, Brewster County, Texas</h1>
+      <div class="sub">Hotels, rooming houses, and other single-room-occupancy structures hand-extracted from the Feb 1933 Sanborn fire-insurance survey &mdash; a railroad division point on the Southern Pacific, chosen to compare against El Paso.</div>
+    </div>
+    <div class="plate">SANBORN MAP CO.<br>ALPINE, TEX.<br>FEB. 1933<br>6 SHEETS</div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <div class="body-grid">
+    <div class="map-col">
+      <div class="map-frame"><div id="map"></div></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="sidebar">
+      <div class="card">
+        <h2>About this map</h2>
+        <p>Points mark structures labeled on the printed Sanborn plates (Hotel, Rooming, Boarding, Apartments). Positions are placed by a single-landmark, scale-bar + compass-rose transform per sheet &mdash; block-level accuracy, not parcel-level. See <code>pipeline/georef.py</code> for the method.</p>
+      </div>
+      <div class="card">
+        <h2>Selected</h2>
+        <div id="info"><p style="font-style:italic;">Click a marker to see what the surveyor recorded.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    Source: Sanborn Fire Insurance Map, Alpine, Brewster County, Texas, Feb. 1933 (Library of Congress, Geography &amp; Map Division). Part of <a class="back" href="../../../index.html">The Lodging Ledger</a>.
+  </footer>
+</div>
+<script>
+const COLORS = { hotel: '#A6531C', boarding: '#3D5A6C', apartments: '#6B7A3A', tenements: '#8B3A62' };
+const map = L.map('map', { scrollWheelZoom: true }).setView([30.3598, -103.6600], 15);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+fetch('../alpine_1933_lodging.geojson').then(r => r.json()).then(gj => {
+  const counts = {};
+  const layers = {};
+  gj.features.forEach(f => {
+    const t = f.properties.building_type;
+    counts[t] = (counts[t]||0) + 1;
+    const color = COLORS[t] || '#666';
+    const m = L.circleMarker([f.geometry.coordinates[1], f.geometry.coordinates[0]], {
+      radius: 8, color: '#2B2420', weight: 1.5, fillColor: color, fillOpacity: 0.85
+    }).addTo(map);
+    m.bindPopup(`<b>${f.properties.label}</b><br>${t} &middot; ${f.properties.year}<br>${f.properties.note}<br><i>confidence: ${f.properties.confidence}</i>`);
+    m.on('click', () => {
+      document.getElementById('info').innerHTML =
+        `<div style="font-family:'Special Elite',monospace;font-size:1.05rem;margin-bottom:6px;">${f.properties.label}</div>
+         <dl style="margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:0.74rem;">
+           <dt style="color:var(--ink-soft);text-transform:uppercase;font-size:0.64rem;">Type</dt><dd>${t}</dd>
+           <dt style="color:var(--ink-soft);text-transform:uppercase;font-size:0.64rem;">Sheet</dt><dd>${f.properties.sheet}</dd>
+           <dt style="color:var(--ink-soft);text-transform:uppercase;font-size:0.64rem;">Note</dt><dd>${f.properties.note}</dd>
+           <dt style="color:var(--ink-soft);text-transform:uppercase;font-size:0.64rem;">Confidence</dt><dd>${f.properties.confidence}</dd>
+         </dl>`;
+    });
+    (layers[t] = layers[t] || []).push(m);
+  });
+
+  const statsEl = document.getElementById('stats');
+  statsEl.innerHTML = `<div class="stat"><div class="n">6</div><div class="l">sheets digitized</div></div>
+    <div class="stat"><div class="n">${gj.features.length}</div><div class="l">structures recorded</div></div>` +
+    Object.keys(counts).map(k => `<div class="stat"><div class="n">${counts[k]}</div><div class="l">${k.replace(/_/g,' ')}</div></div>`).join('');
+
+  const legendEl = document.getElementById('legend');
+  legendEl.innerHTML = Object.keys(counts).map(k =>
+    `<span class="row"><span class="dot" style="background:${COLORS[k]||'#666'}"></span>${k.replace(/_/g,' ')} (${counts[k]})</span>`
+  ).join('');
+});
+</script>
+</body>
+</html>

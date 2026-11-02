@@ -1,0 +1,38 @@
+[
+ {
+  "label": "College Apartments",
+  "type": "apartments",
+  "note": "Labeled COLLEGE APTS, Sul Ross State Teachers College campus housing",
+  "confidence": "high",
+  "lat": 30.362888072383875,
+  "lon": -103.64860144177965,
+  "pixel_xy": [
+   2200,
+   1930
+  ]
+ },
+ {
+  "label": "Boarding House (N. Harrison)",
+  "type": "boarding",
+  "note": "Labeled Boarding, block near N. Harrison / Railroad Ave",
+  "confidence": "medium",
+  "lat": 30.362914400512675,
+  "lon": -103.64597788018366,
+  "pixel_xy": [
+   4670,
+   1420
+  ]
+ },
+ {
+  "label": "Rooming House (N. Harrison)",
+  "type": "boarding",
+  "note": "Labeled Rooming, block near N. Harrison / Railroad Ave",
+  "confidence": "medium",
+  "lat": 30.36277296843685,
+  "lon": -103.64535268528631,
+  "pixel_xy": [
+   5290,
+   1460
+  ]
+ }
+]

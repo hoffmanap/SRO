@@ -1,0 +1,26 @@
+[
+ {
+  "label": "Rooming House (E. Av C)",
+  "type": "boarding",
+  "note": "Labeled ROOMING, near E. Avenue C / Berkeley Hall block",
+  "confidence": "medium",
+  "lat": 30.360577202480762,
+  "lon": -103.65976305797372,
+  "pixel_xy": [
+   2760,
+   1050
+  ]
+ },
+ {
+  "label": "Rooming House (E. Holland Av)",
+  "type": "boarding",
+  "note": "Labeled ROOMING, near E. Holland Avenue",
+  "confidence": "medium",
+  "lat": 30.357661203056978,
+  "lon": -103.66069547607387,
+  "pixel_xy": [
+   2500,
+   4410
+  ]
+ }
+]

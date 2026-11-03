@@ -148,7 +148,7 @@ fetch('sanborn/manifest.json')
   .then(function(r) { return r.json(); })
   .then(function(manifest) {
     manifest.forEach(function(m) {
-      var overlay = L.imageOverlay.rotated(m.file, L.latLng(m.topleft), L.latLng(m.topright), L.latLng(m.bottomleft), {
+      var overlay = L.imageOverlay.rotated('sanborn/' + m.file, L.latLng(m.topleft), L.latLng(m.topright), L.latLng(m.bottomleft), {
         opacity: sheetOpacityVal,
         interactive: false,
         pane: 'sanbornPane',

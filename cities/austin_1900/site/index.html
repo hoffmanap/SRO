@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/leaflet-imageoverlay-rotated@0.2.1/Leaflet.ImageOverlay.Rotated.min.js"></script>
+
 <style>
 :root {
   --parchment: #EAE3D2; --parchment-deep: #DFD6BF; --ink: #2B2420; --ink-soft: #5B5245;
@@ -73,7 +73,7 @@ header .plate { font-family:'Special Elite',monospace; font-size:0.7rem; color:v
     <div class="plate">SANBORN MAP CO.<br>53 SHEETS &middot; VARIES<br>SURVEYED 1900</div>
   </header>
   <div class="note-banner pending">
-    <strong>&#9888; Geocoding pending:</strong> the 28 buildings below are correctly <em>identified and typed</em> from the original sheets, but are currently placed only by nearest cross-street (approximate, block-level-or-worse). A proper per-sheet georeferencing pass for Austin hasn't been done yet -- it runs later, across all pending cities in one sweep (see pipeline/refine_geocoding.py). Treat marker positions here as rough; the building list, types, and counts are solid. The faded sheet images on the map are placed the same way -- centered on each sheet's building cluster, north-up, sized from the printed scale bar, <strong>not</strong> a validated per-sheet transform -- so edges won't line up precisely with the modern street grid yet. Source: Library of Congress raw sheet scans (via the LC Labs bulk Sanborn dataset), read tile-by-tile by eye.
+    <strong>&#9888; Geocoding pending:</strong> the 28 buildings below are correctly <em>identified and typed</em> from the original sheets, but are currently placed only by nearest cross-street (approximate, block-level-or-worse). A proper per-sheet georeferencing pass for Austin hasn't been done yet -- it runs later, across all pending cities in one sweep (see pipeline/refine_geocoding.py). Treat marker positions here as rough; the building list, types, and counts are solid. Source: Library of Congress raw sheet scans (via the LC Labs bulk Sanborn dataset), read tile-by-tile by eye.
   </div>
   <div class="stats" id="stats"></div>
   <div class="body-grid">
@@ -113,19 +113,7 @@ var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
   maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
 });
 
-var sheetLayer = L.layerGroup();
-fetch('sanborn/manifest.json', { cache:'reload' })
-  .then(function(r){ return r.json(); })
-  .then(function(manifest) {
-    manifest.forEach(function(m) {
-      var overlay = L.imageOverlay.rotated('sanborn/' + m.file, L.latLng(m.topleft), L.latLng(m.topright), L.latLng(m.bottomleft), {
-        opacity: 0.75, interactive: false
-      });
-      overlay.addTo(sheetLayer);
-    });
-    sheetLayer.addTo(map);
-  });
-L.control.layers({ "Aerial": aerial, "Streets": streets }, { "Austin 1900 Sanborn sheets": sheetLayer }, { collapsed:false }).addTo(map);
+L.control.layers({ "Aerial": aerial, "Streets": streets }, {}, { collapsed:false }).addTo(map);
 
 
 fetch('../austin_1900_lodging.geojson', { cache:'reload' })

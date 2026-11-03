@@ -84,6 +84,10 @@ input[type=range]{width:100%}
       </div>
       <p class="hint">Your progress is saved in this browser as you go (it'll still be here if you close the tab). When you're done, download both files and send them back in chat.</p>
       <h2>Sheets</h2>
+      <label style="font-size:12px;color:var(--ink-soft);display:flex;gap:6px;align-items:center;margin-bottom:8px">
+        <input type="checkbox" id="previewAll"> Preview all saved sheets of this city (shows stacking order)
+      </label>
+      <p class="hint" style="margin:0 0 8px">Order below = stacking order, top of list = bottom of stack. Use ▲▼ on a saved sheet to move it above/below its neighbor where sheets overlap.</p>
       <div id="list"></div>
       <h2>About</h2>
       <p class="hint">Pick a sheet, drag it into place over the aerial photo (it should line up with the real street grid and block shapes), then hit Save. Switch basemaps with the layer control top-right.</p>
@@ -131,7 +135,7 @@ function stateFromCorners(c, aspectWH){
 
 const map = L.map('map', {scrollWheelZoom:true}).setView([31.46,-100.44], 14);
 const aerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
-const labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png', {maxZoom:20, subdomains:'abcd', attribution:'CARTO'}).addTo(map);
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
 const streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19});
 L.control.layers({"Aerial + labels":aerial,"Streets":streets}, {"Street labels":labels}).addTo(map);
 map.on('baselayerchange', (e) => {
@@ -141,7 +145,7 @@ map.on('baselayerchange', (e) => {
 
 let overlay = null, moveM=null, rotM=null, scaleM=null;
 let cur = null; // {city, sheet, state}
-let saved = {}; // key "city_sheet" -> {topleft,topright,bottomleft}
+let saved = {}; // key "city_sheet" -> {topleft,topright,bottomleft,state,order}
 
 const LS_KEY = 'sanborn_georef_v1';
 function loadLocal(){
@@ -162,17 +166,17 @@ function downloadJSON(filename, obj){
   setTimeout(() => URL.revokeObjectURL(url), 5000);
 }
 function exportCity(city){
-  const cfg = CITY_DATA[city];
   const manifest = [];
-  for (const s of cfg.sheets){
+  const ordered = savedSheetsOrdered(city); // bottom-of-stack first -> array order = draw order = later entries on top
+  ordered.forEach((s, i) => {
     const key = sheetKey(city, s.sheet);
-    if (!saved[key]) continue;
     manifest.push({
       sheet: s.sheet, file: 'sheet_' + s.sheet + '.webp',
       topleft: saved[key].topleft, topright: saved[key].topright, bottomleft: saved[key].bottomleft,
+      order: i,
       placement: 'hand-placed via georeferencer tool',
     });
-  }
+  });
   downloadJSON(city + '_manifest.json', manifest);
 }
 
@@ -181,6 +185,26 @@ const sheetSel = document.getElementById('sheetSel');
 const statusEl = document.getElementById('status');
 const listEl = document.getElementById('list');
 const opacityEl = document.getElementById('opacity');
+const previewAllEl = document.getElementById('previewAll');
+const previewLayer = L.layerGroup().addTo(map);
+
+function redrawPreview(){
+  previewLayer.clearLayers();
+  if (!previewAllEl.checked || !cur) return;
+  const ordered = savedSheetsOrdered(cur.city); // bottom-of-stack first; later addTo = drawn on top
+  for (const s of ordered){
+    const key = sheetKey(cur.city, s.sheet);
+    const e = saved[key];
+    const ov = L.imageOverlay.rotated('images/' + s.file, L.latLng(e.topleft), L.latLng(e.topright), L.latLng(e.bottomleft), {
+      opacity: opacityEl.value/100, interactive:false
+    });
+    ov.addTo(previewLayer);
+  }
+}
+previewAllEl.onchange = () => {
+  if (overlay) overlay.setOpacity(previewAllEl.checked ? Math.min(0.4, opacityEl.value/100) : opacityEl.value/100);
+  redrawPreview();
+};
 
 for (const city of Object.keys(CITY_DATA)){
   const opt = document.createElement('option');
@@ -189,6 +213,36 @@ for (const city of Object.keys(CITY_DATA)){
 }
 
 function sheetKey(city, sheet){ return city+'_'+sheet; }
+
+// --- stacking order ---
+// saved[key].order is a number; lower draws first (bottom), higher draws last (top).
+function nextOrder(city){
+  let max = -1;
+  for (const s of CITY_DATA[city].sheets){
+    const e = saved[sheetKey(city, s.sheet)];
+    if (e && typeof e.order === 'number' && e.order > max) max = e.order;
+  }
+  return max + 1;
+}
+function savedSheetsOrdered(city){
+  return CITY_DATA[city].sheets
+    .filter(s => saved[sheetKey(city, s.sheet)])
+    .slice()
+    .sort((a,b) => (saved[sheetKey(city,a.sheet)].order ?? 0) - (saved[sheetKey(city,b.sheet)].order ?? 0));
+}
+function moveOrder(city, sheet, dir){ // dir: -1 = move down (earlier/below), +1 = move up (later/above)
+  const ordered = savedSheetsOrdered(city);
+  const idx = ordered.findIndex(s => s.sheet === sheet);
+  const swapIdx = idx + dir;
+  if (idx < 0 || swapIdx < 0 || swapIdx >= ordered.length) return;
+  const keyA = sheetKey(city, ordered[idx].sheet), keyB = sheetKey(city, ordered[swapIdx].sheet);
+  const tmp = saved[keyA].order;
+  saved[keyA].order = saved[keyB].order;
+  saved[keyB].order = tmp;
+  saveLocal();
+  renderList();
+  if (previewAllEl.checked) redrawPreview();
+}
 
 function populateSheetSel(city){
   sheetSel.innerHTML = '';
@@ -202,12 +256,35 @@ function populateSheetSel(city){
 function renderList(){
   listEl.innerHTML = '';
   for (const city of Object.keys(CITY_DATA)){
+    const ordered = savedSheetsOrdered(city); // bottom-of-stack first
     for (const s of CITY_DATA[city].sheets){
       const row = document.createElement('div');
       row.className = 'list-item' + (cur && cur.city===city && cur.sheet===s.sheet ? ' active' : '');
       const key = sheetKey(city, s.sheet);
-      row.innerHTML = '<span>'+CITY_DATA[city].label+' #'+s.sheet+'</span><span class="tick">'+(saved[key]?'✓':'')+'</span>';
-      row.onclick = () => loadSheet(city, s.sheet);
+      const left = document.createElement('span');
+      left.textContent = CITY_DATA[city].label+' #'+s.sheet;
+      left.style.cursor = 'pointer';
+      left.onclick = () => loadSheet(city, s.sheet);
+      row.appendChild(left);
+      const right = document.createElement('span');
+      right.style.display = 'flex'; right.style.gap = '4px'; right.style.alignItems = 'center';
+      if (saved[key]){
+        const stackIdx = ordered.findIndex(x => x.sheet === s.sheet);
+        const upBtn = document.createElement('button');
+        upBtn.textContent = '▲'; upBtn.title = 'Move up (draw on top of next)';
+        upBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
+        upBtn.disabled = stackIdx >= ordered.length - 1;
+        upBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, +1); };
+        const downBtn = document.createElement('button');
+        downBtn.textContent = '▼'; downBtn.title = 'Move down (draw below previous)';
+        downBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
+        downBtn.disabled = stackIdx <= 0;
+        downBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, -1); };
+        const tick = document.createElement('span');
+        tick.className = 'tick'; tick.textContent = '✓';
+        right.appendChild(downBtn); right.appendChild(upBtn); right.appendChild(tick);
+      }
+      row.appendChild(right);
       listEl.appendChild(row);
     }
   }
@@ -257,12 +334,16 @@ function loadSheet(city, sheet){
   sheetSel.value = sheet;
   redraw();
   renderList();
+  redrawPreview();
   statusEl.textContent = city + ' sheet ' + sheet + (saved[sheetKey(city,sheet)] ? ' (saved)' : ' (not yet saved)');
 }
 
 citySel.onchange = () => loadSheet(citySel.value, CITY_DATA[citySel.value].sheets[0].sheet);
 sheetSel.onchange = () => loadSheet(citySel.value, parseInt(sheetSel.value));
-opacityEl.oninput = () => { if (overlay) overlay.setOpacity(opacityEl.value/100); };
+opacityEl.oninput = () => {
+  if (overlay) overlay.setOpacity(previewAllEl.checked ? Math.min(0.4, opacityEl.value/100) : opacityEl.value/100);
+  redrawPreview();
+};
 
 document.getElementById('resetBtn').onclick = () => {
   cur.state = Object.assign({}, cur.seedState);
@@ -272,9 +353,11 @@ document.getElementById('resetBtn').onclick = () => {
 document.getElementById('saveBtn').onclick = () => {
   const c = cornersFromState(cur.state);
   const key = sheetKey(cur.city, cur.sheet);
-  saved[key] = { topleft: c.topleft, topright: c.topright, bottomleft: c.bottomleft, state: cur.state };
+  const order = saved[key] ? saved[key].order : nextOrder(cur.city);
+  saved[key] = { topleft: c.topleft, topright: c.topright, bottomleft: c.bottomleft, state: cur.state, order };
   saveLocal();
   renderList();
+  redrawPreview();
   populateSheetSel(cur.city);
   sheetSel.value = cur.sheet;
   // advance to next unsaved sheet, same city first

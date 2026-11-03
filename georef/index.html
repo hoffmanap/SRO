@@ -131,7 +131,7 @@ function stateFromCorners(c, aspectWH){
 
 const map = L.map('map', {scrollWheelZoom:true}).setView([31.46,-100.44], 14);
 const aerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
-const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
+const labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png', {maxZoom:20, subdomains:'abcd', attribution:'CARTO'}).addTo(map);
 const streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19});
 L.control.layers({"Aerial + labels":aerial,"Streets":streets}, {"Street labels":labels}).addTo(map);
 map.on('baselayerchange', (e) => {

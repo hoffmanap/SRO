@@ -73,7 +73,7 @@ input[type=range]{width:100%}
       <div class="handle-legend">
         <div><span class="dot" style="background:#2563eb"></span>blue dot — drag to move the sheet</div>
         <div><span class="dot" style="background:#dc2626"></span>red dot — drag to rotate</div>
-        <div><span class="dot" style="background:#16a34a"></span>green dot — drag to resize</div>
+        <div><span class="dot" style="background:#16a34a"></span>green dot — drag to resize (width &amp; height stretch independently, if the sheet doesn't fit at its original aspect ratio)</div>
       </div>
       <h2>Export</h2>
       <div class="row">
@@ -392,16 +392,16 @@ function wireHandles(){
   scaleM.on('drag', () => {
     const p = scaleM.getLatLng();
     const [e,n] = latlonToEN(cur.state.lat, cur.state.lon, p.lat, p.lng);
-    const dist = Math.hypot(e,n);
     const t = cur.state.rotDeg*Math.PI/180;
     const rightE = Math.cos(t), rightN = -Math.sin(t);
     const upE = Math.sin(t), upN = Math.cos(t);
-    // project onto right/up to get new half-width/half-height, keep aspect from original image
+    // project onto the sheet's own right/up axes independently -- lets width and
+    // height be stretched separately (the original scan isn't always uniform
+    // scale), instead of locking to the image's original aspect ratio.
     const projRight = e*rightE + n*rightN;
-    const aspect = cur.state.heightM / cur.state.widthM;
-    const newHalfW = Math.max(20, projRight);
-    cur.state.widthM = newHalfW*2;
-    cur.state.heightM = newHalfW*2*aspect;
+    const projUp = e*upE + n*upN;
+    cur.state.widthM = Math.max(20, projRight)*2;
+    cur.state.heightM = Math.max(20, projUp)*2;
     redraw();
   });
 }

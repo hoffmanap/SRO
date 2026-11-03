@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.imageoverlay.rotated/0.1.0/Leaflet.ImageOverlay.Rotated.min.js"></script>
 <style>
 :root {
   --parchment: #EAE3D2; --parchment-deep: #DFD6BF; --ink: #2B2420; --ink-soft: #5B5245;
@@ -36,6 +37,9 @@ header h1 { font-family:'Special Elite','IBM Plex Mono',monospace; font-size:cla
 header .sub { color: var(--ink-soft); font-size:0.8rem; max-width:58ch; line-height:1.5; }
 header .plate { font-family:'Special Elite',monospace; font-size:0.7rem; color:var(--ink-soft); text-align:right; line-height:1.6; border:1px solid var(--line); padding:8px 12px; background:var(--paper-card); }
 .note-banner { padding:10px 32px; font-size:0.72rem; color:var(--ink-soft); background:var(--paper-card); border-bottom:1px solid var(--line); line-height:1.5; }
+.note-banner.pending { color:#8a4b12; }
+@media (prefers-color-scheme: dark) { .note-banner.pending { color:#e3a05c; } }
+.pending-tag { display:inline-block; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.04em; border:1px solid #a6531c; color:#a6531c; padding:1px 5px; border-radius:2px; margin-top:4px; }
 .body-grid { display:grid; grid-template-columns: minmax(0,1fr) 320px; }
 @media (max-width:860px) { .body-grid { grid-template-columns:1fr; } }
 .map-col { padding:20px; min-width:0; }
@@ -56,9 +60,6 @@ header .plate { font-family:'Special Elite',monospace; font-size:0.7rem; color:v
 .stat .n { font-size:1.3rem; font-weight:700; color:var(--rust); font-variant-numeric:tabular-nums; }
 .stat .l { font-size:0.6rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-soft); margin-top:2px; }
 .stamp { text-align:center; font-size:0.64rem; color:var(--ink-soft); border:1px dashed var(--line); padding:8px; }
-.note-banner.pending { color:#8a4b12; }
-@media (prefers-color-scheme: dark) { .note-banner.pending { color:#e3a05c; } }
-.pending-tag { display:inline-block; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.04em; border:1px solid #a6531c; color:#a6531c; padding:1px 5px; border-radius:2px; margin-top:4px; }
 </style>
 </head>
 <body>
@@ -67,12 +68,12 @@ header .plate { font-family:'Special Elite',monospace; font-size:0.7rem; color:v
     <div>
       <a class="back" href="../../../index.html">&larr; all cities</a>
       <h1>San Angelo, Texas &middot; July 1913</h1>
-      <div class="sub">Hotels, boarding/rooming houses, and flats recovered from the Sanborn Map Co.'s July 1913 survey of San Angelo (Tom Green County) &mdash; population 13,000 at the time of survey.</div>
+      <div class="sub">Hotels, boarding/rooming houses, and flats recovered from the Sanborn Map Co.'s July 1913 survey of San Angelo (Tom Green County) — population 13,000 at the time of survey.</div>
     </div>
     <div class="plate">SANBORN MAP CO.<br>25 SHEETS &middot; 50 FT./IN.<br>SURVEYED JULY 1913</div>
   </header>
   <div class="note-banner pending">
-    <strong>&#9888; Geocoding pending:</strong> the 25 buildings below are correctly <em>identified and typed</em> from the original sheets, but are currently placed only by nearest cross-street (approximate, block-level-or-worse) &mdash; <strong>not</strong> the pixel-precise sheet transform used for El Paso (parcel-level) and Alpine (&plusmn;5m). A proper per-sheet georeferencing pass for San Angelo hasn't been done yet. Treat marker positions here as rough; the building list, types, and counts are solid. Source: Library of Congress raw sheet scans (via the LC Labs bulk Sanborn dataset), read tile-by-tile by eye, same as El Paso/Alpine.
+    <strong>&#9888; Geocoding pending:</strong> the 25 buildings below are correctly <em>identified and typed</em> from the original sheets, but are currently placed only by nearest cross-street (approximate, block-level-or-worse). A proper per-sheet georeferencing pass for San Angelo hasn't been done yet -- it runs later, across all pending cities in one sweep (see pipeline/refine_geocoding.py). Treat marker positions here as rough; the building list, types, and counts are solid. The faded sheet images on the map are placed the same way -- centered on each sheet's building cluster, north-up, sized from the printed scale bar, <strong>not</strong> a validated per-sheet transform -- so edges won't line up precisely with the modern street grid yet. Source: Library of Congress raw sheet scans (via the LC Labs bulk Sanborn dataset), read tile-by-tile by eye.
   </div>
   <div class="stats" id="stats"></div>
   <div class="body-grid">
@@ -83,11 +84,11 @@ header .plate { font-family:'Special Elite',monospace; font-size:0.7rem; color:v
     <div class="sidebar">
       <div class="card">
         <h2>About</h2>
-        <p>San Angelo was a railroad town of ~13,000 in 1913, with a dense Chadbourne Street hotel/rooming-house district near the Santa Fe depot, plus scattered boarding houses in residential blocks. This is a larger-scale test of the same manual, tile-by-tile vision-reading method used for El Paso and Alpine &mdash; no OCR, no paid API, just reading each sheet by eye.</p>
+        <p>San Angelo was a railroad town of ~13,000 in 1913, with a dense Chadbourne Street hotel/rooming-house district near the Santa Fe depot, plus scattered boarding houses in residential blocks. This is a larger-scale test of the same manual, tile-by-tile vision-reading method used for El Paso and Alpine — no OCR, no paid API, just reading each sheet by eye.</p>
       </div>
       <div class="card">
         <h2>Source</h2>
-        <p>Sanborn Fire Insurance Map of San Angelo, Tex., Sanborn Map Co., July 1913, 25 sheets. Library of Congress Geography &amp; Map Division. Buildings recorded here are those explicitly labeled Hotel, Boarding, Rooms, or Flats on the original sheets &mdash; a lower bound, not a full census.</p>
+        <p>Sanborn Fire Insurance Map of San Angelo, Tex., Sanborn Map Co., July 1913, 25 sheets. Library of Congress Geography & Map Division. Buildings recorded here are those explicitly labeled Hotel, Boarding, Rooms, or Flats on the original sheets — a lower bound, not a full census.</p>
       </div>
       <div class="stamp">Part of The Lodging Ledger &middot; hoffmanap/SRO</div>
     </div>
@@ -104,23 +105,35 @@ var TYPES = {
 };
 function typeInfo(t) { return TYPES[t] || { label: t.replace(/_/g,' '), color: "#8A7B4E" }; }
 
-var map = L.map('map', { scrollWheelZoom:false }).setView([31.4605, -100.4380], 14);
+var map = L.map('map', { scrollWheelZoom:false }).setView([31.4605, -100.438], 14);
 var aerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   maxZoom: 19, attribution: 'Esri World Imagery'
 }).addTo(map);
 var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
 });
-L.control.layers({ "Aerial": aerial, "Streets": streets }, {}, { collapsed:false }).addTo(map);
+
+var sheetLayer = L.layerGroup();
+fetch('sanborn/manifest.json', { cache:'reload' })
+  .then(function(r){ return r.json(); })
+  .then(function(manifest) {
+    manifest.forEach(function(m) {
+      var overlay = L.imageOverlay.rotated('sanborn/' + m.file, L.latLng(m.topleft), L.latLng(m.topright), L.latLng(m.bottomleft), {
+        opacity: 0.75, interactive: false
+      });
+      overlay.addTo(sheetLayer);
+    });
+    sheetLayer.addTo(map);
+  });
+L.control.layers({ "Aerial": aerial, "Streets": streets }, { "San Angelo 1913 Sanborn sheets": sheetLayer }, { collapsed:false }).addTo(map);
+
 
 fetch('../san_angelo_1913_lodging.geojson', { cache:'reload' })
   .then(function(r){ return r.json(); })
   .then(function(fc) {
-    var activeTypes = {};
     var markersByType = {};
     fc.features.forEach(function(f) {
       var t = f.properties.building_type;
-      activeTypes[t] = true;
       var info = typeInfo(t);
       var m = L.circleMarker([f.geometry.coordinates[1], f.geometry.coordinates[0]], {
         radius: 7, color:'#2B2420', weight:1.5, fillColor: info.color, fillOpacity:0.9
@@ -137,7 +150,6 @@ fetch('../san_angelo_1913_lodging.geojson', { cache:'reload' })
       m.addTo(map);
     });
 
-    // legend
     var legend = document.getElementById('legend');
     Object.keys(markersByType).sort().forEach(function(t) {
       var info = typeInfo(t);
@@ -147,7 +159,6 @@ fetch('../san_angelo_1913_lodging.geojson', { cache:'reload' })
       legend.appendChild(row);
     });
 
-    // stats
     var stats = document.getElementById('stats');
     var total = fc.features.length;
     var byType = {};

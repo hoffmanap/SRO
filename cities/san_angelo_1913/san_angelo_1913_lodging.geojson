@@ -19,7 +19,8 @@
     "year": 1913,
     "sheet": 2,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -40,7 +41,8 @@
     "year": 1913,
     "sheet": 2,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -61,7 +63,8 @@
     "year": 1913,
     "sheet": 3,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -82,7 +85,8 @@
     "year": 1913,
     "sheet": 3,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -103,7 +107,8 @@
     "year": 1913,
     "sheet": 3,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -124,7 +129,8 @@
     "year": 1913,
     "sheet": 3,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -145,7 +151,8 @@
     "year": 1913,
     "sheet": 4,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -166,7 +173,8 @@
     "year": 1913,
     "sheet": 4,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -187,7 +195,8 @@
     "year": 1913,
     "sheet": 5,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -208,7 +217,8 @@
     "year": 1913,
     "sheet": 5,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -229,7 +239,8 @@
     "year": 1913,
     "sheet": 7,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -250,7 +261,8 @@
     "year": 1913,
     "sheet": 10,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -271,7 +283,8 @@
     "year": 1913,
     "sheet": 10,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -292,7 +305,8 @@
     "year": 1913,
     "sheet": 10,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -313,7 +327,8 @@
     "year": 1913,
     "sheet": 11,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -334,7 +349,8 @@
     "year": 1913,
     "sheet": 11,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -355,7 +371,8 @@
     "year": 1913,
     "sheet": 11,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -376,7 +393,8 @@
     "year": 1913,
     "sheet": 13,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -397,7 +415,8 @@
     "year": 1913,
     "sheet": 14,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -418,7 +437,8 @@
     "year": 1913,
     "sheet": 14,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -439,7 +459,8 @@
     "year": 1913,
     "sheet": 17,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -460,7 +481,8 @@
     "year": 1913,
     "sheet": 22,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -481,7 +503,8 @@
     "year": 1913,
     "sheet": 23,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -502,7 +525,8 @@
     "year": 1913,
     "sheet": 24,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   },
   {
@@ -523,7 +547,8 @@
     "year": 1913,
     "sheet": 24,
     "source_tile": "n/a",
-    "confidence": "low-block"
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
    }
   }
  ]

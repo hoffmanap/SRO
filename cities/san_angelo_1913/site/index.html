@@ -56,6 +56,9 @@ header .plate { font-family:'Special Elite',monospace; font-size:0.7rem; color:v
 .stat .n { font-size:1.3rem; font-weight:700; color:var(--rust); font-variant-numeric:tabular-nums; }
 .stat .l { font-size:0.6rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-soft); margin-top:2px; }
 .stamp { text-align:center; font-size:0.64rem; color:var(--ink-soft); border:1px dashed var(--line); padding:8px; }
+.note-banner.pending { color:#8a4b12; }
+@media (prefers-color-scheme: dark) { .note-banner.pending { color:#e3a05c; } }
+.pending-tag { display:inline-block; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.04em; border:1px solid #a6531c; color:#a6531c; padding:1px 5px; border-radius:2px; margin-top:4px; }
 </style>
 </head>
 <body>
@@ -68,8 +71,8 @@ header .plate { font-family:'Special Elite',monospace; font-size:0.7rem; color:v
     </div>
     <div class="plate">SANBORN MAP CO.<br>25 SHEETS &middot; 50 FT./IN.<br>SURVEYED JULY 1913</div>
   </header>
-  <div class="note-banner">
-    <strong>Accuracy note:</strong> unlike El Paso (parcel-level, from the sheets' own geotransform) and Alpine (block-level, &plusmn;5m, from a two-landmark pixel transform), San Angelo buildings are placed at <strong>street/block-level accuracy</strong> &mdash; geocoded from each building's nearest cross-streets rather than sheet pixel coordinates, as a faster/more-automatable test of scaling this project to larger cities. Source sheets are the Library of Congress's raw scans (via the LC Labs bulk Sanborn dataset), tile-by-tile vision reading as in El Paso/Alpine.
+  <div class="note-banner pending">
+    <strong>&#9888; Geocoding pending:</strong> the 25 buildings below are correctly <em>identified and typed</em> from the original sheets, but are currently placed only by nearest cross-street (approximate, block-level-or-worse) &mdash; <strong>not</strong> the pixel-precise sheet transform used for El Paso (parcel-level) and Alpine (&plusmn;5m). A proper per-sheet georeferencing pass for San Angelo hasn't been done yet. Treat marker positions here as rough; the building list, types, and counts are solid. Source: Library of Congress raw sheet scans (via the LC Labs bulk Sanborn dataset), read tile-by-tile by eye, same as El Paso/Alpine.
   </div>
   <div class="stats" id="stats"></div>
   <div class="body-grid">
@@ -125,7 +128,10 @@ fetch('../san_angelo_1913_lodging.geojson', { cache:'reload' })
         '<strong>' + f.properties.label + '</strong><br>' +
         info.label + '<br>' +
         '<span style="color:#5B5245;font-size:0.85em">' + f.properties.note + '</span><br>' +
-        '<span style="color:#5B5245;font-size:0.8em">Sheet ' + f.properties.sheet + ' &middot; ' + f.properties.year + '</span>'
+        '<span style="color:#5B5245;font-size:0.8em">Sheet ' + f.properties.sheet + ' &middot; ' + f.properties.year + '</span><br>' +
+        (f.properties.confidence === 'pending_precise_geocode'
+          ? '<span class="pending-tag">&#9888; approximate position</span>'
+          : '')
       );
       (markersByType[t] = markersByType[t] || []).push(m);
       m.addTo(map);

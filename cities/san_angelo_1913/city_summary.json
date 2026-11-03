@@ -5,5 +5,6 @@
   "boarding": 12,
   "hotel": 12,
   "apartments": 1
- }
+ },
+ "geocode_status": "pending_precise_geocode"
 }

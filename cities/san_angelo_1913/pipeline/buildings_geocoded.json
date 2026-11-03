@@ -1,0 +1,232 @@
+[
+  {
+    "label": "Rooms (E. 4th St)",
+    "type": "boarding",
+    "sheet": 2,
+    "note": "Labeled ROOMS, block near E 4th St & E 3rd St, by rail yard",
+    "query": "East 4th Street, San Angelo, Texas",
+    "geocoded": [
+      31.469902,
+      -100.4361575
+    ]
+  },
+  {
+    "label": "Native Rooms (rail depot)",
+    "type": "boarding",
+    "sheet": 2,
+    "note": "Labeled Native Rooms, adjoining the Santa Fe passenger depot",
+    "query": "South Chadbourne Street, San Angelo, Texas",
+    "geocoded": [
+      31.450979,
+      -100.4345446
+    ]
+  },
+  {
+    "label": "Three Sisters Hotel",
+    "type": "hotel",
+    "sheet": 3,
+    "note": "Labeled 3 SISTERS HOTEL, near E College Ave & E Harris Ave",
+    "query": "East College Avenue & North Harris Avenue, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "North Chadbourne Hotel",
+    "type": "hotel",
+    "sheet": 3,
+    "note": "Labeled North Chadbourne Hotel, N Chadbourne St near N Oakes St",
+    "query": "North Chadbourne Street & North Oakes Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Model Hotel",
+    "type": "hotel",
+    "sheet": 3,
+    "note": "Labeled Model Hotel, on Gillis St near N Irving Ave",
+    "query": "Gillis Street & North Irving Avenue, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Boarding (W. Harris Av)",
+    "type": "boarding",
+    "sheet": 3,
+    "note": "Labeled Boarding, block near W Harris Ave / N Chadbourne",
+    "query": "West Harris Avenue, San Angelo, Texas",
+    "geocoded": [
+      31.4490127,
+      -100.4706253
+    ]
+  },
+  {
+    "label": "Boarding (E. Harris Av)",
+    "type": "boarding",
+    "sheet": 4,
+    "note": "Labeled Boarding, block near E Harris Ave / S Oakes",
+    "query": "East Harris Avenue, San Angelo, Texas",
+    "geocoded": [
+      31.4652591,
+      -100.4206944
+    ]
+  },
+  {
+    "label": "The Nimitz House",
+    "type": "hotel",
+    "sheet": 4,
+    "note": "Labeled The Nimitz House, W Beauregard Ave near W Twohig Ave",
+    "query": "West Beauregard Avenue & West Twohig Avenue, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Landon Hotel",
+    "type": "hotel",
+    "sheet": 5,
+    "note": "Labeled LANDON HOTEL with lobby/dining room, E Concho Ave & S Chadbourne St",
+    "query": "East Concho Avenue & South Chadbourne Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Myers Hotel",
+    "type": "hotel",
+    "sheet": 5,
+    "note": "Labeled Myers Hotel, S Chadbourne St near S Irving Av",
+    "query": "South Chadbourne Street & South Irving Avenue, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Santa Fe Hotel",
+    "type": "hotel",
+    "sheet": 7,
+    "note": "Labeled Santa Fe Hotel, E 5th St near N Chadbourne St",
+    "query": "East 5th Street & North Chadbourne Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Boarding (N. Irving)",
+    "type": "boarding",
+    "sheet": 10,
+    "note": "Labeled Boarding, block near N Irving Ave",
+    "query": "North Irving Avenue, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Herreman Hotel",
+    "type": "hotel",
+    "sheet": 10,
+    "note": "Labeled Herreman Hotel, N Irving Ave near N Magdalen St",
+    "query": "North Irving Avenue & North Magdalen Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Rooms (Farr St)",
+    "type": "boarding",
+    "sheet": 10,
+    "note": "Labeled Rooms, block near Farr St / 1st St",
+    "query": "Farr Street, San Angelo, Texas",
+    "geocoded": [
+      31.464178,
+      -100.4410786
+    ]
+  },
+  {
+    "label": "Boarding (E. Harris / N. Magdalen)",
+    "type": "boarding",
+    "sheet": 11,
+    "note": "Labeled Boarding, block near E Harris Ave & N Magdalen St",
+    "query": "East Harris Avenue & North Magdalen Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Boarding (Kaiser St) #1",
+    "type": "boarding",
+    "sheet": 11,
+    "note": "Labeled Boarding, Kaiser St near N Oakes St",
+    "query": "Kaiser Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Boarding (Kaiser St) #2",
+    "type": "boarding",
+    "sheet": 11,
+    "note": "Labeled Boarding, Kaiser St, second building",
+    "query": "Kaiser Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Flats (S. Koenigheim)",
+    "type": "apartments",
+    "sheet": 13,
+    "note": "Three-unit building labeled FLATS, FLATS, FLATS on S Koenigheim St",
+    "query": "South Koenigheim Street, San Angelo, Texas",
+    "geocoded": [
+      31.4515223,
+      -100.4405036
+    ]
+  },
+  {
+    "label": "Boarding (S. Magdalen)",
+    "type": "boarding",
+    "sheet": 14,
+    "note": "Labeled Boarding, block near S Magdalen St",
+    "query": "South Magdalen Street, San Angelo, Texas",
+    "geocoded": [
+      31.4643141,
+      -100.4333972
+    ]
+  },
+  {
+    "label": "Boarding (E. Twohig)",
+    "type": "boarding",
+    "sheet": 14,
+    "note": "Labeled Boarding, block near E Twohig Ave",
+    "query": "East Twohig Avenue, San Angelo, Texas",
+    "geocoded": [
+      31.4620794,
+      -100.4335507
+    ]
+  },
+  {
+    "label": "Rooms (S. Oakes/E. Twohig)",
+    "type": "boarding",
+    "sheet": 17,
+    "note": "Pink building labeled ROOMS, S Oakes St near E Twohig Ave",
+    "query": "South Oakes Street & East Twohig Avenue, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Riverside Hotel",
+    "type": "hotel",
+    "sheet": 22,
+    "note": "Labeled Riverside Hotel, S Oakes St near Porter St",
+    "query": "South Oakes Street, San Angelo, Texas",
+    "geocoded": [
+      31.4588073,
+      -100.4329484
+    ]
+  },
+  {
+    "label": "Hotel (S. Oakes, unnamed)",
+    "type": "hotel",
+    "sheet": 23,
+    "note": "Pink building labeled HOTEL with kitchen/dining/office, S Oakes St block 59",
+    "query": "South Oakes Street & Burgess Street, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Park Hotel",
+    "type": "hotel",
+    "sheet": 24,
+    "note": "Labeled Park Hotel, S Oakes St near W Avenue C",
+    "query": "South Oakes Street & West Avenue C, San Angelo, Texas",
+    "geocoded": null
+  },
+  {
+    "label": "Bishop House Hotel",
+    "type": "hotel",
+    "sheet": 24,
+    "note": "Labeled Bishop Ho. Hotel, W Avenue C",
+    "query": "West Avenue C, San Angelo, Texas",
+    "geocoded": [
+      31.4544041,
+      -100.4383142
+    ]
+  }
+]

@@ -1,0 +1,530 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4361575,
+     31.469902
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Rooms (E. 4th St)",
+    "building_type": "boarding",
+    "note": "Labeled ROOMS, block near E 4th St & E 3rd St, by rail yard",
+    "year": 1913,
+    "sheet": 2,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4345446,
+     31.450979
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Native Rooms (rail depot)",
+    "building_type": "boarding",
+    "note": "Labeled Native Rooms, adjoining the Santa Fe passenger depot",
+    "year": 1913,
+    "sheet": 2,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4359955,
+     31.4656636
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Three Sisters Hotel",
+    "building_type": "hotel",
+    "note": "Labeled 3 SISTERS HOTEL, near E College Ave & E Harris Ave",
+    "year": 1913,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4432116,
+     31.4724687
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "North Chadbourne Hotel",
+    "building_type": "hotel",
+    "note": "Labeled North Chadbourne Hotel, N Chadbourne St near N Oakes St",
+    "year": 1913,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.44311346238771,
+     31.471996659273646
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Model Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Model Hotel, on Gillis St near N Irving Ave",
+    "year": 1913,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4434525049689,
+     31.47277248456092
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (W. Harris Av)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block near W Harris Ave / N Chadbourne",
+    "year": 1913,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4206944,
+     31.4652591
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (E. Harris Av)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block near E Harris Ave / S Oakes",
+    "year": 1913,
+    "sheet": 4,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4411539,
+     31.465905300000003
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "The Nimitz House",
+    "building_type": "hotel",
+    "note": "Labeled The Nimitz House, W Beauregard Ave near W Twohig Ave",
+    "year": 1913,
+    "sheet": 4,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.433845,
+     31.4605184
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Landon Hotel",
+    "building_type": "hotel",
+    "note": "Labeled LANDON HOTEL with lobby/dining room, E Concho Ave & S Chadbourne St",
+    "year": 1913,
+    "sheet": 5,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.43371532110031,
+     31.460386991879947
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Myers Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Myers Hotel, S Chadbourne St near S Irving Av",
+    "year": 1913,
+    "sheet": 5,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.44350072868615,
+     31.472195370836676
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Santa Fe Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Santa Fe Hotel, E 5th St near N Chadbourne St",
+    "year": 1913,
+    "sheet": 7,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.43875390000001,
+     31.465145300000003
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (N. Irving)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block near N Irving Ave",
+    "year": 1913,
+    "sheet": 10,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.43845612379575,
+     31.464661061097015
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Herreman Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Herreman Hotel, N Irving Ave near N Magdalen St",
+    "year": 1913,
+    "sheet": 10,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4410786,
+     31.464178
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Rooms (Farr St)",
+    "building_type": "boarding",
+    "note": "Labeled Rooms, block near Farr St / 1st St",
+    "year": 1913,
+    "sheet": 10,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.42009813874479,
+     31.46470557340665
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (E. Harris / N. Magdalen)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block near E Harris Ave & N Magdalen St",
+    "year": 1913,
+    "sheet": 11,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.42015302904252,
+     31.46473920387564
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (Kaiser St) #1",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, Kaiser St near N Oakes St",
+    "year": 1913,
+    "sheet": 11,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.42122544954965,
+     31.465226327225707
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (Kaiser St) #2",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, Kaiser St, second building",
+    "year": 1913,
+    "sheet": 11,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4405036,
+     31.4515223
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Flats (S. Koenigheim)",
+    "building_type": "apartments",
+    "note": "Three-unit building labeled FLATS, FLATS, FLATS on S Koenigheim St",
+    "year": 1913,
+    "sheet": 13,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4333972,
+     31.4643141
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (S. Magdalen)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block near S Magdalen St",
+    "year": 1913,
+    "sheet": 14,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4335507,
+     31.4620794
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Boarding (E. Twohig)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding, block near E Twohig Ave",
+    "year": 1913,
+    "sheet": 14,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4350593,
+     31.4634517
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Rooms (S. Oakes/E. Twohig)",
+    "building_type": "boarding",
+    "note": "Pink building labeled ROOMS, S Oakes St near E Twohig Ave",
+    "year": 1913,
+    "sheet": 17,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4329484,
+     31.4588073
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Riverside Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Riverside Hotel, S Oakes St near Porter St",
+    "year": 1913,
+    "sheet": 22,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.43563032254998,
+     31.464050207494935
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Hotel (S. Oakes, unnamed)",
+    "building_type": "hotel",
+    "note": "Pink building labeled HOTEL with kitchen/dining/office, S Oakes St block 59",
+    "year": 1913,
+    "sheet": 23,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.43490487854828,
+     31.462893959608436
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Park Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Park Hotel, S Oakes St near W Avenue C",
+    "year": 1913,
+    "sheet": 24,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -100.4383142,
+     31.4544041
+    ]
+   },
+   "properties": {
+    "city": "san_angelo",
+    "city_label": "San Angelo, TX",
+    "label": "Bishop House Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Bishop Ho. Hotel, W Avenue C",
+    "year": 1913,
+    "sheet": 24,
+    "source_tile": "n/a",
+    "confidence": "low-block"
+   }
+  }
+ ]
+}

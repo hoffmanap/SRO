@@ -24,6 +24,18 @@
       "site": "cities/alpine_1933/site/index.html",
       "summary": "cities/alpine_1933/city_summary.json",
       "geojson": "cities/alpine_1933/alpine_1933_lodging.geojson"
+    },
+    {
+      "slug": "san_angelo_1913",
+      "city": "san_angelo",
+      "city_label": "San Angelo, TX",
+      "state": "TX",
+      "survey_year": 1913,
+      "status": "complete",
+      "path": "cities/san_angelo_1913",
+      "site": "cities/san_angelo_1913/site/index.html",
+      "summary": "cities/san_angelo_1913/city_summary.json",
+      "geojson": "cities/san_angelo_1913/san_angelo_1913_lodging.geojson"
     }
   ]
 }

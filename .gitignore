@@ -1,2 +1,3 @@
 cities/*/pipeline/raw/
 __pycache__/
+cities/*/pipeline/preview/

@@ -1,0 +1,30 @@
+# Austin 1900 Sanborn - lodging/hotel/boarding candidates
+# format: sheet | block | type | label/note | nearest streets
+
+2 | 18 | boarding | "Boarding" (unnamed) x2 in block bounded Congress/Brazos/E3rd/E2nd | Congress Ave & Brazos St near E 2nd/E 3rd
+3 | 29 | hotel | "Southern Hotel 2st" | Congress Ave & W 4th St
+3 | 29 | hotel | "Hotel Sager" | Congress Ave & W 4th St
+3 | 44 | boarding | "Boarding" (unnamed) | Lavaca St near W 5th St
+4 | 30 | hotel | "Comm'l Hotel Rooms 2nd" (Sanders Bldg) | Congress Ave near E 3rd/E 4th St
+4 | 42 | hotel | "President Hotel" (2d & 3d floors, block 42) | Congress Ave & Brazos St, near E 4th/E 5th
+5 | 82 | hotel | "Palmer House" | Lavaca St near W 8th St
+5 | 83 | boarding | "Boarding Ho" | Colorado St near W 7th/W 8th St
+5 | 70 | hotel | "Hotel Orr" (addr ~623-627) | Congress Ave near W 6th/W 7th St
+5 | 71 | boarding | "Carrollton House" | Lavaca St near W 6th/W 7th St
+6 | 84 | hotel | "Avenue Hotel" | Congress Ave near W 7th/W 8th St
+6 | 69 | hotel | "The Driskill Hotel" (fireproof, slow-burning constr) | Brazos St near E 6th/E 7th St
+6 | 68 | lodging | "San Jacinto Ho." (addr 208) | San Jacinto St near E 6th/E 7th St
+8 | 123 | hotel | "Capitol Hotel" | Congress Ave near E 10th/E 11th St
+8 | 123 | lodging | "Lodging" (unnamed, addr ~109) | Congress Ave near E 10th/E 11th St
+8 | 111 | lodging | "The Mansion" (addr 114-118, 2-story brick) | Congress Ave near E 9th/E 10th St
+11 | 60 | boarding | "Boarding Ho" (2-story, kitchen) | San Jacinto St near E 5th/E 6th St
+13 | 67 | hotel | "St. Charles Hotel" (addr ~310) | San Jacinto St near E 6th/E 7th St
+26 | - | boarding | "Boarding Ho." (addr 307, over saloon) | Lavaca St near W 16th/W 17th St
+30 | OL174 | boarding | "Boarding Ho." (addr 208) | Colorado St near W 14th/W 15th St
+31 | OL159 | boarding | "Boarding Ho." (addr 100-102) | Colorado St near W 14th/W 15th St
+51 | B | institutional_lodging | "Dormitories" (Tillotson College for Negroes, brick, rent free) | Tillotson Ave near E 11th St, South Austin
+51 | - | institutional_lodging | Unlabeled 115-room stone building, part of Tillotson College campus (likely a dormitory/main bldg) | Tillotson Ave near E 11th St, South Austin
+53 | - | boarding | "Grace Hall" — "Boarding Ho. for Young Ladies" | Whitis Ave near W 24th St
+53 | - | institutional_lodging | "Boys Dormitories" & "Girls Dormitories" (Texas State School for the Deaf) | South Austin, two miles south of Capitol
+53 | - | institutional_lodging | "Class Rooms & Dormitories" + "Sisters' Dormitories" (St. Edward's College) | South Austin, 1.5 mi S of State School for the Deaf
+53 | - | institutional_lodging | Unlabeled "Dormitories, Kitchen, Dining Hall" building (Texas State University / UT Austin campus) | UT Austin campus, Whitis Ave area

@@ -1,0 +1,11 @@
+{
+ "sheets_digitized": 53,
+ "total_buildings": 28,
+ "counts_by_type": {
+  "boarding": 10,
+  "hotel": 10,
+  "lodging": 3,
+  "institutional_lodging": 5
+ },
+ "geocode_status": "pending_precise_geocode"
+}

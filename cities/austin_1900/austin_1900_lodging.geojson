@@ -1,0 +1,621 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74059266516242,
+     30.269906625288606
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House No. 1",
+    "building_type": "boarding",
+    "note": "Unnamed boarding house, labeled ROOMS/BOARDING, block bounded Congress/Brazos/E2nd/E3rd",
+    "year": 1900,
+    "sheet": 2,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74084127258841,
+     30.269828481397397
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House No. 2",
+    "building_type": "boarding",
+    "note": "Unnamed boarding house, same block as above, second building",
+    "year": 1900,
+    "sheet": 2,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74358008102163,
+     30.265783480560934
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Southern Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Southern Hotel, 2 stories",
+    "year": 1900,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74126018913051,
+     30.271455506980864
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Hotel Sager",
+    "building_type": "hotel",
+    "note": "Labeled Hotel Sager, same block as Southern Hotel",
+    "year": 1900,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74153984369005,
+     30.278564870867218
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House (Lavaca)",
+    "building_type": "boarding",
+    "note": "Unnamed boarding house",
+    "year": 1900,
+    "sheet": 3,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74162732725674,
+     30.27145190116367
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Commercial Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Comm'l Hotel Rooms, Sanders Building",
+    "year": 1900,
+    "sheet": 4,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74369549928252,
+     30.26565339159579
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "President Hotel",
+    "building_type": "hotel",
+    "note": "Labeled President Hotel, 2nd & 3rd floors",
+    "year": 1900,
+    "sheet": 4,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.7452153320182,
+     30.271220779696577
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Palmer House",
+    "building_type": "hotel",
+    "note": "Labeled Palmer House hotel",
+    "year": 1900,
+    "sheet": 5,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74324395659808,
+     30.269058611405654
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House (Colorado/W7th)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding Ho.",
+    "year": 1900,
+    "sheet": 5,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74133770857948,
+     30.271560028524554
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Hotel Orr",
+    "building_type": "hotel",
+    "note": "Labeled Hotel Orr, addr ~623-627, next to Masonic Temple",
+    "year": 1900,
+    "sheet": 5,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74321087237898,
+     30.27381436925592
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Carrollton House",
+    "building_type": "boarding",
+    "note": "Labeled Carrollton House lodging",
+    "year": 1900,
+    "sheet": 5,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74148150149693,
+     30.271427589436612
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Avenue Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Avenue Hotel",
+    "year": 1900,
+    "sheet": 6,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.73848946249355,
+     30.27411161561347
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "The Driskill Hotel",
+    "building_type": "hotel",
+    "note": "The famous Driskill Hotel, fireproof construction",
+    "year": 1900,
+    "sheet": 6,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.73547039457766,
+     30.291964534381382
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "San Jacinto House",
+    "building_type": "lodging",
+    "note": "Labeled San Jacinto Ho., addr 208",
+    "year": 1900,
+    "sheet": 6,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.7414110842022,
+     30.271588226403054
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Capitol Hotel",
+    "building_type": "hotel",
+    "note": "Labeled Capitol Hotel",
+    "year": 1900,
+    "sheet": 8,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.7414522862512,
+     30.2717230856621
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Lodging House (Congress/E10th)",
+    "building_type": "lodging",
+    "note": "Unnamed building labeled Lodging, addr ~109",
+    "year": 1900,
+    "sheet": 8,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74143609001716,
+     30.27142455859149
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "The Mansion",
+    "building_type": "lodging",
+    "note": "Labeled The Mansion, addr 114-118, 2-story brick",
+    "year": 1900,
+    "sheet": 8,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.73526889140119,
+     30.292049061955318
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House (San Jacinto/E5th)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding Ho, 2-story with kitchen",
+    "year": 1900,
+    "sheet": 11,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.73488595862187,
+     30.29083272356097
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "St. Charles Hotel",
+    "building_type": "hotel",
+    "note": "Labeled St. Charles Hotel, addr ~310",
+    "year": 1900,
+    "sheet": 13,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74149534817369,
+     30.27848669672324
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House (Lavaca/W16th)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding Ho., addr 307, above a saloon",
+    "year": 1900,
+    "sheet": 26,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.7408780448378,
+     30.276681254791843
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House (Colorado/W14th No.1)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding Ho., addr 208",
+    "year": 1900,
+    "sheet": 30,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74227803261884,
+     30.274754107078994
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Boarding House (Colorado/W14th No.2)",
+    "building_type": "boarding",
+    "note": "Labeled Boarding Ho., addr 100-102, OL 159",
+    "year": 1900,
+    "sheet": 31,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74030682743177,
+     30.274040662790505
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Tillotson College Dormitories",
+    "building_type": "institutional_lodging",
+    "note": "Labeled Dormitories, 2 Chem. Lect'g Rms, brick, rent free -- Tillotson College for Negroes",
+    "year": 1900,
+    "sheet": 51,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74039061973369,
+     30.274582805843362
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Tillotson College Main Building",
+    "building_type": "institutional_lodging",
+    "note": "Unlabeled 4-story stone building, 115 rooms, part of Tillotson College campus",
+    "year": 1900,
+    "sheet": 51,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74055066978018,
+     30.288466692148113
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Grace Hall",
+    "building_type": "boarding",
+    "note": "Labeled Grace Hall -- Boarding Ho. for Young Ladies",
+    "year": 1900,
+    "sheet": 53,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.73965439180323,
+     30.27445791234348
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "Texas School for the Deaf Dormitories",
+    "building_type": "institutional_lodging",
+    "note": "Boys Dormitories and Girls Dormitories, Texas State School for the Deaf, South Austin",
+    "year": 1900,
+    "sheet": 53,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.74034157086739,
+     30.274027908501566
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "St. Edward's College Dormitories",
+    "building_type": "institutional_lodging",
+    "note": "Class Rooms & Dormitories plus Sisters' Dormitories, St. Edward's College",
+    "year": 1900,
+    "sheet": 53,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.73868550318055,
+     30.296097986529006
+    ]
+   },
+   "properties": {
+    "city": "austin",
+    "city_label": "Austin, TX",
+    "label": "UT Austin Dormitory Building",
+    "building_type": "institutional_lodging",
+    "note": "Unlabeled Dormitories/Kitchen/Dining Hall building, Texas State University campus",
+    "year": 1900,
+    "sheet": 53,
+    "source_tile": "n/a",
+    "confidence": "pending_precise_geocode",
+    "geocode_method": "approximate (nearest cross-street) -- pixel-level georeferencing not yet done for this city"
+   }
+  }
+ ]
+}

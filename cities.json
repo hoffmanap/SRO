@@ -36,6 +36,18 @@
       "site": "cities/san_angelo_1913/site/index.html",
       "summary": "cities/san_angelo_1913/city_summary.json",
       "geojson": "cities/san_angelo_1913/san_angelo_1913_lodging.geojson"
+    },
+    {
+      "slug": "austin_1900",
+      "city": "austin",
+      "city_label": "Austin, TX",
+      "state": "TX",
+      "survey_year": 1900,
+      "status": "geocode_pending",
+      "path": "cities/austin_1900",
+      "site": "cities/austin_1900/site/index.html",
+      "summary": "cities/austin_1900/city_summary.json",
+      "geojson": "cities/austin_1900/austin_1900_lodging.geojson"
     }
   ]
 }

@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sanborn Georeferencer</title>
+<style>.leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:focus,.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(images/layers.png);width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(images/layers-2x.png);background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(images/marker-icon.png)}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:focus,.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:focus,.leaflet-container a.leaflet-popup-close-button:hover{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet-imageoverlay-rotated@0.2.1/Leaflet.ImageOverlay.Rotated.min.js"></script>
+<style>
+:root{
+  --bg:#f4f1e9; --panel:#fff; --ink:#2b2420; --ink-soft:#6b6253; --line:#d9d2bf;
+  --accent:#a6531c; --ok:#3d7a4f; --warn:#b8860b;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17140f; --panel:#201c15; --ink:#ece4d2; --ink-soft:#aa9f88;
+    --line:#3a3326; --accent:#e08a4a; --ok:#6fcf8c; --warn:#e0b84a;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+#wrap{display:flex;flex-direction:column;height:100vh}
+header{padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{font-size:15px;margin:0;font-weight:700;white-space:nowrap}
+select{font-size:13px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+#main{flex:1;display:flex;min-height:0}
+#map{flex:1;min-width:0}
+#side{width:300px;flex-shrink:0;border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;padding:14px;font-size:13px}
+#side h2{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);margin:16px 0 6px}
+#side h2:first-child{margin-top:0}
+button{font-size:13px;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+button:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:8px;margin-bottom:8px}
+.row button{flex:1}
+input[type=range]{width:100%}
+.hint{color:var(--ink-soft);font-size:12px;line-height:1.5}
+#list{max-height:260px;overflow-y:auto;border:1px solid var(--line);border-radius:6px}
+.list-item{padding:6px 10px;font-size:12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;cursor:pointer}
+.list-item:last-child{border-bottom:none}
+.list-item:hover{background:var(--bg)}
+.list-item.active{background:var(--accent);color:#fff}
+.list-item .tick{color:var(--ok);font-weight:700}
+.list-item.active .tick{color:#fff}
+#status{font-size:12px;color:var(--ink-soft);padding:8px 16px}
+.handle-legend{font-size:11px;color:var(--ink-soft);line-height:1.6;margin-top:8px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <header>
+    <h1>Sanborn Georeferencer</h1>
+    <select id="citySel"></select>
+    <select id="sheetSel"></select>
+    <span id="status"></span>
+  </header>
+  <div id="main">
+    <div id="map"></div>
+    <div id="side">
+      <h2>Controls</h2>
+      <div class="row">
+        <button id="saveBtn" class="primary">Save &amp; next unsaved</button>
+      </div>
+      <div class="row">
+        <button id="resetBtn">Reset to starting guess</button>
+      </div>
+      <label style="font-size:12px;color:var(--ink-soft)">Sheet opacity</label>
+      <input type="range" id="opacity" min="20" max="100" value="70">
+      <div class="handle-legend">
+        <div><span class="dot" style="background:#2563eb"></span>blue dot — drag to move the sheet</div>
+        <div><span class="dot" style="background:#dc2626"></span>red dot — drag to rotate</div>
+        <div><span class="dot" style="background:#16a34a"></span>green dot — drag to resize</div>
+      </div>
+      <h2>Export</h2>
+      <div class="row">
+        <button id="exportSA">Download San Angelo JSON</button>
+      </div>
+      <div class="row">
+        <button id="exportAU">Download Austin JSON</button>
+      </div>
+      <p class="hint">Your progress is saved in this browser as you go (it'll still be here if you close the tab). When you're done, download both files and send them back in chat.</p>
+      <h2>Sheets</h2>
+      <div id="list"></div>
+      <h2>About</h2>
+      <p class="hint">Pick a sheet, drag it into place over the aerial photo (it should line up with the real street grid and block shapes), then hit Save. Switch basemaps with the layer control top-right.</p>
+    </div>
+  </div>
+</div>
+<script>
+const CITY_DATA = {"san_angelo_1913": {"label": "San Angelo 1913", "center": [31.4605, -100.438], "defaultScale": 0.35, "sheets": [{"sheet": 2, "file": "san_angelo_1913_sheet2.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.467968527343988, -100.43935465098421], "topright": [31.469129102214602, -100.43613888029304], "bottomleft": [31.465396969093124, -100.43807908061623]}}, {"sheet": 3, "file": "san_angelo_1913_sheet3.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.465614576881364, -100.43747612361163], "topright": [31.466339936175498, -100.43546626692965], "bottomleft": [31.463900204714122, -100.43662574336632]}}, {"sheet": 4, "file": "san_angelo_1913_sheet4.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.463946375285637, -100.43593774833718], "topright": [31.465034414226835, -100.43292296331421], "bottomleft": [31.461889128684945, -100.4349172920428]}}, {"sheet": 5, "file": "san_angelo_1913_sheet5.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.45957466386878, -100.43684980153313], "topright": [31.460880310598217, -100.43323205950556], "bottomleft": [31.45768885448481, -100.43591438326327]}}, {"sheet": 7, "file": "san_angelo_1913_sheet7.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.471924828397984, -100.43847350740741], "topright": [31.47250511583329, -100.43686562206182], "bottomleft": [31.46935327014712, -100.43719793703943]}}, {"sheet": 10, "file": "san_angelo_1913_sheet10.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46536391881017, -100.44209110314733], "topright": [31.466451957751367, -100.43907631812435], "bottomleft": [31.463306672209477, -100.44107064685295]}}, {"sheet": 11, "file": "san_angelo_1913_sheet11.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46706529546963, -100.43345641024766], "topright": [31.468008262552, -100.43084359656108], "bottomleft": [31.465179486085663, -100.43252099197781]}}, {"sheet": 13, "file": "san_angelo_1913_sheet13.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.463234136280064, -100.44127163252115], "topright": [31.46403203150361, -100.43906079017096], "bottomleft": [31.4606625780292, -100.43999606215316]}}, {"sheet": 14, "file": "san_angelo_1913_sheet14.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46466517443549, -100.43226587790421], "topright": [31.465825749306102, -100.42905010721303], "bottomleft": [31.46277936505152, -100.43133045963435]}}, {"sheet": 17, "file": "san_angelo_1913_sheet17.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.461223185031667, -100.43340213555462], "topright": [31.461876008396384, -100.43159326454082], "bottomleft": [31.459680250081146, -100.43263679333383]}}, {"sheet": 22, "file": "san_angelo_1913_sheet22.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.458434018992563, -100.43272952219122], "topright": [31.459739665722, -100.42911178016365], "bottomleft": [31.4558624607417, -100.43145395182324]}}, {"sheet": 23, "file": "san_angelo_1913_sheet23.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.452987513703842, -100.4338193422691], "topright": [31.454365696362693, -100.43000061457333], "bottomleft": [31.45093026710315, -100.43279888597472]}}, {"sheet": 24, "file": "san_angelo_1913_sheet24.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.45662062075723, -100.43775416389619], "topright": [31.457636123769017, -100.43494036454142], "bottomleft": [31.45302043920602, -100.43596836538102]}}]}, "austin_1900": {"label": "Austin 1900", "center": [30.273, -97.743], "defaultScale": 0.35, "sheets": [{"sheet": 2, "file": "austin_1900_sheet2.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 3, "file": "austin_1900_sheet3.webp", "w": 1369, "h": 1600, "seed": null}, {"sheet": 4, "file": "austin_1900_sheet4.webp", "w": 1355, "h": 1600, "seed": null}, {"sheet": 5, "file": "austin_1900_sheet5.webp", "w": 1360, "h": 1600, "seed": null}, {"sheet": 6, "file": "austin_1900_sheet6.webp", "w": 1364, "h": 1600, "seed": null}, {"sheet": 8, "file": "austin_1900_sheet8.webp", "w": 1356, "h": 1600, "seed": null}, {"sheet": 11, "file": "austin_1900_sheet11.webp", "w": 1354, "h": 1600, "seed": null}, {"sheet": 13, "file": "austin_1900_sheet13.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 26, "file": "austin_1900_sheet26.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 30, "file": "austin_1900_sheet30.webp", "w": 1359, "h": 1600, "seed": null}, {"sheet": 31, "file": "austin_1900_sheet31.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 51, "file": "austin_1900_sheet51.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 53, "file": "austin_1900_sheet53.webp", "w": 1369, "h": 1600, "seed": null}]}};
+
+const M_PER_DEG_LAT = 111320.0;
+function mPerDegLon(lat){ return 111320.0 * Math.cos(lat*Math.PI/180); }
+function latlonToEN(lat0, lon0, lat, lon){
+  return [(lon-lon0)*mPerDegLon(lat0), (lat-lat0)*M_PER_DEG_LAT];
+}
+function enToLatLon(lat0, lon0, e, n){
+  return [lat0 + n/M_PER_DEG_LAT, lon0 + e/mPerDegLon(lat0)];
+}
+// state: {lat, lon, rotDeg, widthM, heightM} -> corners
+function cornersFromState(st){
+  const t = st.rotDeg*Math.PI/180;
+  // up/right unit vectors in (east,north); rot=0 => up=north, right=east
+  const upE = Math.sin(t), upN = Math.cos(t);
+  const rightE = Math.cos(t), rightN = -Math.sin(t);
+  const hw = st.widthM/2, hh = st.heightM/2;
+  function pt(signR, signU){
+    const e = signR*hw*rightE + signU*hh*upE;
+    const n = signR*hw*rightN + signU*hh*upN;
+    return enToLatLon(st.lat, st.lon, e, n);
+  }
+  return { topleft: pt(-1,1), topright: pt(1,1), bottomleft: pt(-1,-1) };
+}
+function stateFromCorners(c, aspectWH){
+  const lat0 = c.topleft[0], lon0 = c.topleft[1];
+  const [teE, teN] = latlonToEN(lat0, lon0, c.topright[0], c.topright[1]);
+  const [beE, beN] = latlonToEN(lat0, lon0, c.bottomleft[0], c.bottomleft[1]);
+  const widthM = Math.hypot(teE, teN);
+  const heightM = Math.hypot(beE, beN);
+  // right vector = (teE,teN)/widthM ; rot: rightE=cos t, rightN=-sin t => t = atan2(-rightN, rightE)
+  const rightE = teE/widthM, rightN = teN/widthM;
+  const rotDeg = Math.atan2(-rightN, rightE) * 180/Math.PI;
+  const cLat = lat0 + (teN+beN)/2/M_PER_DEG_LAT;
+  const cLon = lon0 + (teE+beE)/2/mPerDegLon(lat0);
+  return {lat:cLat, lon:cLon, rotDeg, widthM, heightM};
+}
+
+const map = L.map('map', {scrollWheelZoom:true}).setView([31.46,-100.44], 14);
+const aerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
+const streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19});
+L.control.layers({"Aerial + labels":aerial,"Streets":streets}, {"Street labels":labels}).addTo(map);
+map.on('baselayerchange', (e) => {
+  if (e.name === 'Streets' && map.hasLayer(labels)) map.removeLayer(labels);
+  if (e.name === 'Aerial + labels' && !map.hasLayer(labels)) labels.addTo(map);
+});
+
+let overlay = null, moveM=null, rotM=null, scaleM=null;
+let cur = null; // {city, sheet, state}
+let saved = {}; // key "city_sheet" -> {topleft,topright,bottomleft}
+
+const LS_KEY = 'sanborn_georef_v1';
+function loadLocal(){
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) saved = JSON.parse(raw);
+  } catch(e){}
+}
+function saveLocal(){
+  try { localStorage.setItem(LS_KEY, JSON.stringify(saved)); } catch(e){}
+}
+function downloadJSON(filename, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 1)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+function exportCity(city){
+  const cfg = CITY_DATA[city];
+  const manifest = [];
+  for (const s of cfg.sheets){
+    const key = sheetKey(city, s.sheet);
+    if (!saved[key]) continue;
+    manifest.push({
+      sheet: s.sheet, file: 'sheet_' + s.sheet + '.webp',
+      topleft: saved[key].topleft, topright: saved[key].topright, bottomleft: saved[key].bottomleft,
+      placement: 'hand-placed via georeferencer tool',
+    });
+  }
+  downloadJSON(city + '_manifest.json', manifest);
+}
+
+const citySel = document.getElementById('citySel');
+const sheetSel = document.getElementById('sheetSel');
+const statusEl = document.getElementById('status');
+const listEl = document.getElementById('list');
+const opacityEl = document.getElementById('opacity');
+
+for (const city of Object.keys(CITY_DATA)){
+  const opt = document.createElement('option');
+  opt.value = city; opt.textContent = CITY_DATA[city].label;
+  citySel.appendChild(opt);
+}
+
+function sheetKey(city, sheet){ return city+'_'+sheet; }
+
+function populateSheetSel(city){
+  sheetSel.innerHTML = '';
+  for (const s of CITY_DATA[city].sheets){
+    const opt = document.createElement('option');
+    opt.value = s.sheet; opt.textContent = 'Sheet ' + s.sheet + (saved[sheetKey(city,s.sheet)] ? ' ✓' : '');
+    sheetSel.appendChild(opt);
+  }
+}
+
+function renderList(){
+  listEl.innerHTML = '';
+  for (const city of Object.keys(CITY_DATA)){
+    for (const s of CITY_DATA[city].sheets){
+      const row = document.createElement('div');
+      row.className = 'list-item' + (cur && cur.city===city && cur.sheet===s.sheet ? ' active' : '');
+      const key = sheetKey(city, s.sheet);
+      row.innerHTML = '<span>'+CITY_DATA[city].label+' #'+s.sheet+'</span><span class="tick">'+(saved[key]?'✓':'')+'</span>';
+      row.onclick = () => loadSheet(city, s.sheet);
+      listEl.appendChild(row);
+    }
+  }
+}
+
+function makeHandle(color){
+  return L.marker([0,0], {
+    draggable:true,
+    icon: L.divIcon({className:'', html:'<div style="width:16px;height:16px;border-radius:50%;background:'+color+';border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)"></div>', iconSize:[16,16], iconAnchor:[8,8]})
+  });
+}
+
+function redraw(){
+  const c = cornersFromState(cur.state);
+  if (!overlay){
+    overlay = L.imageOverlay.rotated(cur.imgUrl, L.latLng(c.topleft), L.latLng(c.topright), L.latLng(c.bottomleft), {opacity: opacityEl.value/100, interactive:false}).addTo(map);
+  } else {
+    overlay.setUrl(cur.imgUrl);
+    overlay.reposition(L.latLng(c.topleft), L.latLng(c.topright), L.latLng(c.bottomleft));
+  }
+  moveM.setLatLng([cur.state.lat, cur.state.lon]);
+  // rotate handle: beyond top-middle
+  const t = cur.state.rotDeg*Math.PI/180;
+  const upE = Math.sin(t), upN = Math.cos(t);
+  const rotPt = enToLatLon(cur.state.lat, cur.state.lon, upE*cur.state.heightM*0.7, upN*cur.state.heightM*0.7);
+  rotM.setLatLng(rotPt);
+  scaleM.setLatLng(c.topright);
+}
+
+function loadSheet(city, sheet){
+  const cfg = CITY_DATA[city];
+  const s = cfg.sheets.find(x => x.sheet === sheet);
+  let state;
+  if (s.seed){
+    state = stateFromCorners(s.seed);
+  } else {
+    // default grid offset so sheets don't start stacked
+    const idx = cfg.sheets.indexOf(s);
+    const cols = 4, spacing = 250;
+    const offE = (idx % cols - cols/2) * spacing, offN = -Math.floor(idx/cols) * spacing;
+    const [lat, lon] = enToLatLon(cfg.center[0], cfg.center[1], offE, offN);
+    state = {lat, lon, rotDeg:0, widthM: s.w * cfg.defaultScale, heightM: s.h * cfg.defaultScale};
+  }
+  cur = {city, sheet, state, imgUrl: 'images/' + s.file, seedState: state};
+  citySel.value = city;
+  populateSheetSel(city);
+  sheetSel.value = sheet;
+  redraw();
+  renderList();
+  statusEl.textContent = city + ' sheet ' + sheet + (saved[sheetKey(city,sheet)] ? ' (saved)' : ' (not yet saved)');
+}
+
+citySel.onchange = () => loadSheet(citySel.value, CITY_DATA[citySel.value].sheets[0].sheet);
+sheetSel.onchange = () => loadSheet(citySel.value, parseInt(sheetSel.value));
+opacityEl.oninput = () => { if (overlay) overlay.setOpacity(opacityEl.value/100); };
+
+document.getElementById('resetBtn').onclick = () => {
+  cur.state = Object.assign({}, cur.seedState);
+  redraw();
+};
+
+document.getElementById('saveBtn').onclick = () => {
+  const c = cornersFromState(cur.state);
+  const key = sheetKey(cur.city, cur.sheet);
+  saved[key] = { topleft: c.topleft, topright: c.topright, bottomleft: c.bottomleft, state: cur.state };
+  saveLocal();
+  renderList();
+  populateSheetSel(cur.city);
+  sheetSel.value = cur.sheet;
+  // advance to next unsaved sheet, same city first
+  const allKeys = [];
+  for (const city of Object.keys(CITY_DATA)) for (const s of CITY_DATA[city].sheets) allKeys.push([city, s.sheet]);
+  const curIdx = allKeys.findIndex(([ci,sh]) => ci===cur.city && sh===cur.sheet);
+  let next = null;
+  for (let i=1;i<=allKeys.length;i++){
+    const [ci,sh] = allKeys[(curIdx+i) % allKeys.length];
+    if (!saved[sheetKey(ci,sh)]){ next = [ci,sh]; break; }
+  }
+  statusEl.textContent = 'Saved sheet ' + cur.sheet + '.';
+  if (next) loadSheet(next[0], next[1]);
+  else statusEl.textContent = 'All sheets saved! Let Claude know you\'re done.';
+};
+
+function wireHandles(){
+  moveM = makeHandle('#2563eb').addTo(map);
+  rotM = makeHandle('#dc2626').addTo(map);
+  scaleM = makeHandle('#16a34a').addTo(map);
+  moveM.on('drag', () => {
+    const p = moveM.getLatLng();
+    cur.state.lat = p.lat; cur.state.lon = p.lng;
+    redraw();
+  });
+  rotM.on('drag', () => {
+    const p = rotM.getLatLng();
+    const [e,n] = latlonToEN(cur.state.lat, cur.state.lon, p.lat, p.lng);
+    cur.state.rotDeg = Math.atan2(e, n) * 180/Math.PI;
+    redraw();
+  });
+  scaleM.on('drag', () => {
+    const p = scaleM.getLatLng();
+    const [e,n] = latlonToEN(cur.state.lat, cur.state.lon, p.lat, p.lng);
+    const dist = Math.hypot(e,n);
+    const t = cur.state.rotDeg*Math.PI/180;
+    const rightE = Math.cos(t), rightN = -Math.sin(t);
+    const upE = Math.sin(t), upN = Math.cos(t);
+    // project onto right/up to get new half-width/half-height, keep aspect from original image
+    const projRight = e*rightE + n*rightN;
+    const aspect = cur.state.heightM / cur.state.widthM;
+    const newHalfW = Math.max(20, projRight);
+    cur.state.widthM = newHalfW*2;
+    cur.state.heightM = newHalfW*2*aspect;
+    redraw();
+  });
+}
+
+document.getElementById('exportSA').onclick = () => exportCity('san_angelo_1913');
+document.getElementById('exportAU').onclick = () => exportCity('austin_1900');
+
+function init(){
+  wireHandles();
+  loadLocal();
+  const firstCity = Object.keys(CITY_DATA)[0];
+  map.setView(CITY_DATA[firstCity].center, 15);
+  loadSheet(firstCity, CITY_DATA[firstCity].sheets[0].sheet);
+}
+init();
+</script>
+</body>
+</html>

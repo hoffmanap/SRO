@@ -187,7 +187,7 @@ COMPLETE_BANNER = """<div class="note-banner">
     Building positions are from a validated per-sheet pixel transform (control points cross-checked against an independent third landmark). Source: Library of Congress raw sheet scans (via the LC Labs bulk Sanborn dataset), read tile-by-tile by eye.
   </div>"""
 
-ROTATED_OVERLAY_SCRIPT = '<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.imageoverlay.rotated/0.1.0/Leaflet.ImageOverlay.Rotated.min.js"></script>'
+ROTATED_OVERLAY_SCRIPT = '<script src="https://cdn.jsdelivr.net/npm/leaflet-imageoverlay-rotated@0.2.1/Leaflet.ImageOverlay.Rotated.min.js"></script>'
 
 SHEETS_JS = """
 var sheetLayer = L.layerGroup();

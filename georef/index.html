@@ -101,14 +101,19 @@ input[type=range]{width:100%}
       <p class="hint" style="margin:0 0 8px">Saved sheets are listed in stacking order (top of list = bottom of stack). Drag a saved sheet onto another to reorder where sheets overlap.</p>
       <div id="list"></div>
       <h2>About</h2>
-      <p class="hint">Pick a sheet, drag it into place over the aerial photo (it should line up with the real street grid and block shapes), then hit Save. Switch basemaps with the layer control top-right. If a sheet's black border actually covers several separate, non-touching areas (common on index/key sheets with distant insets), use "Split sheet into pieces" to carve out each area and place them independently — each piece then gets its own row, handles, and stacking order, and exports as its own small image file alongside the manifest.</p>
+      <p class="hint">Pick a sheet, drag it into place over the aerial photo (it should line up with the real street grid and block shapes), then hit Save. Switch basemaps with the layer control top-right. If a sheet's black border actually covers several separate, non-touching areas (common on index/key sheets with distant insets), use "Split sheet into pieces" to carve out each area and place them independently — each piece then gets its own row, handles, and stacking order, and exports as its own small image file alongside the manifest. Use Box mode for a straight-edged area, or Polygon mode when an area is angled or irregular and doesn't fit a rectangle.</p>
     </div>
   </div>
 </div>
 <div id="splitModal" class="modal-backdrop" style="display:none">
   <div class="modal">
     <h3 style="margin:0 0 6px">Split <span id="splitModalSheet"></span> into pieces</h3>
-    <p class="hint">Drag a box around one self-contained area on the sheet below, then click "Add piece." Repeat for each separate area. Existing pieces are outlined in orange and labeled.</p>
+    <p class="hint" id="splitHint">Box mode: drag a rectangle around one self-contained area. Polygon mode: click to place each corner, then click back on the first point (or double-click) to close the shape -- use this when an area doesn't fit a straight rectangle. Then click "Add piece." Repeat for each separate area. Existing pieces are outlined in orange and labeled.</p>
+    <div class="row" style="margin:0 0 6px;gap:8px">
+      <button id="splitModeRect" class="primary">Box</button>
+      <button id="splitModePoly">Polygon</button>
+      <button id="splitClearBtn">Clear selection</button>
+    </div>
     <canvas id="splitCanvas"></canvas>
     <div class="row" style="margin-top:8px">
       <button id="splitAddBtn" class="primary" disabled>Add piece from selection</button>
@@ -216,7 +221,23 @@ function getCroppedImageUrl(s, crop, key){
     img.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = crop.w; canvas.height = crop.h;
-      canvas.getContext('2d').drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, crop.w, crop.h);
+      const ctx = canvas.getContext('2d');
+      if (crop.type === 'poly'){
+        // clip to the polygon (relative to its own bounding box) so the area
+        // outside the shape is transparent, not a stray rectangle of map
+        ctx.save();
+        ctx.beginPath();
+        crop.points.forEach(([x,y], i) => {
+          const px = x - crop.x, py = y - crop.y;
+          if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        });
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, crop.w, crop.h);
+        ctx.restore();
+      } else {
+        ctx.drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, crop.w, crop.h);
+      }
       const url = canvas.toDataURL('image/png');
       cropCache[key] = url;
       resolve(url);
@@ -558,8 +579,28 @@ const splitCanvas = document.getElementById('splitCanvas');
 const splitCtx = splitCanvas.getContext('2d');
 const splitAddBtn = document.getElementById('splitAddBtn');
 const splitPieceList = document.getElementById('splitPieceList');
-let splitImg = null, splitScale = 1, splitSel = null, splitDragging = false, splitStart = null;
-let splitTargetCity = null, splitTargetSheet = null;
+const splitModeRectBtn = document.getElementById('splitModeRect');
+const splitModePolyBtn = document.getElementById('splitModePoly');
+let splitImg = null, splitScale = 1, splitTargetCity = null, splitTargetSheet = null;
+let splitMode = 'rect'; // 'rect' | 'poly'
+let splitSel = null, splitDragging = false, splitStart = null; // box mode
+let splitPolyPoints = [], splitPolyClosed = false, splitMouse = null; // polygon mode
+
+function resetSplitSelection(){
+  splitSel = null; splitDragging = false; splitStart = null;
+  splitPolyPoints = []; splitPolyClosed = false; splitMouse = null;
+  splitAddBtn.disabled = true;
+}
+function setSplitMode(mode){
+  splitMode = mode;
+  splitModeRectBtn.className = mode === 'rect' ? 'primary' : '';
+  splitModePolyBtn.className = mode === 'poly' ? 'primary' : '';
+  resetSplitSelection();
+  drawSplitCanvas();
+}
+splitModeRectBtn.onclick = () => setSplitMode('rect');
+splitModePolyBtn.onclick = () => setSplitMode('poly');
+document.getElementById('splitClearBtn').onclick = () => { resetSplitSelection(); drawSplitCanvas(); };
 
 document.getElementById('splitBtn').onclick = () => {
   if (!cur) return;
@@ -572,14 +613,26 @@ document.getElementById('splitBtn').onclick = () => {
     splitScale = Math.min(maxW/splitImg.width, maxH/splitImg.height, 1);
     splitCanvas.width = Math.round(splitImg.width*splitScale);
     splitCanvas.height = Math.round(splitImg.height*splitScale);
-    splitSel = null;
-    splitAddBtn.disabled = true;
-    drawSplitCanvas();
+    setSplitMode('rect');
     renderPieceList();
     splitModal.style.display = 'flex';
   };
   splitImg.src = 'images/' + s.file;
 };
+
+function strokeCropOutline(crop, scale){
+  if (crop.type === 'poly'){
+    splitCtx.beginPath();
+    crop.points.forEach(([x,y], i) => {
+      const px = x*scale, py = y*scale;
+      if (i === 0) splitCtx.moveTo(px,py); else splitCtx.lineTo(px,py);
+    });
+    splitCtx.closePath();
+    splitCtx.stroke();
+  } else {
+    splitCtx.strokeRect(crop.x*scale, crop.y*scale, crop.w*scale, crop.h*scale);
+  }
+}
 
 function drawSplitCanvas(){
   splitCtx.clearRect(0,0,splitCanvas.width,splitCanvas.height);
@@ -589,52 +642,107 @@ function drawSplitCanvas(){
   splitCtx.font = '12px sans-serif';
   for (const p of existing){
     splitCtx.strokeStyle = '#a6531c';
-    splitCtx.strokeRect(p.crop.x*splitScale, p.crop.y*splitScale, p.crop.w*splitScale, p.crop.h*splitScale);
+    strokeCropOutline(p.crop, splitScale);
     splitCtx.fillStyle = '#a6531c';
     splitCtx.fillText(p.id, p.crop.x*splitScale + 4, p.crop.y*splitScale + 14);
   }
-  if (splitSel){
+  if (splitMode === 'rect' && splitSel){
     splitCtx.strokeStyle = '#2563eb';
     splitCtx.setLineDash([5,3]);
     splitCtx.strokeRect(splitSel.x, splitSel.y, splitSel.w, splitSel.h);
     splitCtx.setLineDash([]);
   }
+  if (splitMode === 'poly' && splitPolyPoints.length){
+    splitCtx.strokeStyle = '#2563eb';
+    splitCtx.fillStyle = 'rgba(37,99,235,0.15)';
+    splitCtx.beginPath();
+    splitPolyPoints.forEach((p,i) => { if (i===0) splitCtx.moveTo(p.x,p.y); else splitCtx.lineTo(p.x,p.y); });
+    if (splitPolyClosed){
+      splitCtx.closePath();
+      splitCtx.fill();
+    } else if (splitMouse){
+      splitCtx.lineTo(splitMouse.x, splitMouse.y);
+    }
+    splitCtx.stroke();
+    splitCtx.fillStyle = '#2563eb';
+    splitPolyPoints.forEach((p,i) => {
+      splitCtx.beginPath();
+      splitCtx.arc(p.x, p.y, i===0 ? 5 : 4, 0, Math.PI*2);
+      splitCtx.fill();
+    });
+  }
 }
 
 splitCanvas.onmousedown = (ev) => {
   const r = splitCanvas.getBoundingClientRect();
-  splitStart = {x: ev.clientX-r.left, y: ev.clientY-r.top};
-  splitDragging = true;
+  const pt = {x: ev.clientX-r.left, y: ev.clientY-r.top};
+  if (splitMode === 'rect'){
+    splitStart = pt;
+    splitDragging = true;
+  } else {
+    if (splitPolyClosed) return; // already closed -- Add piece or Clear selection
+    if (splitPolyPoints.length >= 3 && Math.hypot(pt.x-splitPolyPoints[0].x, pt.y-splitPolyPoints[0].y) < 10){
+      splitPolyClosed = true;
+      drawSplitCanvas();
+      return;
+    }
+    splitPolyPoints.push(pt);
+    splitAddBtn.disabled = splitPolyPoints.length < 3;
+    drawSplitCanvas();
+  }
 };
 splitCanvas.onmousemove = (ev) => {
-  if (!splitDragging) return;
   const r = splitCanvas.getBoundingClientRect();
-  const cx = ev.clientX-r.left, cy = ev.clientY-r.top;
-  splitSel = { x: Math.min(splitStart.x,cx), y: Math.min(splitStart.y,cy), w: Math.abs(cx-splitStart.x), h: Math.abs(cy-splitStart.y) };
-  drawSplitCanvas();
+  const pt = {x: ev.clientX-r.left, y: ev.clientY-r.top};
+  if (splitMode === 'rect'){
+    if (!splitDragging) return;
+    splitSel = { x: Math.min(splitStart.x,pt.x), y: Math.min(splitStart.y,pt.y), w: Math.abs(pt.x-splitStart.x), h: Math.abs(pt.y-splitStart.y) };
+    drawSplitCanvas();
+  } else {
+    splitMouse = pt;
+    if (splitPolyPoints.length && !splitPolyClosed) drawSplitCanvas();
+  }
+};
+splitCanvas.ondblclick = () => {
+  if (splitMode === 'poly' && splitPolyPoints.length >= 3 && !splitPolyClosed){
+    splitPolyClosed = true;
+    drawSplitCanvas();
+  }
 };
 window.addEventListener('mouseup', () => {
-  if (splitDragging){
+  if (splitMode === 'rect' && splitDragging){
     splitDragging = false;
     splitAddBtn.disabled = !splitSel || splitSel.w < 6 || splitSel.h < 6;
   }
 });
 
 splitAddBtn.onclick = () => {
-  if (!splitSel || splitSel.w < 6 || splitSel.h < 6) return;
   const key = splitTargetCity+'_'+splitTargetSheet;
-  if (!splits[key]) splits[key] = [];
-  const nextId = String.fromCharCode(97 + splits[key].length); // a, b, c...
-  splits[key].push({
-    id: nextId,
-    crop: {
+  let cropEntry;
+  if (splitMode === 'rect'){
+    if (!splitSel || splitSel.w < 6 || splitSel.h < 6) return;
+    cropEntry = {
+      type: 'rect',
       x: Math.round(splitSel.x/splitScale), y: Math.round(splitSel.y/splitScale),
       w: Math.round(splitSel.w/splitScale), h: Math.round(splitSel.h/splitScale),
-    }
-  });
+    };
+  } else {
+    if (splitPolyPoints.length < 3) return;
+    const origPts = splitPolyPoints.map(p => [p.x/splitScale, p.y/splitScale]);
+    const xs = origPts.map(p=>p[0]), ys = origPts.map(p=>p[1]);
+    const minX = Math.min(...xs), minY = Math.min(...ys), maxX = Math.max(...xs), maxY = Math.max(...ys);
+    if (maxX-minX < 6 || maxY-minY < 6) return;
+    cropEntry = {
+      type: 'poly',
+      points: origPts.map(([x,y]) => [Math.round(x), Math.round(y)]),
+      x: Math.round(minX), y: Math.round(minY), w: Math.round(maxX-minX), h: Math.round(maxY-minY),
+    };
+  }
+  if (!splits[key]) splits[key] = [];
+  const nextId = String.fromCharCode(97 + splits[key].length); // a, b, c...
+  splits[key].push({ id: nextId, crop: cropEntry });
   saveSplits();
-  splitSel = null;
-  splitAddBtn.disabled = true;
+  resetSplitSelection();
   drawSplitCanvas();
   renderPieceList();
 };
@@ -651,7 +759,7 @@ function renderPieceList(){
     const row = document.createElement('div');
     row.className = 'piece-row';
     const span = document.createElement('span');
-    span.textContent = 'Piece ' + p.id + ' (' + p.crop.w + '×' + p.crop.h + 'px)';
+    span.textContent = 'Piece ' + p.id + ' (' + (p.crop.type === 'poly' ? ('polygon, ' + p.crop.points.length + ' pts') : (p.crop.w + '×' + p.crop.h + 'px')) + ')';
     row.appendChild(span);
     const del = document.createElement('button');
     del.textContent = 'Remove';

@@ -45,6 +45,9 @@ input[type=range]{width:100%}
 .list-item.active{background:var(--accent);color:#fff}
 .list-item .tick{color:var(--ok);font-weight:700}
 .list-item.active .tick{color:#fff}
+.list-item.dragging{opacity:.4}
+.list-item.drop-target{box-shadow:inset 0 2px 0 var(--accent)}
+#list{max-height:360px}
 #status{font-size:12px;color:var(--ink-soft);padding:8px 16px}
 .handle-legend{font-size:11px;color:var(--ink-soft);line-height:1.6;margin-top:8px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
@@ -95,7 +98,7 @@ input[type=range]{width:100%}
       <label style="font-size:12px;color:var(--ink-soft);display:flex;gap:6px;align-items:center;margin-bottom:8px">
         <input type="checkbox" id="previewAll"> Preview all saved sheets of this city (shows stacking order)
       </label>
-      <p class="hint" style="margin:0 0 8px">Order below = stacking order, top of list = bottom of stack. Use ▲▼ on a saved sheet to move it above/below its neighbor where sheets overlap.</p>
+      <p class="hint" style="margin:0 0 8px">Saved sheets are listed in stacking order (top of list = bottom of stack). Drag a saved sheet onto another to reorder where sheets overlap.</p>
       <div id="list"></div>
       <h2>About</h2>
       <p class="hint">Pick a sheet, drag it into place over the aerial photo (it should line up with the real street grid and block shapes), then hit Save. Switch basemaps with the layer control top-right. If a sheet's black border actually covers several separate, non-touching areas (common on index/key sheets with distant insets), use "Split sheet into pieces" to carve out each area and place them independently — each piece then gets its own row, handles, and stacking order, and exports as its own small image file alongside the manifest.</p>
@@ -117,7 +120,7 @@ input[type=range]{width:100%}
   </div>
 </div>
 <script>
-const CITY_DATA = {"san_angelo_1913": {"label": "San Angelo 1913", "center": [31.4605, -100.438], "defaultScale": 0.35, "sheets": [{"sheet": 2, "file": "san_angelo_1913_sheet2.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.467968527343988, -100.43935465098421], "topright": [31.469129102214602, -100.43613888029304], "bottomleft": [31.465396969093124, -100.43807908061623]}}, {"sheet": 3, "file": "san_angelo_1913_sheet3.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.465614576881364, -100.43747612361163], "topright": [31.466339936175498, -100.43546626692965], "bottomleft": [31.463900204714122, -100.43662574336632]}}, {"sheet": 4, "file": "san_angelo_1913_sheet4.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.463946375285637, -100.43593774833718], "topright": [31.465034414226835, -100.43292296331421], "bottomleft": [31.461889128684945, -100.4349172920428]}}, {"sheet": 5, "file": "san_angelo_1913_sheet5.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.45957466386878, -100.43684980153313], "topright": [31.460880310598217, -100.43323205950556], "bottomleft": [31.45768885448481, -100.43591438326327]}}, {"sheet": 7, "file": "san_angelo_1913_sheet7.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.471924828397984, -100.43847350740741], "topright": [31.47250511583329, -100.43686562206182], "bottomleft": [31.46935327014712, -100.43719793703943]}}, {"sheet": 10, "file": "san_angelo_1913_sheet10.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46536391881017, -100.44209110314733], "topright": [31.466451957751367, -100.43907631812435], "bottomleft": [31.463306672209477, -100.44107064685295]}}, {"sheet": 11, "file": "san_angelo_1913_sheet11.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46706529546963, -100.43345641024766], "topright": [31.468008262552, -100.43084359656108], "bottomleft": [31.465179486085663, -100.43252099197781]}}, {"sheet": 13, "file": "san_angelo_1913_sheet13.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.463234136280064, -100.44127163252115], "topright": [31.46403203150361, -100.43906079017096], "bottomleft": [31.4606625780292, -100.43999606215316]}}, {"sheet": 14, "file": "san_angelo_1913_sheet14.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46466517443549, -100.43226587790421], "topright": [31.465825749306102, -100.42905010721303], "bottomleft": [31.46277936505152, -100.43133045963435]}}, {"sheet": 17, "file": "san_angelo_1913_sheet17.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.461223185031667, -100.43340213555462], "topright": [31.461876008396384, -100.43159326454082], "bottomleft": [31.459680250081146, -100.43263679333383]}}, {"sheet": 22, "file": "san_angelo_1913_sheet22.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.458434018992563, -100.43272952219122], "topright": [31.459739665722, -100.42911178016365], "bottomleft": [31.4558624607417, -100.43145395182324]}}, {"sheet": 23, "file": "san_angelo_1913_sheet23.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.452987513703842, -100.4338193422691], "topright": [31.454365696362693, -100.43000061457333], "bottomleft": [31.45093026710315, -100.43279888597472]}}, {"sheet": 24, "file": "san_angelo_1913_sheet24.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.45662062075723, -100.43775416389619], "topright": [31.457636123769017, -100.43494036454142], "bottomleft": [31.45302043920602, -100.43596836538102]}}]}, "austin_1900": {"label": "Austin 1900", "center": [30.273, -97.743], "defaultScale": 0.35, "sheets": [{"sheet": 2, "file": "austin_1900_sheet2.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 3, "file": "austin_1900_sheet3.webp", "w": 1369, "h": 1600, "seed": null}, {"sheet": 4, "file": "austin_1900_sheet4.webp", "w": 1355, "h": 1600, "seed": null}, {"sheet": 5, "file": "austin_1900_sheet5.webp", "w": 1360, "h": 1600, "seed": null}, {"sheet": 6, "file": "austin_1900_sheet6.webp", "w": 1364, "h": 1600, "seed": null}, {"sheet": 8, "file": "austin_1900_sheet8.webp", "w": 1356, "h": 1600, "seed": null}, {"sheet": 11, "file": "austin_1900_sheet11.webp", "w": 1354, "h": 1600, "seed": null}, {"sheet": 13, "file": "austin_1900_sheet13.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 26, "file": "austin_1900_sheet26.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 30, "file": "austin_1900_sheet30.webp", "w": 1359, "h": 1600, "seed": null}, {"sheet": 31, "file": "austin_1900_sheet31.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 51, "file": "austin_1900_sheet51.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 53, "file": "austin_1900_sheet53.webp", "w": 1369, "h": 1600, "seed": null}]}};
+const CITY_DATA = {"san_angelo_1913": {"label": "San Angelo 1913", "center": [31.4605, -100.438], "defaultScale": 0.35, "sheets": [{"sheet": 1, "file": "san_angelo_1913_sheet1.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 2, "file": "san_angelo_1913_sheet2.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.467968527343988, -100.43935465098421], "topright": [31.469129102214602, -100.43613888029304], "bottomleft": [31.465396969093124, -100.43807908061623]}}, {"sheet": 3, "file": "san_angelo_1913_sheet3.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.465614576881364, -100.43747612361163], "topright": [31.466339936175498, -100.43546626692965], "bottomleft": [31.463900204714122, -100.43662574336632]}}, {"sheet": 4, "file": "san_angelo_1913_sheet4.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.463946375285637, -100.43593774833718], "topright": [31.465034414226835, -100.43292296331421], "bottomleft": [31.461889128684945, -100.4349172920428]}}, {"sheet": 5, "file": "san_angelo_1913_sheet5.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.45957466386878, -100.43684980153313], "topright": [31.460880310598217, -100.43323205950556], "bottomleft": [31.45768885448481, -100.43591438326327]}}, {"sheet": 6, "file": "san_angelo_1913_sheet6.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 7, "file": "san_angelo_1913_sheet7.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.471924828397984, -100.43847350740741], "topright": [31.47250511583329, -100.43686562206182], "bottomleft": [31.46935327014712, -100.43719793703943]}}, {"sheet": 8, "file": "san_angelo_1913_sheet8.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 9, "file": "san_angelo_1913_sheet9.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 10, "file": "san_angelo_1913_sheet10.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46536391881017, -100.44209110314733], "topright": [31.466451957751367, -100.43907631812435], "bottomleft": [31.463306672209477, -100.44107064685295]}}, {"sheet": 11, "file": "san_angelo_1913_sheet11.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46706529546963, -100.43345641024766], "topright": [31.468008262552, -100.43084359656108], "bottomleft": [31.465179486085663, -100.43252099197781]}}, {"sheet": 12, "file": "san_angelo_1913_sheet12.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 13, "file": "san_angelo_1913_sheet13.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.463234136280064, -100.44127163252115], "topright": [31.46403203150361, -100.43906079017096], "bottomleft": [31.4606625780292, -100.43999606215316]}}, {"sheet": 14, "file": "san_angelo_1913_sheet14.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.46466517443549, -100.43226587790421], "topright": [31.465825749306102, -100.42905010721303], "bottomleft": [31.46277936505152, -100.43133045963435]}}, {"sheet": 15, "file": "san_angelo_1913_sheet15.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 16, "file": "san_angelo_1913_sheet16.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 17, "file": "san_angelo_1913_sheet17.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.461223185031667, -100.43340213555462], "topright": [31.461876008396384, -100.43159326454082], "bottomleft": [31.459680250081146, -100.43263679333383]}}, {"sheet": 18, "file": "san_angelo_1913_sheet18.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 19, "file": "san_angelo_1913_sheet19.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 20, "file": "san_angelo_1913_sheet20.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 21, "file": "san_angelo_1913_sheet21.webp", "w": 1349, "h": 1600, "seed": null}, {"sheet": 22, "file": "san_angelo_1913_sheet22.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.458434018992563, -100.43272952219122], "topright": [31.459739665722, -100.42911178016365], "bottomleft": [31.4558624607417, -100.43145395182324]}}, {"sheet": 23, "file": "san_angelo_1913_sheet23.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.452987513703842, -100.4338193422691], "topright": [31.454365696362693, -100.43000061457333], "bottomleft": [31.45093026710315, -100.43279888597472]}}, {"sheet": 24, "file": "san_angelo_1913_sheet24.webp", "w": 1349, "h": 1600, "seed": {"topleft": [31.45662062075723, -100.43775416389619], "topright": [31.457636123769017, -100.43494036454142], "bottomleft": [31.45302043920602, -100.43596836538102]}}, {"sheet": 25, "file": "san_angelo_1913_sheet25.webp", "w": 1349, "h": 1600, "seed": null}]}, "austin_1900": {"label": "Austin 1900", "center": [30.273, -97.743], "defaultScale": 0.35, "sheets": [{"sheet": 1, "file": "austin_1900_sheet1.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 2, "file": "austin_1900_sheet2.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 3, "file": "austin_1900_sheet3.webp", "w": 1369, "h": 1600, "seed": null}, {"sheet": 4, "file": "austin_1900_sheet4.webp", "w": 1355, "h": 1600, "seed": null}, {"sheet": 5, "file": "austin_1900_sheet5.webp", "w": 1360, "h": 1600, "seed": null}, {"sheet": 6, "file": "austin_1900_sheet6.webp", "w": 1364, "h": 1600, "seed": null}, {"sheet": 7, "file": "austin_1900_sheet7.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 8, "file": "austin_1900_sheet8.webp", "w": 1356, "h": 1600, "seed": null}, {"sheet": 9, "file": "austin_1900_sheet9.webp", "w": 1364, "h": 1600, "seed": null}, {"sheet": 10, "file": "austin_1900_sheet10.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 11, "file": "austin_1900_sheet11.webp", "w": 1354, "h": 1600, "seed": null}, {"sheet": 12, "file": "austin_1900_sheet12.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 13, "file": "austin_1900_sheet13.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 14, "file": "austin_1900_sheet14.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 15, "file": "austin_1900_sheet15.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 16, "file": "austin_1900_sheet16.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 17, "file": "austin_1900_sheet17.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 18, "file": "austin_1900_sheet18.webp", "w": 1360, "h": 1600, "seed": null}, {"sheet": 19, "file": "austin_1900_sheet19.webp", "w": 1370, "h": 1600, "seed": null}, {"sheet": 20, "file": "austin_1900_sheet20.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 21, "file": "austin_1900_sheet21.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 22, "file": "austin_1900_sheet22.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 23, "file": "austin_1900_sheet23.webp", "w": 1373, "h": 1600, "seed": null}, {"sheet": 24, "file": "austin_1900_sheet24.webp", "w": 1366, "h": 1600, "seed": null}, {"sheet": 25, "file": "austin_1900_sheet25.webp", "w": 1351, "h": 1600, "seed": null}, {"sheet": 26, "file": "austin_1900_sheet26.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 27, "file": "austin_1900_sheet27.webp", "w": 1369, "h": 1600, "seed": null}, {"sheet": 28, "file": "austin_1900_sheet28.webp", "w": 1356, "h": 1600, "seed": null}, {"sheet": 29, "file": "austin_1900_sheet29.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 30, "file": "austin_1900_sheet30.webp", "w": 1359, "h": 1600, "seed": null}, {"sheet": 31, "file": "austin_1900_sheet31.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 32, "file": "austin_1900_sheet32.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 33, "file": "austin_1900_sheet33.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 34, "file": "austin_1900_sheet34.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 35, "file": "austin_1900_sheet35.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 36, "file": "austin_1900_sheet36.webp", "w": 1360, "h": 1600, "seed": null}, {"sheet": 37, "file": "austin_1900_sheet37.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 38, "file": "austin_1900_sheet38.webp", "w": 1359, "h": 1600, "seed": null}, {"sheet": 39, "file": "austin_1900_sheet39.webp", "w": 1356, "h": 1600, "seed": null}, {"sheet": 40, "file": "austin_1900_sheet40.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 41, "file": "austin_1900_sheet41.webp", "w": 1368, "h": 1600, "seed": null}, {"sheet": 42, "file": "austin_1900_sheet42.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 43, "file": "austin_1900_sheet43.webp", "w": 1366, "h": 1600, "seed": null}, {"sheet": 44, "file": "austin_1900_sheet44.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 45, "file": "austin_1900_sheet45.webp", "w": 1362, "h": 1600, "seed": null}, {"sheet": 46, "file": "austin_1900_sheet46.webp", "w": 1369, "h": 1600, "seed": null}, {"sheet": 47, "file": "austin_1900_sheet47.webp", "w": 1359, "h": 1600, "seed": null}, {"sheet": 48, "file": "austin_1900_sheet48.webp", "w": 1362, "h": 1600, "seed": null}, {"sheet": 49, "file": "austin_1900_sheet49.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 50, "file": "austin_1900_sheet50.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 51, "file": "austin_1900_sheet51.webp", "w": 1365, "h": 1600, "seed": null}, {"sheet": 52, "file": "austin_1900_sheet52.webp", "w": 1361, "h": 1600, "seed": null}, {"sheet": 53, "file": "austin_1900_sheet53.webp", "w": 1369, "h": 1600, "seed": null}]}};
 
 const M_PER_DEG_LAT = 111320.0;
 function mPerDegLon(lat){ return 111320.0 * Math.cos(lat*Math.PI/180); }
@@ -307,21 +310,6 @@ function savedItemsOrdered(city){
     .filter(it => saved[itemKey(city, it.sheet, it.pieceId)])
     .sort((a,b) => (saved[itemKey(city,a.sheet,a.pieceId)].order ?? 0) - (saved[itemKey(city,b.sheet,b.pieceId)].order ?? 0));
 }
-function moveOrder(city, sheet, pieceId, dir){ // dir: -1 = move down (earlier/below), +1 = move up (later/above)
-  const ordered = savedItemsOrdered(city);
-  const idx = ordered.findIndex(it => it.sheet === sheet && it.pieceId === pieceId);
-  const swapIdx = idx + dir;
-  if (idx < 0 || swapIdx < 0 || swapIdx >= ordered.length) return;
-  const keyA = itemKey(city, ordered[idx].sheet, ordered[idx].pieceId);
-  const keyB = itemKey(city, ordered[swapIdx].sheet, ordered[swapIdx].pieceId);
-  const tmp = saved[keyA].order;
-  saved[keyA].order = saved[keyB].order;
-  saved[keyB].order = tmp;
-  saveLocal();
-  renderList();
-  if (previewAllEl.checked) redrawPreview();
-}
-
 function populateSheetSel(city){
   sheetSel.innerHTML = '';
   for (const s of CITY_DATA[city].sheets){
@@ -334,41 +322,87 @@ function populateSheetSel(city){
   }
 }
 
+// Reassign order=0..n-1 to a city's saved items following a given sequence
+// of {sheet,pieceId}, then persist + rerender.
+function applyOrderSequence(city, sequence){
+  sequence.forEach((it, i) => { saved[itemKey(city, it.sheet, it.pieceId)].order = i; });
+  saveLocal();
+  renderList();
+  if (previewAllEl.checked) redrawPreview();
+}
+
+function makeListRow(city, sheet, pieceId, isSaved){
+  const row = document.createElement('div');
+  const active = cur && cur.city===city && cur.sheet===sheet && (cur.pieceId||null)===(pieceId||null);
+  row.className = 'list-item' + (active ? ' active' : '');
+  const key = itemKey(city, sheet, pieceId);
+  const left = document.createElement('span');
+  left.textContent = (isSaved ? '⠇ ' : '') + itemLabel(CITY_DATA[city].label, sheet, pieceId);
+  left.style.cursor = 'pointer';
+  left.onclick = () => loadItem(city, sheet, pieceId);
+  row.appendChild(left);
+  if (isSaved){
+    const tick = document.createElement('span');
+    tick.className = 'tick'; tick.textContent = '✓';
+    row.appendChild(tick);
+    row.draggable = true;
+    row.title = 'Drag to reorder (stacking order); drop a sheet on another to swap which draws on top';
+    row.ondragstart = (ev) => {
+      ev.dataTransfer.effectAllowed = 'move';
+      ev.dataTransfer.setData('text/plain', JSON.stringify({city, sheet, pieceId}));
+      setTimeout(() => row.classList.add('dragging'), 0);
+    };
+    row.ondragend = () => row.classList.remove('dragging');
+    row.ondragover = (ev) => { ev.preventDefault(); row.classList.add('drop-target'); };
+    row.ondragleave = () => row.classList.remove('drop-target');
+    row.ondrop = (ev) => {
+      ev.preventDefault();
+      row.classList.remove('drop-target');
+      let data;
+      try { data = JSON.parse(ev.dataTransfer.getData('text/plain')); } catch(e){ return; }
+      if (data.city !== city) return; // dragging across cities isn't meaningful (separate stacks)
+      const ordered = savedItemsOrdered(city);
+      const fromIdx = ordered.findIndex(it => it.sheet===data.sheet && it.pieceId===(data.pieceId||null));
+      const toIdx = ordered.findIndex(it => it.sheet===sheet && it.pieceId===(pieceId||null));
+      if (fromIdx === -1 || toIdx === -1 || fromIdx === toIdx) return;
+      const [moved] = ordered.splice(fromIdx, 1);
+      ordered.splice(toIdx, 0, moved);
+      applyOrderSequence(city, ordered);
+    };
+  }
+  return row;
+}
+
 function renderList(){
   listEl.innerHTML = '';
   for (const city of Object.keys(CITY_DATA)){
+    const header = document.createElement('div');
+    header.textContent = CITY_DATA[city].label + ' — saved (drag to reorder stacking)';
+    header.style.cssText = 'font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);padding:6px 10px 3px;background:var(--bg)';
+    listEl.appendChild(header);
+
     const ordered = savedItemsOrdered(city); // bottom-of-stack first
+    if (!ordered.length){
+      const none = document.createElement('div');
+      none.className = 'hint';
+      none.style.padding = '4px 10px 8px';
+      none.textContent = 'Nothing saved yet.';
+      listEl.appendChild(none);
+    }
+    for (const it of ordered){
+      listEl.appendChild(makeListRow(city, it.sheet, it.pieceId, true));
+    }
+
+    const header2 = document.createElement('div');
+    header2.textContent = CITY_DATA[city].label + ' — not yet placed';
+    header2.style.cssText = 'font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);padding:6px 10px 3px;background:var(--bg)';
+    listEl.appendChild(header2);
+
     for (const s of CITY_DATA[city].sheets){
       for (const p of getPieces(city, s.sheet)){
-        const row = document.createElement('div');
-        const active = cur && cur.city===city && cur.sheet===s.sheet && (cur.pieceId||null)===(p.id||null);
-        row.className = 'list-item' + (active ? ' active' : '');
         const key = itemKey(city, s.sheet, p.id);
-        const left = document.createElement('span');
-        left.textContent = itemLabel(CITY_DATA[city].label, s.sheet, p.id);
-        left.style.cursor = 'pointer';
-        left.onclick = () => loadItem(city, s.sheet, p.id);
-        row.appendChild(left);
-        const right = document.createElement('span');
-        right.style.display = 'flex'; right.style.gap = '4px'; right.style.alignItems = 'center';
-        if (saved[key]){
-          const stackIdx = ordered.findIndex(x => x.sheet === s.sheet && x.pieceId === p.id);
-          const upBtn = document.createElement('button');
-          upBtn.textContent = '▲'; upBtn.title = 'Move up (draw on top of next)';
-          upBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
-          upBtn.disabled = stackIdx >= ordered.length - 1;
-          upBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, p.id, +1); };
-          const downBtn = document.createElement('button');
-          downBtn.textContent = '▼'; downBtn.title = 'Move down (draw below previous)';
-          downBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
-          downBtn.disabled = stackIdx <= 0;
-          downBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, p.id, -1); };
-          const tick = document.createElement('span');
-          tick.className = 'tick'; tick.textContent = '✓';
-          right.appendChild(downBtn); right.appendChild(upBtn); right.appendChild(tick);
-        }
-        row.appendChild(right);
-        listEl.appendChild(row);
+        if (saved[key]) continue; // already listed above
+        listEl.appendChild(makeListRow(city, s.sheet, p.id, false));
       }
     }
   }

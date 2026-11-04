@@ -48,6 +48,11 @@ input[type=range]{width:100%}
 #status{font-size:12px;color:var(--ink-soft);padding:8px 16px}
 .handle-legend{font-size:11px;color:var(--ink-soft);line-height:1.6;margin-top:8px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:2000;padding:20px}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;max-width:92vw;max-height:92vh;overflow:auto}
+#splitCanvas{border:1px solid var(--line);cursor:crosshair;display:block;margin-top:8px}
+.piece-row{display:flex;justify-content:space-between;align-items:center;padding:5px 2px;font-size:12px;border-bottom:1px solid var(--line)}
+.piece-row button{padding:2px 8px;font-size:11px}
 </style>
 </head>
 <body>
@@ -67,6 +72,9 @@ input[type=range]{width:100%}
       </div>
       <div class="row">
         <button id="resetBtn">Reset to starting guess</button>
+      </div>
+      <div class="row">
+        <button id="splitBtn">Split sheet into pieces&hellip;</button>
       </div>
       <label style="font-size:12px;color:var(--ink-soft)">Sheet opacity</label>
       <input type="range" id="opacity" min="20" max="100" value="70">
@@ -90,7 +98,21 @@ input[type=range]{width:100%}
       <p class="hint" style="margin:0 0 8px">Order below = stacking order, top of list = bottom of stack. Use ▲▼ on a saved sheet to move it above/below its neighbor where sheets overlap.</p>
       <div id="list"></div>
       <h2>About</h2>
-      <p class="hint">Pick a sheet, drag it into place over the aerial photo (it should line up with the real street grid and block shapes), then hit Save. Switch basemaps with the layer control top-right.</p>
+      <p class="hint">Pick a sheet, drag it into place over the aerial photo (it should line up with the real street grid and block shapes), then hit Save. Switch basemaps with the layer control top-right. If a sheet's black border actually covers several separate, non-touching areas (common on index/key sheets with distant insets), use "Split sheet into pieces" to carve out each area and place them independently — each piece then gets its own row, handles, and stacking order, and exports as its own small image file alongside the manifest.</p>
+    </div>
+  </div>
+</div>
+<div id="splitModal" class="modal-backdrop" style="display:none">
+  <div class="modal">
+    <h3 style="margin:0 0 6px">Split <span id="splitModalSheet"></span> into pieces</h3>
+    <p class="hint">Drag a box around one self-contained area on the sheet below, then click "Add piece." Repeat for each separate area. Existing pieces are outlined in orange and labeled.</p>
+    <canvas id="splitCanvas"></canvas>
+    <div class="row" style="margin-top:8px">
+      <button id="splitAddBtn" class="primary" disabled>Add piece from selection</button>
+    </div>
+    <div id="splitPieceList"></div>
+    <div class="row">
+      <button id="splitDoneBtn">Done</button>
     </div>
   </div>
 </div>
@@ -157,6 +179,48 @@ function loadLocal(){
 function saveLocal(){
   try { localStorage.setItem(LS_KEY, JSON.stringify(saved)); } catch(e){}
 }
+
+// --- splitting a sheet into independently-placed pieces ---
+// Some sheets' black border actually encloses several separate, non-touching
+// areas (insets of distant institutions, etc). splits[city_sheet] holds the
+// user-drawn crop rectangles (in original image pixel space) for those cases.
+let splits = {}; // key "city_sheet" -> [{id:'a', crop:{x,y,w,h}}, ...]
+const SPLITS_LS_KEY = 'sanborn_georef_splits_v1';
+function loadSplits(){
+  try { const raw = localStorage.getItem(SPLITS_LS_KEY); if (raw) splits = JSON.parse(raw); } catch(e){}
+}
+function saveSplits(){
+  try { localStorage.setItem(SPLITS_LS_KEY, JSON.stringify(splits)); } catch(e){}
+}
+function getPieces(city, sheet){
+  const key = city + '_' + sheet;
+  return (splits[key] && splits[key].length) ? splits[key] : [{id:null, crop:null}];
+}
+function itemKey(city, sheet, pieceId){ return pieceId ? city+'_'+sheet+'_'+pieceId : city+'_'+sheet; }
+function itemLabel(cityLabel, sheet, pieceId){ return cityLabel + ' #' + sheet + (pieceId||''); }
+function allCityItems(city){
+  const items = [];
+  for (const s of CITY_DATA[city].sheets){
+    for (const p of getPieces(city, s.sheet)) items.push({sheet: s.sheet, pieceId: p.id, s, crop: p.crop});
+  }
+  return items;
+}
+const cropCache = {};
+function getCroppedImageUrl(s, crop, key){
+  if (cropCache[key]) return Promise.resolve(cropCache[key]);
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = crop.w; canvas.height = crop.h;
+      canvas.getContext('2d').drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, crop.w, crop.h);
+      const url = canvas.toDataURL('image/png');
+      cropCache[key] = url;
+      resolve(url);
+    };
+    img.src = 'images/' + s.file;
+  });
+}
 function downloadJSON(filename, obj){
   const blob = new Blob([JSON.stringify(obj, null, 1)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -165,17 +229,32 @@ function downloadJSON(filename, obj){
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 5000);
 }
+function downloadDataUrlAsFile(filename, dataUrl){
+  const a = document.createElement('a');
+  a.href = dataUrl; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
 function exportCity(city){
   const manifest = [];
-  const ordered = savedSheetsOrdered(city); // bottom-of-stack first -> array order = draw order = later entries on top
-  ordered.forEach((s, i) => {
-    const key = sheetKey(city, s.sheet);
+  const ordered = savedItemsOrdered(city); // bottom-of-stack first -> array order = draw order = later entries on top
+  let pieceDownloads = 0;
+  ordered.forEach((it, i) => {
+    const key = itemKey(city, it.sheet, it.pieceId);
+    const e = saved[key];
+    const fname = it.pieceId ? ('sheet_' + it.sheet + it.pieceId + '.png') : ('sheet_' + it.sheet + '.webp');
     manifest.push({
-      sheet: s.sheet, file: 'sheet_' + s.sheet + '.webp',
-      topleft: saved[key].topleft, topright: saved[key].topright, bottomleft: saved[key].bottomleft,
+      sheet: it.sheet + (it.pieceId||''), file: fname,
+      topleft: e.topleft, topright: e.topright, bottomleft: e.bottomleft,
       order: i,
-      placement: 'hand-placed via georeferencer tool',
+      placement: it.pieceId
+        ? ('hand-placed via georeferencer tool (split piece ' + it.pieceId + ' of sheet ' + it.sheet + ')')
+        : 'hand-placed via georeferencer tool',
     });
+    if (it.pieceId && e.imgUrl){
+      // this piece's cropped image doesn't exist in the repo yet -- download it alongside the manifest
+      pieceDownloads++;
+      setTimeout(() => downloadDataUrlAsFile(fname, e.imgUrl), pieceDownloads * 200);
+    }
   });
   downloadJSON(city + '_manifest.json', manifest);
 }
@@ -191,11 +270,12 @@ const previewLayer = L.layerGroup().addTo(map);
 function redrawPreview(){
   previewLayer.clearLayers();
   if (!previewAllEl.checked || !cur) return;
-  const ordered = savedSheetsOrdered(cur.city); // bottom-of-stack first; later addTo = drawn on top
-  for (const s of ordered){
-    const key = sheetKey(cur.city, s.sheet);
+  const ordered = savedItemsOrdered(cur.city); // bottom-of-stack first; later addTo = drawn on top
+  for (const it of ordered){
+    const key = itemKey(cur.city, it.sheet, it.pieceId);
     const e = saved[key];
-    const ov = L.imageOverlay.rotated('images/' + s.file, L.latLng(e.topleft), L.latLng(e.topright), L.latLng(e.bottomleft), {
+    const url = e.imgUrl || ('images/' + it.s.file);
+    const ov = L.imageOverlay.rotated(url, L.latLng(e.topleft), L.latLng(e.topright), L.latLng(e.bottomleft), {
       opacity: opacityEl.value/100, interactive:false
     });
     ov.addTo(previewLayer);
@@ -212,30 +292,28 @@ for (const city of Object.keys(CITY_DATA)){
   citySel.appendChild(opt);
 }
 
-function sheetKey(city, sheet){ return city+'_'+sheet; }
-
-// --- stacking order ---
+// --- stacking order (per placed item -- a whole sheet, or one split piece) ---
 // saved[key].order is a number; lower draws first (bottom), higher draws last (top).
 function nextOrder(city){
   let max = -1;
-  for (const s of CITY_DATA[city].sheets){
-    const e = saved[sheetKey(city, s.sheet)];
+  for (const it of allCityItems(city)){
+    const e = saved[itemKey(city, it.sheet, it.pieceId)];
     if (e && typeof e.order === 'number' && e.order > max) max = e.order;
   }
   return max + 1;
 }
-function savedSheetsOrdered(city){
-  return CITY_DATA[city].sheets
-    .filter(s => saved[sheetKey(city, s.sheet)])
-    .slice()
-    .sort((a,b) => (saved[sheetKey(city,a.sheet)].order ?? 0) - (saved[sheetKey(city,b.sheet)].order ?? 0));
+function savedItemsOrdered(city){
+  return allCityItems(city)
+    .filter(it => saved[itemKey(city, it.sheet, it.pieceId)])
+    .sort((a,b) => (saved[itemKey(city,a.sheet,a.pieceId)].order ?? 0) - (saved[itemKey(city,b.sheet,b.pieceId)].order ?? 0));
 }
-function moveOrder(city, sheet, dir){ // dir: -1 = move down (earlier/below), +1 = move up (later/above)
-  const ordered = savedSheetsOrdered(city);
-  const idx = ordered.findIndex(s => s.sheet === sheet);
+function moveOrder(city, sheet, pieceId, dir){ // dir: -1 = move down (earlier/below), +1 = move up (later/above)
+  const ordered = savedItemsOrdered(city);
+  const idx = ordered.findIndex(it => it.sheet === sheet && it.pieceId === pieceId);
   const swapIdx = idx + dir;
   if (idx < 0 || swapIdx < 0 || swapIdx >= ordered.length) return;
-  const keyA = sheetKey(city, ordered[idx].sheet), keyB = sheetKey(city, ordered[swapIdx].sheet);
+  const keyA = itemKey(city, ordered[idx].sheet, ordered[idx].pieceId);
+  const keyB = itemKey(city, ordered[swapIdx].sheet, ordered[swapIdx].pieceId);
   const tmp = saved[keyA].order;
   saved[keyA].order = saved[keyB].order;
   saved[keyB].order = tmp;
@@ -247,45 +325,51 @@ function moveOrder(city, sheet, dir){ // dir: -1 = move down (earlier/below), +1
 function populateSheetSel(city){
   sheetSel.innerHTML = '';
   for (const s of CITY_DATA[city].sheets){
-    const opt = document.createElement('option');
-    opt.value = s.sheet; opt.textContent = 'Sheet ' + s.sheet + (saved[sheetKey(city,s.sheet)] ? ' ✓' : '');
-    sheetSel.appendChild(opt);
+    for (const p of getPieces(city, s.sheet)){
+      const opt = document.createElement('option');
+      opt.value = s.sheet + (p.id||'');
+      opt.textContent = 'Sheet ' + s.sheet + (p.id||'') + (saved[itemKey(city,s.sheet,p.id)] ? ' ✓' : '');
+      sheetSel.appendChild(opt);
+    }
   }
 }
 
 function renderList(){
   listEl.innerHTML = '';
   for (const city of Object.keys(CITY_DATA)){
-    const ordered = savedSheetsOrdered(city); // bottom-of-stack first
+    const ordered = savedItemsOrdered(city); // bottom-of-stack first
     for (const s of CITY_DATA[city].sheets){
-      const row = document.createElement('div');
-      row.className = 'list-item' + (cur && cur.city===city && cur.sheet===s.sheet ? ' active' : '');
-      const key = sheetKey(city, s.sheet);
-      const left = document.createElement('span');
-      left.textContent = CITY_DATA[city].label+' #'+s.sheet;
-      left.style.cursor = 'pointer';
-      left.onclick = () => loadSheet(city, s.sheet);
-      row.appendChild(left);
-      const right = document.createElement('span');
-      right.style.display = 'flex'; right.style.gap = '4px'; right.style.alignItems = 'center';
-      if (saved[key]){
-        const stackIdx = ordered.findIndex(x => x.sheet === s.sheet);
-        const upBtn = document.createElement('button');
-        upBtn.textContent = '▲'; upBtn.title = 'Move up (draw on top of next)';
-        upBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
-        upBtn.disabled = stackIdx >= ordered.length - 1;
-        upBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, +1); };
-        const downBtn = document.createElement('button');
-        downBtn.textContent = '▼'; downBtn.title = 'Move down (draw below previous)';
-        downBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
-        downBtn.disabled = stackIdx <= 0;
-        downBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, -1); };
-        const tick = document.createElement('span');
-        tick.className = 'tick'; tick.textContent = '✓';
-        right.appendChild(downBtn); right.appendChild(upBtn); right.appendChild(tick);
+      for (const p of getPieces(city, s.sheet)){
+        const row = document.createElement('div');
+        const active = cur && cur.city===city && cur.sheet===s.sheet && (cur.pieceId||null)===(p.id||null);
+        row.className = 'list-item' + (active ? ' active' : '');
+        const key = itemKey(city, s.sheet, p.id);
+        const left = document.createElement('span');
+        left.textContent = itemLabel(CITY_DATA[city].label, s.sheet, p.id);
+        left.style.cursor = 'pointer';
+        left.onclick = () => loadItem(city, s.sheet, p.id);
+        row.appendChild(left);
+        const right = document.createElement('span');
+        right.style.display = 'flex'; right.style.gap = '4px'; right.style.alignItems = 'center';
+        if (saved[key]){
+          const stackIdx = ordered.findIndex(x => x.sheet === s.sheet && x.pieceId === p.id);
+          const upBtn = document.createElement('button');
+          upBtn.textContent = '▲'; upBtn.title = 'Move up (draw on top of next)';
+          upBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
+          upBtn.disabled = stackIdx >= ordered.length - 1;
+          upBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, p.id, +1); };
+          const downBtn = document.createElement('button');
+          downBtn.textContent = '▼'; downBtn.title = 'Move down (draw below previous)';
+          downBtn.style.cssText = 'padding:0 5px;font-size:10px;line-height:1.6';
+          downBtn.disabled = stackIdx <= 0;
+          downBtn.onclick = (ev) => { ev.stopPropagation(); moveOrder(city, s.sheet, p.id, -1); };
+          const tick = document.createElement('span');
+          tick.className = 'tick'; tick.textContent = '✓';
+          right.appendChild(downBtn); right.appendChild(upBtn); right.appendChild(tick);
+        }
+        row.appendChild(right);
+        listEl.appendChild(row);
       }
-      row.appendChild(right);
-      listEl.appendChild(row);
     }
   }
 }
@@ -314,32 +398,57 @@ function redraw(){
   scaleM.setLatLng(c.topright);
 }
 
-function loadSheet(city, sheet){
+async function loadItem(city, sheet, pieceId){
   const cfg = CITY_DATA[city];
   const s = cfg.sheets.find(x => x.sheet === sheet);
+  const pieces = getPieces(city, sheet);
+  const piece = pieceId ? pieces.find(p => p.id === pieceId) : pieces.find(p => !p.id);
+  const key = itemKey(city, sheet, pieceId);
+  const savedEntry = saved[key];
+  let imgUrl;
+  if (savedEntry && savedEntry.imgUrl){
+    imgUrl = savedEntry.imgUrl;
+  } else if (piece && piece.crop){
+    imgUrl = await getCroppedImageUrl(s, piece.crop, key);
+  } else {
+    imgUrl = 'images/' + s.file;
+  }
   let state;
-  if (s.seed){
+  if (savedEntry){
+    // reopening a saved item restores exactly where you left it
+    state = Object.assign({}, savedEntry.state);
+  } else if (!pieceId && s.seed){
     state = stateFromCorners(s.seed);
   } else {
-    // default grid offset so sheets don't start stacked
+    // default grid offset so sheets/pieces don't start stacked on top of each other
     const idx = cfg.sheets.indexOf(s);
     const cols = 4, spacing = 250;
-    const offE = (idx % cols - cols/2) * spacing, offN = -Math.floor(idx/cols) * spacing;
+    const pieceShift = piece && piece.id ? (piece.id.charCodeAt(0) - 97 + 1) * 0.35 : 0;
+    const offE = (idx % cols - cols/2) * spacing + pieceShift * spacing, offN = -Math.floor(idx/cols) * spacing;
     const [lat, lon] = enToLatLon(cfg.center[0], cfg.center[1], offE, offN);
-    state = {lat, lon, rotDeg:0, widthM: s.w * cfg.defaultScale, heightM: s.h * cfg.defaultScale};
+    const w = (piece && piece.crop) ? piece.crop.w : s.w;
+    const h = (piece && piece.crop) ? piece.crop.h : s.h;
+    state = {lat, lon, rotDeg:0, widthM: w * cfg.defaultScale, heightM: h * cfg.defaultScale};
   }
-  cur = {city, sheet, state, imgUrl: 'images/' + s.file, seedState: state};
+  cur = {city, sheet, pieceId: pieceId||null, crop: piece ? piece.crop : null, state, imgUrl, seedState: Object.assign({}, state)};
   citySel.value = city;
   populateSheetSel(city);
-  sheetSel.value = sheet;
+  sheetSel.value = sheet + (pieceId||'');
   redraw();
   renderList();
   redrawPreview();
-  statusEl.textContent = city + ' sheet ' + sheet + (saved[sheetKey(city,sheet)] ? ' (saved)' : ' (not yet saved)');
+  statusEl.textContent = itemLabel(cfg.label, sheet, pieceId) + (savedEntry ? ' (saved)' : ' (not yet saved)');
 }
 
-citySel.onchange = () => loadSheet(citySel.value, CITY_DATA[citySel.value].sheets[0].sheet);
-sheetSel.onchange = () => loadSheet(citySel.value, parseInt(sheetSel.value));
+citySel.onchange = () => {
+  const firstSheet = CITY_DATA[citySel.value].sheets[0];
+  const firstPiece = getPieces(citySel.value, firstSheet.sheet)[0];
+  loadItem(citySel.value, firstSheet.sheet, firstPiece.id);
+};
+sheetSel.onchange = () => {
+  const m = sheetSel.value.match(/^(\d+)([a-z]?)$/);
+  loadItem(citySel.value, parseInt(m[1]), m[2] || null);
+};
 opacityEl.oninput = () => {
   if (overlay) overlay.setOpacity(previewAllEl.checked ? Math.min(0.4, opacityEl.value/100) : opacityEl.value/100);
   redrawPreview();
@@ -352,25 +461,25 @@ document.getElementById('resetBtn').onclick = () => {
 
 document.getElementById('saveBtn').onclick = () => {
   const c = cornersFromState(cur.state);
-  const key = sheetKey(cur.city, cur.sheet);
+  const key = itemKey(cur.city, cur.sheet, cur.pieceId);
   const order = saved[key] ? saved[key].order : nextOrder(cur.city);
-  saved[key] = { topleft: c.topleft, topright: c.topright, bottomleft: c.bottomleft, state: cur.state, order };
+  saved[key] = { topleft: c.topleft, topright: c.topright, bottomleft: c.bottomleft, state: cur.state, order, imgUrl: cur.imgUrl };
   saveLocal();
   renderList();
   redrawPreview();
   populateSheetSel(cur.city);
-  sheetSel.value = cur.sheet;
-  // advance to next unsaved sheet, same city first
+  sheetSel.value = cur.sheet + (cur.pieceId||'');
+  // advance to next unsaved item, same city first
   const allKeys = [];
-  for (const city of Object.keys(CITY_DATA)) for (const s of CITY_DATA[city].sheets) allKeys.push([city, s.sheet]);
-  const curIdx = allKeys.findIndex(([ci,sh]) => ci===cur.city && sh===cur.sheet);
+  for (const city of Object.keys(CITY_DATA)) for (const it of allCityItems(city)) allKeys.push([city, it.sheet, it.pieceId]);
+  const curIdx = allKeys.findIndex(([ci,sh,pid]) => ci===cur.city && sh===cur.sheet && pid===(cur.pieceId||null));
   let next = null;
   for (let i=1;i<=allKeys.length;i++){
-    const [ci,sh] = allKeys[(curIdx+i) % allKeys.length];
-    if (!saved[sheetKey(ci,sh)]){ next = [ci,sh]; break; }
+    const [ci,sh,pid] = allKeys[(curIdx+i) % allKeys.length];
+    if (!saved[itemKey(ci,sh,pid)]){ next = [ci,sh,pid]; break; }
   }
-  statusEl.textContent = 'Saved sheet ' + cur.sheet + '.';
-  if (next) loadSheet(next[0], next[1]);
+  statusEl.textContent = 'Saved ' + itemLabel(CITY_DATA[cur.city].label, cur.sheet, cur.pieceId) + '.';
+  if (next) loadItem(next[0], next[1], next[2]);
   else statusEl.textContent = 'All sheets saved! Let Claude know you\'re done.';
 };
 
@@ -409,12 +518,148 @@ function wireHandles(){
 document.getElementById('exportSA').onclick = () => exportCity('san_angelo_1913');
 document.getElementById('exportAU').onclick = () => exportCity('austin_1900');
 
+// --- split-sheet modal ---
+const splitModal = document.getElementById('splitModal');
+const splitCanvas = document.getElementById('splitCanvas');
+const splitCtx = splitCanvas.getContext('2d');
+const splitAddBtn = document.getElementById('splitAddBtn');
+const splitPieceList = document.getElementById('splitPieceList');
+let splitImg = null, splitScale = 1, splitSel = null, splitDragging = false, splitStart = null;
+let splitTargetCity = null, splitTargetSheet = null;
+
+document.getElementById('splitBtn').onclick = () => {
+  if (!cur) return;
+  splitTargetCity = cur.city; splitTargetSheet = cur.sheet;
+  document.getElementById('splitModalSheet').textContent = CITY_DATA[cur.city].label + ' #' + cur.sheet;
+  const s = CITY_DATA[cur.city].sheets.find(x => x.sheet === cur.sheet);
+  splitImg = new Image();
+  splitImg.onload = () => {
+    const maxW = Math.min(900, window.innerWidth*0.85), maxH = window.innerHeight*0.55;
+    splitScale = Math.min(maxW/splitImg.width, maxH/splitImg.height, 1);
+    splitCanvas.width = Math.round(splitImg.width*splitScale);
+    splitCanvas.height = Math.round(splitImg.height*splitScale);
+    splitSel = null;
+    splitAddBtn.disabled = true;
+    drawSplitCanvas();
+    renderPieceList();
+    splitModal.style.display = 'flex';
+  };
+  splitImg.src = 'images/' + s.file;
+};
+
+function drawSplitCanvas(){
+  splitCtx.clearRect(0,0,splitCanvas.width,splitCanvas.height);
+  splitCtx.drawImage(splitImg, 0, 0, splitCanvas.width, splitCanvas.height);
+  const existing = splits[splitTargetCity+'_'+splitTargetSheet] || [];
+  splitCtx.lineWidth = 2;
+  splitCtx.font = '12px sans-serif';
+  for (const p of existing){
+    splitCtx.strokeStyle = '#a6531c';
+    splitCtx.strokeRect(p.crop.x*splitScale, p.crop.y*splitScale, p.crop.w*splitScale, p.crop.h*splitScale);
+    splitCtx.fillStyle = '#a6531c';
+    splitCtx.fillText(p.id, p.crop.x*splitScale + 4, p.crop.y*splitScale + 14);
+  }
+  if (splitSel){
+    splitCtx.strokeStyle = '#2563eb';
+    splitCtx.setLineDash([5,3]);
+    splitCtx.strokeRect(splitSel.x, splitSel.y, splitSel.w, splitSel.h);
+    splitCtx.setLineDash([]);
+  }
+}
+
+splitCanvas.onmousedown = (ev) => {
+  const r = splitCanvas.getBoundingClientRect();
+  splitStart = {x: ev.clientX-r.left, y: ev.clientY-r.top};
+  splitDragging = true;
+};
+splitCanvas.onmousemove = (ev) => {
+  if (!splitDragging) return;
+  const r = splitCanvas.getBoundingClientRect();
+  const cx = ev.clientX-r.left, cy = ev.clientY-r.top;
+  splitSel = { x: Math.min(splitStart.x,cx), y: Math.min(splitStart.y,cy), w: Math.abs(cx-splitStart.x), h: Math.abs(cy-splitStart.y) };
+  drawSplitCanvas();
+};
+window.addEventListener('mouseup', () => {
+  if (splitDragging){
+    splitDragging = false;
+    splitAddBtn.disabled = !splitSel || splitSel.w < 6 || splitSel.h < 6;
+  }
+});
+
+splitAddBtn.onclick = () => {
+  if (!splitSel || splitSel.w < 6 || splitSel.h < 6) return;
+  const key = splitTargetCity+'_'+splitTargetSheet;
+  if (!splits[key]) splits[key] = [];
+  const nextId = String.fromCharCode(97 + splits[key].length); // a, b, c...
+  splits[key].push({
+    id: nextId,
+    crop: {
+      x: Math.round(splitSel.x/splitScale), y: Math.round(splitSel.y/splitScale),
+      w: Math.round(splitSel.w/splitScale), h: Math.round(splitSel.h/splitScale),
+    }
+  });
+  saveSplits();
+  splitSel = null;
+  splitAddBtn.disabled = true;
+  drawSplitCanvas();
+  renderPieceList();
+};
+
+function renderPieceList(){
+  const key = splitTargetCity+'_'+splitTargetSheet;
+  const pieces = splits[key] || [];
+  splitPieceList.innerHTML = '';
+  if (!pieces.length){
+    splitPieceList.innerHTML = '<p class="hint">No pieces defined yet — sheet will be placed as one whole image.</p>';
+    return;
+  }
+  for (const p of pieces){
+    const row = document.createElement('div');
+    row.className = 'piece-row';
+    const span = document.createElement('span');
+    span.textContent = 'Piece ' + p.id + ' (' + p.crop.w + '×' + p.crop.h + 'px)';
+    row.appendChild(span);
+    const del = document.createElement('button');
+    del.textContent = 'Remove';
+    del.onclick = () => {
+      delete saved[itemKey(splitTargetCity, splitTargetSheet, p.id)];
+      splits[key] = splits[key].filter(x => x.id !== p.id);
+      // re-letter remaining pieces so ids stay contiguous a,b,c...
+      splits[key].forEach((pc, i) => {
+        const oldId = pc.id, newId = String.fromCharCode(97+i);
+        if (oldId !== newId){
+          const oldKey = itemKey(splitTargetCity, splitTargetSheet, oldId);
+          if (saved[oldKey]){ saved[itemKey(splitTargetCity, splitTargetSheet, newId)] = saved[oldKey]; delete saved[oldKey]; }
+          pc.id = newId;
+        }
+      });
+      if (!splits[key].length) delete splits[key];
+      saveSplits(); saveLocal();
+      drawSplitCanvas();
+      renderPieceList();
+    };
+    row.appendChild(del);
+    splitPieceList.appendChild(row);
+  }
+}
+
+document.getElementById('splitDoneBtn').onclick = () => {
+  splitModal.style.display = 'none';
+  const pieces = getPieces(splitTargetCity, splitTargetSheet);
+  populateSheetSel(splitTargetCity);
+  renderList();
+  loadItem(splitTargetCity, splitTargetSheet, pieces[0].id);
+};
+
 function init(){
   wireHandles();
   loadLocal();
+  loadSplits();
   const firstCity = Object.keys(CITY_DATA)[0];
   map.setView(CITY_DATA[firstCity].center, 15);
-  loadSheet(firstCity, CITY_DATA[firstCity].sheets[0].sheet);
+  const firstSheet = CITY_DATA[firstCity].sheets[0];
+  const firstPiece = getPieces(firstCity, firstSheet.sheet)[0];
+  loadItem(firstCity, firstSheet.sheet, firstPiece.id);
 }
 init();
 </script>

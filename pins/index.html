@@ -52,6 +52,16 @@ label.chk{font-size:12px;color:var(--ink-soft);display:flex;gap:6px;align-items:
 .pin-label{font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);border-radius:3px;padding:0 3px;white-space:nowrap;text-shadow:0 1px 1px rgba(0,0,0,.6)}
 .type-legend{font-size:11px;color:var(--ink-soft);line-height:1.7;margin-top:4px}
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.3)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:2000;padding:20px}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;max-width:92vw;width:380px}
+.modal h3{margin:0 0 10px}
+.modal label{display:block;font-size:12px;color:var(--ink-soft);margin:10px 0 4px}
+.modal input[type=text], .modal select, .modal textarea{width:100%;font-size:13px;padding:7px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit}
+.modal textarea{resize:vertical;min-height:50px}
+#addBtn{margin-bottom:10px}
+body.placing-armed #map{cursor:crosshair}
+.placing-banner{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;z-index:1500;box-shadow:0 2px 8px rgba(0,0,0,.3);display:none}
+.placing-banner.show{display:block}
 </style>
 </head>
 <body>
@@ -80,7 +90,35 @@ label.chk{font-size:12px;color:var(--ink-soft);display:flex;gap:6px;align-items:
         <div><span class="dot" style="background:#16a34a"></span>institutional lodging</div>
       </div>
       <h2 style="margin-top:14px">Buildings <span id="listCount" class="hint"></span></h2>
+      <div class="row" id="addBtn">
+        <button id="addBuildingBtn">+ Add a missed building</button>
+      </div>
       <div id="list"></div>
+    </div>
+  </div>
+</div>
+<div id="placingBanner" class="placing-banner">Click anywhere on the map to place the new pin (Esc to cancel)</div>
+<div id="addModal" class="modal-backdrop" style="display:none">
+  <div class="modal">
+    <h3>Add a missed building</h3>
+    <p class="hint">Fill in what you know from the sheet, then click Next and click the spot on the map. You can drag it to the exact spot afterward.</p>
+    <label for="addLabel">Label (what's written on the sheet, or a description)</label>
+    <input type="text" id="addLabel" placeholder="e.g. Rooms (addr 214, W. 6th St)">
+    <label for="addType">Type</label>
+    <select id="addType">
+      <option value="hotel">hotel</option>
+      <option value="boarding">boarding</option>
+      <option value="lodging">lodging</option>
+      <option value="apartments">apartments</option>
+      <option value="institutional_lodging">institutional lodging</option>
+    </select>
+    <label for="addSheet">Sheet #</label>
+    <input type="text" id="addSheet" placeholder="e.g. 9 or 17c">
+    <label for="addNote">Note (anything else on the sheet worth keeping -- address, cross streets, what it's labeled)</label>
+    <textarea id="addNote" placeholder="e.g. Labeled ROOMS, 2-story frame, block near W 6th & Farr"></textarea>
+    <div class="row" style="margin-top:14px">
+      <button id="addCancelBtn">Cancel</button>
+      <button id="addNextBtn" class="primary">Next: click the map</button>
     </div>
   </div>
 </div>
@@ -98,10 +136,14 @@ const TYPE_COLOR = {
 };
 function colorFor(t){ return TYPE_COLOR[t] || '#555'; }
 
-const map = L.map('map', {scrollWheelZoom:true}).setView([31.46,-100.44], 14);
-const aerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
-const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
-const streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19});
+// maxZoom lets you zoom in well past the tile providers' native 19 -- past that
+// point the basemap tiles just get stretched (slightly blurry), but the sheet
+// overlays and building labels on them get bigger and stay readable, which is
+// the point: this tool is for close-in label reading, not wide-area browsing.
+const map = L.map('map', {scrollWheelZoom:true, maxZoom:22}).setView([31.46,-100.44], 14);
+const aerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom:22, maxNativeZoom:19, attribution:'Esri'}).addTo(map);
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {maxZoom:22, maxNativeZoom:19, attribution:'Esri'}).addTo(map);
+const streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:22, maxNativeZoom:19});
 L.control.layers({"Aerial + labels":aerial,"Streets":streets}, {"Street labels":labels}).addTo(map);
 map.on('baselayerchange', (e) => {
   if (e.name === 'Streets' && map.hasLayer(labels)) map.removeLayer(labels);
@@ -120,6 +162,22 @@ function saveLocal(){
   try { localStorage.setItem(LS_KEY, JSON.stringify(placements)); } catch(e){}
 }
 loadLocal();
+
+// Buildings you add yourself (ones the extraction pass missed) -- kept separate
+// from CITY_DATA (which is baked into the page at build time) so they survive
+// across page loads via localStorage, same as dragged placements.
+const CUSTOM_LS_KEY = 'sanborn_pins_custom_v1';
+let customPins = {}; // city -> [pin, ...]
+function loadCustom(){
+  try { const raw = localStorage.getItem(CUSTOM_LS_KEY); if (raw) customPins = JSON.parse(raw); } catch(e){}
+}
+function saveCustom(){
+  try { localStorage.setItem(CUSTOM_LS_KEY, JSON.stringify(customPins)); } catch(e){}
+}
+loadCustom();
+function allPins(city){
+  return CITY_DATA[city].pins.concat(customPins[city] || []);
+}
 
 const citySel = document.getElementById('citySel');
 const statusEl = document.getElementById('status');
@@ -156,12 +214,14 @@ function makePinIcon(num, color, isPlaced, active){
 }
 
 function detailHTML(p){
-  return '<div class="d-label">'+escapeHtml(p.label)+'</div>'
+  const isCustom = !!p.custom;
+  return '<div class="d-label">'+escapeHtml(p.label)+(isCustom ? ' <span style="font-weight:400;font-size:11px;color:var(--accent)">(added by you)</span>' : '')+'</div>'
     + '<div class="d-row"><b>Type:</b> '+escapeHtml(p.building_type)+'</div>'
-    + '<div class="d-row"><b>Sheet:</b> #'+p.sheet+' &nbsp; <b>Year:</b> '+p.year+'</div>'
+    + '<div class="d-row"><b>Sheet:</b> #'+p.sheet+(p.year ? ' &nbsp; <b>Year:</b> '+p.year : '')+'</div>'
     + '<div class="d-row"><b>City:</b> '+escapeHtml(CITY_DATA[citySel.value].label)+'</div>'
-    + '<div class="d-row"><b>Status:</b> '+(placements[p.id] ? '<span style="color:var(--ok)">dragged to precise location</span>' : '<span style="color:var(--warn)">still at approximate seed position</span>')+'</div>'
-    + '<div class="d-note">"'+escapeHtml(p.note)+'"</div>';
+    + '<div class="d-row"><b>Status:</b> '+(placements[p.id] || isCustom ? '<span style="color:var(--ok)">placed</span>' : '<span style="color:var(--warn)">still at approximate seed position</span>')+'</div>'
+    + (p.note ? '<div class="d-note">"'+escapeHtml(p.note)+'"</div>' : '')
+    + (isCustom ? '<div class="row" style="margin-top:8px"><button id="removeCustomBtn" style="color:var(--accent)">Remove this pin</button></div>' : '');
 }
 function escapeHtml(s){
   return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -169,7 +229,7 @@ function escapeHtml(s){
 
 function selectPin(id){
   activeId = id;
-  const p = CITY_DATA[citySel.value].pins.find(x => x.id === id);
+  const p = allPins(citySel.value).find(x => x.id === id);
   detailEl.innerHTML = p ? detailHTML(p) : '';
   redrawPins();
   renderList();
@@ -182,15 +242,23 @@ function selectPin(id){
 function redrawPins(){
   pinLayer.clearLayers();
   markers = {};
-  const cfg = CITY_DATA[citySel.value];
-  cfg.pins.forEach((p, i) => {
+  const pins = allPins(citySel.value);
+  pins.forEach((p, i) => {
     const pos = pinPos(p);
     const isPlaced = !!placements[p.id];
     const icon = makePinIcon(i+1, colorFor(p.building_type), isPlaced, p.id === activeId);
     const m = L.marker(pos, {draggable:true, icon, autoPan:true});
     m.bindTooltip(p.label, {permanent:false, direction:'top', offset:[0,-20]});
     m.on('click', () => selectPin(p.id));
-    m.on('dragstart', () => selectPin(p.id));
+    // IMPORTANT: do NOT call selectPin()/redrawPins() here -- redrawPins() tears
+    // down and recreates every marker's DOM element, which would rip out the very
+    // marker Leaflet is actively dragging and silently kill the drag. Just update
+    // the active id + side panel without touching the map layer.
+    m.on('dragstart', () => {
+      activeId = p.id;
+      detailEl.innerHTML = detailHTML(p);
+      renderList();
+    });
     m.on('drag', () => { /* live-follow not needed, just move marker */ });
     m.on('dragend', () => {
       const ll = m.getLatLng();
@@ -215,11 +283,11 @@ function makeListRow(p, i){
 
 function renderList(){
   listEl.innerHTML = '';
-  const cfg = CITY_DATA[citySel.value];
+  const pins = allPins(citySel.value);
   let placedCount = 0;
-  cfg.pins.forEach((p) => { if (placements[p.id]) placedCount++; });
-  listCountEl.textContent = '('+placedCount+' / '+cfg.pins.length+' placed)';
-  cfg.pins.forEach((p, i) => listEl.appendChild(makeListRow(p, i)));
+  pins.forEach((p) => { if (placements[p.id] || p.custom) placedCount++; });
+  listCountEl.textContent = '('+placedCount+' / '+pins.length+' placed)';
+  pins.forEach((p, i) => listEl.appendChild(makeListRow(p, i)));
 }
 
 async function loadSheetManifest(city){
@@ -279,8 +347,7 @@ function downloadJSON(filename, obj){
 
 document.getElementById('exportBtn').onclick = () => {
   const city = citySel.value;
-  const cfg = CITY_DATA[city];
-  const out = cfg.pins.map(p => {
+  const out = allPins(city).map(p => {
     const pos = pinPos(p);
     const dragged = !!placements[p.id];
     return {
@@ -292,13 +359,98 @@ document.getElementById('exportBtn').onclick = () => {
       year: p.year,
       lat: pos[0],
       lon: pos[1],
-      confidence: dragged ? 'manual_pin_placement' : 'pending_precise_geocode',
-      geocode_method: dragged ? 'hand-dragged via pin-placer tool' : 'approximate (nearest cross-street) -- not yet hand-placed',
+      confidence: dragged || p.custom ? 'manual_pin_placement' : 'pending_precise_geocode',
+      geocode_method: p.custom ? 'added by hand via pin-placer tool (missed by extraction pass)' : (dragged ? 'hand-dragged via pin-placer tool' : 'approximate (nearest cross-street) -- not yet hand-placed'),
+      custom: !!p.custom,
     };
   });
   downloadJSON(city + '_pins.json', out);
   statusEl.textContent = 'Downloaded ' + city + '_pins.json';
 };
+
+// --- "Add a missed building" flow ---
+const addBuildingBtn = document.getElementById('addBuildingBtn');
+const addModal = document.getElementById('addModal');
+const addLabel = document.getElementById('addLabel');
+const addType = document.getElementById('addType');
+const addSheet = document.getElementById('addSheet');
+const addNote = document.getElementById('addNote');
+const addCancelBtn = document.getElementById('addCancelBtn');
+const addNextBtn = document.getElementById('addNextBtn');
+const placingBanner = document.getElementById('placingBanner');
+let pendingNewPin = null; // {label, building_type, sheet, note} while armed, waiting for a map click
+
+addBuildingBtn.onclick = () => {
+  addLabel.value = ''; addType.value = 'boarding'; addSheet.value = ''; addNote.value = '';
+  addModal.style.display = 'flex';
+  addLabel.focus();
+};
+addCancelBtn.onclick = () => { addModal.style.display = 'none'; };
+
+addNextBtn.onclick = () => {
+  const label = addLabel.value.trim();
+  if (!label){ addLabel.focus(); return; }
+  pendingNewPin = {
+    label,
+    building_type: addType.value,
+    sheet: addSheet.value.trim() || '?',
+    note: addNote.value.trim(),
+  };
+  addModal.style.display = 'none';
+  document.body.classList.add('placing-armed');
+  placingBanner.classList.add('show');
+};
+
+function cancelPlacing(){
+  pendingNewPin = null;
+  document.body.classList.remove('placing-armed');
+  placingBanner.classList.remove('show');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && pendingNewPin) cancelPlacing();
+});
+
+map.on('click', (e) => {
+  if (!pendingNewPin) return;
+  const city = citySel.value;
+  const id = city + '_custom_' + Date.now();
+  const newPin = {
+    id,
+    label: pendingNewPin.label,
+    building_type: pendingNewPin.building_type,
+    note: pendingNewPin.note,
+    sheet: pendingNewPin.sheet,
+    year: CITY_DATA[city].pins[0] ? CITY_DATA[city].pins[0].year : null,
+    lat: e.latlng.lat,
+    lon: e.latlng.lng,
+    custom: true,
+  };
+  if (!customPins[city]) customPins[city] = [];
+  customPins[city].push(newPin);
+  saveCustom();
+  cancelPlacing();
+  redrawPins();
+  renderList();
+  selectPin(id);
+});
+
+// Delegated click handler for the "Remove this pin" button that detailHTML()
+// renders for custom pins (the button is re-created each time, so delegate
+// from a stable ancestor rather than binding directly).
+detailEl.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'removeCustomBtn' && activeId){
+    const city = citySel.value;
+    customPins[city] = (customPins[city] || []).filter(p => p.id !== activeId);
+    saveCustom();
+    delete placements[activeId];
+    saveLocal();
+    activeId = null;
+    detailEl.innerHTML = '<span class="hint">Click a pin on the map, or a row in the list below, to see its full details here.</span>';
+    redrawPins();
+    renderList();
+  }
+});
 
 switchCity(citySel.value);
 </script>

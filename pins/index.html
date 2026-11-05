@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Building Pin Placer</title>
+<style>.leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:focus,.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(../georef/images/layers.png);width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(../georef/images/layers-2x.png);background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(../georef/images/marker-icon.png)}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:focus,.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:focus,.leaflet-container a.leaflet-popup-close-button:hover{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style>
+<style>
+:root{
+  --bg:#f4f1e9; --panel:#fff; --ink:#2b2420; --ink-soft:#6b6253; --line:#d9d2bf;
+  --accent:#a6531c; --ok:#3d7a4f; --warn:#b8860b;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17140f; --panel:#201c15; --ink:#ece4d2; --ink-soft:#aa9f88;
+    --line:#3a3326; --accent:#e08a4a; --ok:#6fcf8c; --warn:#e0b84a;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+#wrap{display:flex;flex-direction:column;height:100vh}
+header{padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{font-size:15px;margin:0;font-weight:700;white-space:nowrap}
+select{font-size:13px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+#main{flex:1;display:flex;min-height:0}
+#map{flex:1;min-width:0}
+#side{width:340px;flex-shrink:0;border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;padding:14px;font-size:13px;display:flex;flex-direction:column}
+#side h2{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);margin:16px 0 6px}
+#side h2:first-child{margin-top:0}
+button{font-size:13px;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.row{display:flex;gap:8px;margin-bottom:8px}
+.row button{flex:1}
+.hint{color:var(--ink-soft);font-size:12px;line-height:1.5}
+label.chk{font-size:12px;color:var(--ink-soft);display:flex;gap:6px;align-items:center;margin-bottom:6px}
+#detail{border:1px solid var(--line);border-radius:6px;padding:10px;margin-bottom:10px;background:var(--bg)}
+#detail .d-label{font-weight:700;font-size:14px;margin-bottom:4px}
+#detail .d-row{font-size:12px;margin-bottom:3px}
+#detail .d-row b{color:var(--ink-soft);font-weight:600}
+#detail .d-note{font-size:12px;margin-top:6px;line-height:1.5;font-style:italic;color:var(--ink)}
+#list{flex:1;min-height:0;overflow-y:auto;border:1px solid var(--line);border-radius:6px}
+.list-item{padding:7px 10px;font-size:12px;border-bottom:1px solid var(--line);cursor:pointer}
+.list-item:last-child{border-bottom:none}
+.list-item:hover{background:var(--bg)}
+.list-item.active{background:var(--accent);color:#fff}
+.list-item .li-title{font-weight:600}
+.list-item .li-sub{font-size:11px;opacity:.75}
+.list-item.placed .li-title::after{content:" ✓";color:var(--ok);font-weight:700}
+.list-item.active.placed .li-title::after{color:#fff}
+.pin-label{font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);border-radius:3px;padding:0 3px;white-space:nowrap;text-shadow:0 1px 1px rgba(0,0,0,.6)}
+.type-legend{font-size:11px;color:var(--ink-soft);line-height:1.7;margin-top:4px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.3)}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <header>
+    <h1>Building Pin Placer</h1>
+    <select id="citySel"></select>
+    <span id="status" class="hint"></span>
+  </header>
+  <div id="main">
+    <div id="map"></div>
+    <div id="side">
+      <h2>Reference</h2>
+      <label class="chk"><input type="checkbox" id="showSheets" checked> Show georeferenced sheets (if published)</label>
+      <input type="range" id="sheetOpacity" min="10" max="90" value="45">
+      <h2>Selected building</h2>
+      <div id="detail"><span class="hint">Click a pin on the map, or a row in the list below, to see its full details here.</span></div>
+      <div class="row">
+        <button id="exportBtn" class="primary">Download updated JSON</button>
+      </div>
+      <p class="hint">Your dragging is saved in this browser as you go. When you're done with a city, hit download and send the file back in chat.</p>
+      <div class="type-legend">
+        <div><span class="dot" style="background:#c0392b"></span>hotel</div>
+        <div><span class="dot" style="background:#2563eb"></span>boarding / lodging</div>
+        <div><span class="dot" style="background:#7d3c98"></span>apartments</div>
+        <div><span class="dot" style="background:#16a34a"></span>institutional lodging</div>
+      </div>
+      <h2 style="margin-top:14px">Buildings <span id="listCount" class="hint"></span></h2>
+      <div id="list"></div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet-imageoverlay-rotated@0.2.1/Leaflet.ImageOverlay.Rotated.min.js"></script>
+<script>
+const CITY_DATA = {"san_angelo_1913": {"label": "San Angelo 1913", "center": [31.4605, -100.438], "pins": [{"id": "san_angelo_1913_0", "label": "Rooms (E. 4th St)", "building_type": "boarding", "note": "Labeled ROOMS, block near E 4th St & E 3rd St, by rail yard", "sheet": 2, "year": 1913, "lat": 31.469902, "lon": -100.4361575}, {"id": "san_angelo_1913_1", "label": "Native Rooms (rail depot)", "building_type": "boarding", "note": "Labeled Native Rooms, adjoining the Santa Fe passenger depot", "sheet": 2, "year": 1913, "lat": 31.450979, "lon": -100.4345446}, {"id": "san_angelo_1913_2", "label": "Three Sisters Hotel", "building_type": "hotel", "note": "Labeled 3 SISTERS HOTEL, near E College Ave & E Harris Ave", "sheet": 3, "year": 1913, "lat": 31.4656636, "lon": -100.4359955}, {"id": "san_angelo_1913_3", "label": "North Chadbourne Hotel", "building_type": "hotel", "note": "Labeled North Chadbourne Hotel, N Chadbourne St near N Oakes St", "sheet": 3, "year": 1913, "lat": 31.4724687, "lon": -100.4432116}, {"id": "san_angelo_1913_4", "label": "Model Hotel", "building_type": "hotel", "note": "Labeled Model Hotel, on Gillis St near N Irving Ave", "sheet": 3, "year": 1913, "lat": 31.471996659273646, "lon": -100.44311346238771}, {"id": "san_angelo_1913_5", "label": "Boarding (W. Harris Av)", "building_type": "boarding", "note": "Labeled Boarding, block near W Harris Ave / N Chadbourne", "sheet": 3, "year": 1913, "lat": 31.47277248456092, "lon": -100.4434525049689}, {"id": "san_angelo_1913_6", "label": "Boarding (E. Harris Av)", "building_type": "boarding", "note": "Labeled Boarding, block near E Harris Ave / S Oakes", "sheet": 4, "year": 1913, "lat": 31.4652591, "lon": -100.4206944}, {"id": "san_angelo_1913_7", "label": "The Nimitz House", "building_type": "hotel", "note": "Labeled The Nimitz House, W Beauregard Ave near W Twohig Ave", "sheet": 4, "year": 1913, "lat": 31.465905300000003, "lon": -100.4411539}, {"id": "san_angelo_1913_8", "label": "Landon Hotel", "building_type": "hotel", "note": "Labeled LANDON HOTEL with lobby/dining room, E Concho Ave & S Chadbourne St", "sheet": 5, "year": 1913, "lat": 31.4605184, "lon": -100.433845}, {"id": "san_angelo_1913_9", "label": "Myers Hotel", "building_type": "hotel", "note": "Labeled Myers Hotel, S Chadbourne St near S Irving Av", "sheet": 5, "year": 1913, "lat": 31.460386991879947, "lon": -100.43371532110031}, {"id": "san_angelo_1913_10", "label": "Santa Fe Hotel", "building_type": "hotel", "note": "Labeled Santa Fe Hotel, E 5th St near N Chadbourne St", "sheet": 7, "year": 1913, "lat": 31.472195370836676, "lon": -100.44350072868615}, {"id": "san_angelo_1913_11", "label": "Boarding (N. Irving)", "building_type": "boarding", "note": "Labeled Boarding, block near N Irving Ave", "sheet": 10, "year": 1913, "lat": 31.465145300000003, "lon": -100.43875390000001}, {"id": "san_angelo_1913_12", "label": "Herreman Hotel", "building_type": "hotel", "note": "Labeled Herreman Hotel, N Irving Ave near N Magdalen St", "sheet": 10, "year": 1913, "lat": 31.464661061097015, "lon": -100.43845612379575}, {"id": "san_angelo_1913_13", "label": "Rooms (Farr St)", "building_type": "boarding", "note": "Labeled Rooms, block near Farr St / 1st St", "sheet": 10, "year": 1913, "lat": 31.464178, "lon": -100.4410786}, {"id": "san_angelo_1913_14", "label": "Boarding (E. Harris / N. Magdalen)", "building_type": "boarding", "note": "Labeled Boarding, block near E Harris Ave & N Magdalen St", "sheet": 11, "year": 1913, "lat": 31.46470557340665, "lon": -100.42009813874479}, {"id": "san_angelo_1913_15", "label": "Boarding (Kaiser St) #1", "building_type": "boarding", "note": "Labeled Boarding, Kaiser St near N Oakes St", "sheet": 11, "year": 1913, "lat": 31.46473920387564, "lon": -100.42015302904252}, {"id": "san_angelo_1913_16", "label": "Boarding (Kaiser St) #2", "building_type": "boarding", "note": "Labeled Boarding, Kaiser St, second building", "sheet": 11, "year": 1913, "lat": 31.465226327225707, "lon": -100.42122544954965}, {"id": "san_angelo_1913_17", "label": "Flats (S. Koenigheim)", "building_type": "apartments", "note": "Three-unit building labeled FLATS, FLATS, FLATS on S Koenigheim St", "sheet": 13, "year": 1913, "lat": 31.4515223, "lon": -100.4405036}, {"id": "san_angelo_1913_18", "label": "Boarding (S. Magdalen)", "building_type": "boarding", "note": "Labeled Boarding, block near S Magdalen St", "sheet": 14, "year": 1913, "lat": 31.4643141, "lon": -100.4333972}, {"id": "san_angelo_1913_19", "label": "Boarding (E. Twohig)", "building_type": "boarding", "note": "Labeled Boarding, block near E Twohig Ave", "sheet": 14, "year": 1913, "lat": 31.4620794, "lon": -100.4335507}, {"id": "san_angelo_1913_20", "label": "Rooms (S. Oakes/E. Twohig)", "building_type": "boarding", "note": "Pink building labeled ROOMS, S Oakes St near E Twohig Ave", "sheet": 17, "year": 1913, "lat": 31.4634517, "lon": -100.4350593}, {"id": "san_angelo_1913_21", "label": "Riverside Hotel", "building_type": "hotel", "note": "Labeled Riverside Hotel, S Oakes St near Porter St", "sheet": 22, "year": 1913, "lat": 31.4588073, "lon": -100.4329484}, {"id": "san_angelo_1913_22", "label": "Hotel (S. Oakes, unnamed)", "building_type": "hotel", "note": "Pink building labeled HOTEL with kitchen/dining/office, S Oakes St block 59", "sheet": 23, "year": 1913, "lat": 31.464050207494935, "lon": -100.43563032254998}, {"id": "san_angelo_1913_23", "label": "Park Hotel", "building_type": "hotel", "note": "Labeled Park Hotel, S Oakes St near W Avenue C", "sheet": 24, "year": 1913, "lat": 31.462893959608436, "lon": -100.43490487854828}, {"id": "san_angelo_1913_24", "label": "Bishop House Hotel", "building_type": "hotel", "note": "Labeled Bishop Ho. Hotel, W Avenue C", "sheet": 24, "year": 1913, "lat": 31.4544041, "lon": -100.4383142}]}, "austin_1900": {"label": "Austin 1900", "center": [30.273, -97.743], "pins": [{"id": "austin_1900_0", "label": "Boarding House No. 1", "building_type": "boarding", "note": "Unnamed boarding house, labeled ROOMS/BOARDING, block bounded Congress/Brazos/E2nd/E3rd", "sheet": 2, "year": 1900, "lat": 30.269906625288606, "lon": -97.74059266516242}, {"id": "austin_1900_1", "label": "Boarding House No. 2", "building_type": "boarding", "note": "Unnamed boarding house, same block as above, second building", "sheet": 2, "year": 1900, "lat": 30.269828481397397, "lon": -97.74084127258841}, {"id": "austin_1900_2", "label": "Southern Hotel", "building_type": "hotel", "note": "Labeled Southern Hotel, 2 stories", "sheet": 3, "year": 1900, "lat": 30.265783480560934, "lon": -97.74358008102163}, {"id": "austin_1900_3", "label": "Hotel Sager", "building_type": "hotel", "note": "Labeled Hotel Sager, same block as Southern Hotel", "sheet": 3, "year": 1900, "lat": 30.271455506980864, "lon": -97.74126018913051}, {"id": "austin_1900_4", "label": "Boarding House (Lavaca)", "building_type": "boarding", "note": "Unnamed boarding house", "sheet": 3, "year": 1900, "lat": 30.278564870867218, "lon": -97.74153984369005}, {"id": "austin_1900_5", "label": "Commercial Hotel", "building_type": "hotel", "note": "Labeled Comm'l Hotel Rooms, Sanders Building", "sheet": 4, "year": 1900, "lat": 30.27145190116367, "lon": -97.74162732725674}, {"id": "austin_1900_6", "label": "President Hotel", "building_type": "hotel", "note": "Labeled President Hotel, 2nd & 3rd floors", "sheet": 4, "year": 1900, "lat": 30.26565339159579, "lon": -97.74369549928252}, {"id": "austin_1900_7", "label": "Palmer House", "building_type": "hotel", "note": "Labeled Palmer House hotel", "sheet": 5, "year": 1900, "lat": 30.271220779696577, "lon": -97.7452153320182}, {"id": "austin_1900_8", "label": "Boarding House (Colorado/W7th)", "building_type": "boarding", "note": "Labeled Boarding Ho.", "sheet": 5, "year": 1900, "lat": 30.269058611405654, "lon": -97.74324395659808}, {"id": "austin_1900_9", "label": "Hotel Orr", "building_type": "hotel", "note": "Labeled Hotel Orr, addr ~623-627, next to Masonic Temple", "sheet": 5, "year": 1900, "lat": 30.271560028524554, "lon": -97.74133770857948}, {"id": "austin_1900_10", "label": "Carrollton House", "building_type": "boarding", "note": "Labeled Carrollton House lodging", "sheet": 5, "year": 1900, "lat": 30.27381436925592, "lon": -97.74321087237898}, {"id": "austin_1900_11", "label": "Avenue Hotel", "building_type": "hotel", "note": "Labeled Avenue Hotel", "sheet": 6, "year": 1900, "lat": 30.271427589436612, "lon": -97.74148150149693}, {"id": "austin_1900_12", "label": "The Driskill Hotel", "building_type": "hotel", "note": "The famous Driskill Hotel, fireproof construction", "sheet": 6, "year": 1900, "lat": 30.27411161561347, "lon": -97.73848946249355}, {"id": "austin_1900_13", "label": "San Jacinto House", "building_type": "lodging", "note": "Labeled San Jacinto Ho., addr 208", "sheet": 6, "year": 1900, "lat": 30.291964534381382, "lon": -97.73547039457766}, {"id": "austin_1900_14", "label": "Capitol Hotel", "building_type": "hotel", "note": "Labeled Capitol Hotel", "sheet": 8, "year": 1900, "lat": 30.271588226403054, "lon": -97.7414110842022}, {"id": "austin_1900_15", "label": "Lodging House (Congress/E10th)", "building_type": "lodging", "note": "Unnamed building labeled Lodging, addr ~109", "sheet": 8, "year": 1900, "lat": 30.2717230856621, "lon": -97.7414522862512}, {"id": "austin_1900_16", "label": "The Mansion", "building_type": "lodging", "note": "Labeled The Mansion, addr 114-118, 2-story brick", "sheet": 8, "year": 1900, "lat": 30.27142455859149, "lon": -97.74143609001716}, {"id": "austin_1900_17", "label": "Boarding House (San Jacinto/E5th)", "building_type": "boarding", "note": "Labeled Boarding Ho, 2-story with kitchen", "sheet": 11, "year": 1900, "lat": 30.292049061955318, "lon": -97.73526889140119}, {"id": "austin_1900_18", "label": "St. Charles Hotel", "building_type": "hotel", "note": "Labeled St. Charles Hotel, addr ~310", "sheet": 13, "year": 1900, "lat": 30.29083272356097, "lon": -97.73488595862187}, {"id": "austin_1900_19", "label": "Boarding House (Lavaca/W16th)", "building_type": "boarding", "note": "Labeled Boarding Ho., addr 307, above a saloon", "sheet": 26, "year": 1900, "lat": 30.27848669672324, "lon": -97.74149534817369}, {"id": "austin_1900_20", "label": "Boarding House (Colorado/W14th No.1)", "building_type": "boarding", "note": "Labeled Boarding Ho., addr 208", "sheet": 30, "year": 1900, "lat": 30.276681254791843, "lon": -97.7408780448378}, {"id": "austin_1900_21", "label": "Boarding House (Colorado/W14th No.2)", "building_type": "boarding", "note": "Labeled Boarding Ho., addr 100-102, OL 159", "sheet": 31, "year": 1900, "lat": 30.274754107078994, "lon": -97.74227803261884}, {"id": "austin_1900_22", "label": "Tillotson College Dormitories", "building_type": "institutional_lodging", "note": "Labeled Dormitories, 2 Chem. Lect'g Rms, brick, rent free -- Tillotson College for Negroes", "sheet": 51, "year": 1900, "lat": 30.274040662790505, "lon": -97.74030682743177}, {"id": "austin_1900_23", "label": "Tillotson College Main Building", "building_type": "institutional_lodging", "note": "Unlabeled 4-story stone building, 115 rooms, part of Tillotson College campus", "sheet": 51, "year": 1900, "lat": 30.274582805843362, "lon": -97.74039061973369}, {"id": "austin_1900_24", "label": "Grace Hall", "building_type": "boarding", "note": "Labeled Grace Hall -- Boarding Ho. for Young Ladies", "sheet": 53, "year": 1900, "lat": 30.288466692148113, "lon": -97.74055066978018}, {"id": "austin_1900_25", "label": "Texas School for the Deaf Dormitories", "building_type": "institutional_lodging", "note": "Boys Dormitories and Girls Dormitories, Texas State School for the Deaf, South Austin", "sheet": 53, "year": 1900, "lat": 30.27445791234348, "lon": -97.73965439180323}, {"id": "austin_1900_26", "label": "St. Edward's College Dormitories", "building_type": "institutional_lodging", "note": "Class Rooms & Dormitories plus Sisters' Dormitories, St. Edward's College", "sheet": 53, "year": 1900, "lat": 30.274027908501566, "lon": -97.74034157086739}, {"id": "austin_1900_27", "label": "UT Austin Dormitory Building", "building_type": "institutional_lodging", "note": "Unlabeled Dormitories/Kitchen/Dining Hall building, Texas State University campus", "sheet": 53, "year": 1900, "lat": 30.296097986529006, "lon": -97.73868550318055}]}};
+
+const TYPE_COLOR = {
+  hotel: '#c0392b',
+  boarding: '#2563eb',
+  lodging: '#2563eb',
+  apartments: '#7d3c98',
+  institutional_lodging: '#16a34a',
+};
+function colorFor(t){ return TYPE_COLOR[t] || '#555'; }
+
+const map = L.map('map', {scrollWheelZoom:true}).setView([31.46,-100.44], 14);
+const aerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {maxZoom:19, attribution:'Esri'}).addTo(map);
+const streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19});
+L.control.layers({"Aerial + labels":aerial,"Streets":streets}, {"Street labels":labels}).addTo(map);
+map.on('baselayerchange', (e) => {
+  if (e.name === 'Streets' && map.hasLayer(labels)) map.removeLayer(labels);
+  if (e.name === 'Aerial + labels' && !map.hasLayer(labels)) labels.addTo(map);
+});
+
+const sheetLayer = L.layerGroup().addTo(map);
+const pinLayer = L.layerGroup().addTo(map);
+
+const LS_KEY = 'sanborn_pins_v1';
+let placements = {}; // key "id" -> {lat, lon}
+function loadLocal(){
+  try { const raw = localStorage.getItem(LS_KEY); if (raw) placements = JSON.parse(raw); } catch(e){}
+}
+function saveLocal(){
+  try { localStorage.setItem(LS_KEY, JSON.stringify(placements)); } catch(e){}
+}
+loadLocal();
+
+const citySel = document.getElementById('citySel');
+const statusEl = document.getElementById('status');
+const listEl = document.getElementById('list');
+const listCountEl = document.getElementById('listCount');
+const detailEl = document.getElementById('detail');
+const showSheetsEl = document.getElementById('showSheets');
+const sheetOpacityEl = document.getElementById('sheetOpacity');
+
+for (const city of Object.keys(CITY_DATA)){
+  const opt = document.createElement('option');
+  opt.value = city; opt.textContent = CITY_DATA[city].label;
+  citySel.appendChild(opt);
+}
+
+let markers = {}; // id -> L.marker
+let activeId = null;
+let sheetManifestCache = {};
+
+function pinPos(p){
+  const saved = placements[p.id];
+  return saved ? [saved.lat, saved.lon] : [p.lat, p.lon];
+}
+
+function makePinIcon(num, color, isPlaced, active){
+  const ring = active ? '0 0 0 3px #fff, 0 0 0 5px ' + color : '0 1px 3px rgba(0,0,0,.5)';
+  const border = isPlaced ? '2px solid #fff' : '2px dashed #fff';
+  return L.divIcon({
+    className: '',
+    html: '<div style="width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:'+color+';border:'+border+';box-shadow:'+ring+';display:flex;align-items:center;justify-content:center">'
+        + '<span style="transform:rotate(45deg);color:#fff;font-size:10px;font-weight:700">'+num+'</span></div>',
+    iconSize: [22,22], iconAnchor: [11,22], popupAnchor: [0,-20],
+  });
+}
+
+function detailHTML(p){
+  return '<div class="d-label">'+escapeHtml(p.label)+'</div>'
+    + '<div class="d-row"><b>Type:</b> '+escapeHtml(p.building_type)+'</div>'
+    + '<div class="d-row"><b>Sheet:</b> #'+p.sheet+' &nbsp; <b>Year:</b> '+p.year+'</div>'
+    + '<div class="d-row"><b>City:</b> '+escapeHtml(CITY_DATA[citySel.value].label)+'</div>'
+    + '<div class="d-row"><b>Status:</b> '+(placements[p.id] ? '<span style="color:var(--ok)">dragged to precise location</span>' : '<span style="color:var(--warn)">still at approximate seed position</span>')+'</div>'
+    + '<div class="d-note">"'+escapeHtml(p.note)+'"</div>';
+}
+function escapeHtml(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function selectPin(id){
+  activeId = id;
+  const p = CITY_DATA[citySel.value].pins.find(x => x.id === id);
+  detailEl.innerHTML = p ? detailHTML(p) : '';
+  redrawPins();
+  renderList();
+  if (p){
+    const pos = pinPos(p);
+    if (!map.getBounds().contains(pos)) map.panTo(pos);
+  }
+}
+
+function redrawPins(){
+  pinLayer.clearLayers();
+  markers = {};
+  const cfg = CITY_DATA[citySel.value];
+  cfg.pins.forEach((p, i) => {
+    const pos = pinPos(p);
+    const isPlaced = !!placements[p.id];
+    const icon = makePinIcon(i+1, colorFor(p.building_type), isPlaced, p.id === activeId);
+    const m = L.marker(pos, {draggable:true, icon, autoPan:true});
+    m.bindTooltip(p.label, {permanent:false, direction:'top', offset:[0,-20]});
+    m.on('click', () => selectPin(p.id));
+    m.on('dragstart', () => selectPin(p.id));
+    m.on('drag', () => { /* live-follow not needed, just move marker */ });
+    m.on('dragend', () => {
+      const ll = m.getLatLng();
+      placements[p.id] = {lat: ll.lat, lon: ll.lng};
+      saveLocal();
+      selectPin(p.id);
+    });
+    m.addTo(pinLayer);
+    markers[p.id] = m;
+  });
+}
+
+function makeListRow(p, i){
+  const row = document.createElement('div');
+  const isPlaced = !!placements[p.id];
+  row.className = 'list-item' + (p.id === activeId ? ' active' : '') + (isPlaced ? ' placed' : '');
+  row.innerHTML = '<div class="li-title">'+(i+1)+'. '+escapeHtml(p.label)+'</div>'
+    + '<div class="li-sub">Sheet #'+p.sheet+' &middot; '+escapeHtml(p.building_type)+'</div>';
+  row.onclick = () => selectPin(p.id);
+  return row;
+}
+
+function renderList(){
+  listEl.innerHTML = '';
+  const cfg = CITY_DATA[citySel.value];
+  let placedCount = 0;
+  cfg.pins.forEach((p) => { if (placements[p.id]) placedCount++; });
+  listCountEl.textContent = '('+placedCount+' / '+cfg.pins.length+' placed)';
+  cfg.pins.forEach((p, i) => listEl.appendChild(makeListRow(p, i)));
+}
+
+async function loadSheetManifest(city){
+  if (sheetManifestCache[city]) return sheetManifestCache[city];
+  try {
+    const res = await fetch('../cities/' + city + '/site/sanborn/manifest.json');
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    sheetManifestCache[city] = data;
+    return data;
+  } catch(e){
+    sheetManifestCache[city] = null;
+    return null;
+  }
+}
+
+async function redrawSheets(){
+  sheetLayer.clearLayers();
+  if (!showSheetsEl.checked) return;
+  const city = citySel.value;
+  const manifest = await loadSheetManifest(city);
+  if (!manifest){
+    statusEl.textContent = 'No published sheet manifest found for this city yet -- showing pins only.';
+    return;
+  }
+  for (const e of manifest){
+    const url = '../cities/' + city + '/site/sanborn/' + e.file;
+    const ov = L.imageOverlay.rotated(url, L.latLng(e.topleft), L.latLng(e.topright), L.latLng(e.bottomleft), {
+      opacity: sheetOpacityEl.value/100, interactive:false
+    });
+    ov.addTo(sheetLayer);
+  }
+}
+
+function switchCity(city){
+  activeId = null;
+  detailEl.innerHTML = '<span class="hint">Click a pin on the map, or a row in the list below, to see its full details here.</span>';
+  map.setView(CITY_DATA[city].center, 14);
+  redrawPins();
+  renderList();
+  redrawSheets();
+  statusEl.textContent = '';
+}
+
+citySel.onchange = () => switchCity(citySel.value);
+showSheetsEl.onchange = redrawSheets;
+sheetOpacityEl.oninput = redrawSheets;
+
+function downloadJSON(filename, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 1)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+
+document.getElementById('exportBtn').onclick = () => {
+  const city = citySel.value;
+  const cfg = CITY_DATA[city];
+  const out = cfg.pins.map(p => {
+    const pos = pinPos(p);
+    const dragged = !!placements[p.id];
+    return {
+      id: p.id,
+      label: p.label,
+      building_type: p.building_type,
+      note: p.note,
+      sheet: p.sheet,
+      year: p.year,
+      lat: pos[0],
+      lon: pos[1],
+      confidence: dragged ? 'manual_pin_placement' : 'pending_precise_geocode',
+      geocode_method: dragged ? 'hand-dragged via pin-placer tool' : 'approximate (nearest cross-street) -- not yet hand-placed',
+    };
+  });
+  downloadJSON(city + '_pins.json', out);
+  statusEl.textContent = 'Downloaded ' + city + '_pins.json';
+};
+
+switchCity(citySel.value);
+</script>
+</body>
+</html>

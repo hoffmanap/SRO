@@ -185,7 +185,14 @@ function loadLocal(){
   } catch(e){}
 }
 function saveLocal(){
-  try { localStorage.setItem(LS_KEY, JSON.stringify(saved)); } catch(e){}
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify(saved));
+    return true;
+  } catch(e){
+    alert('Your save did NOT stick (browser storage is full: ' + e.message + '). ' +
+      'Please tell Claude -- this needs a fix. Nothing past this point will be saved until it\'s resolved.');
+    return false;
+  }
 }
 
 // --- splitting a sheet into independently-placed pieces ---
@@ -245,6 +252,17 @@ function getCroppedImageUrl(s, crop, key){
     img.src = 'images/' + s.file;
   });
 }
+// Resolve the image URL for a placed item, whether it's a whole sheet (just the
+// static file) or a split piece (recomputed from its crop definition -- we no
+// longer persist the crop's rendered PNG in localStorage, see saveLocal).
+function getItemImgUrl(city, sheet, pieceId){
+  const key = itemKey(city, sheet, pieceId);
+  const s = CITY_DATA[city].sheets.find(x => x.sheet === sheet);
+  if (!pieceId) return Promise.resolve('images/' + s.file);
+  const piece = getPieces(city, sheet).find(p => p.id === pieceId);
+  if (!piece || !piece.crop) return Promise.resolve('images/' + s.file);
+  return getCroppedImageUrl(s, piece.crop, key);
+}
 function downloadJSON(filename, obj){
   const blob = new Blob([JSON.stringify(obj, null, 1)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -258,11 +276,12 @@ function downloadDataUrlAsFile(filename, dataUrl){
   a.href = dataUrl; a.download = filename;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
-function exportCity(city){
+async function exportCity(city){
   const manifest = [];
   const ordered = savedItemsOrdered(city); // bottom-of-stack first -> array order = draw order = later entries on top
   let pieceDownloads = 0;
-  ordered.forEach((it, i) => {
+  for (let i = 0; i < ordered.length; i++){
+    const it = ordered[i];
     const key = itemKey(city, it.sheet, it.pieceId);
     const e = saved[key];
     const fname = it.pieceId ? ('sheet_' + it.sheet + it.pieceId + '.png') : ('sheet_' + it.sheet + '.webp');
@@ -274,12 +293,14 @@ function exportCity(city){
         ? ('hand-placed via georeferencer tool (split piece ' + it.pieceId + ' of sheet ' + it.sheet + ')')
         : 'hand-placed via georeferencer tool',
     });
-    if (it.pieceId && e.imgUrl){
+    if (it.pieceId){
       // this piece's cropped image doesn't exist in the repo yet -- download it alongside the manifest
+      // (recomputed fresh from the crop definition, since we don't persist the rendered PNG)
+      const imgUrl = await getItemImgUrl(city, it.sheet, it.pieceId);
       pieceDownloads++;
-      setTimeout(() => downloadDataUrlAsFile(fname, e.imgUrl), pieceDownloads * 200);
+      setTimeout(() => downloadDataUrlAsFile(fname, imgUrl), pieceDownloads * 200);
     }
-  });
+  }
   downloadJSON(city + '_manifest.json', manifest);
 }
 
@@ -291,14 +312,17 @@ const opacityEl = document.getElementById('opacity');
 const previewAllEl = document.getElementById('previewAll');
 const previewLayer = L.layerGroup().addTo(map);
 
-function redrawPreview(){
+let previewGen = 0; // bumped on every call so a slow/stale async redraw doesn't clobber a newer one
+async function redrawPreview(){
+  const gen = ++previewGen;
   previewLayer.clearLayers();
   if (!previewAllEl.checked || !cur) return;
   const ordered = savedItemsOrdered(cur.city); // bottom-of-stack first; later addTo = drawn on top
   for (const it of ordered){
     const key = itemKey(cur.city, it.sheet, it.pieceId);
     const e = saved[key];
-    const url = e.imgUrl || ('images/' + it.s.file);
+    const url = await getItemImgUrl(cur.city, it.sheet, it.pieceId);
+    if (gen !== previewGen) return; // a newer redrawPreview() call superseded this one
     const ov = L.imageOverlay.rotated(url, L.latLng(e.topleft), L.latLng(e.topright), L.latLng(e.bottomleft), {
       opacity: opacityEl.value/100, interactive:false
     });
@@ -518,8 +542,12 @@ document.getElementById('saveBtn').onclick = () => {
   const c = cornersFromState(cur.state);
   const key = itemKey(cur.city, cur.sheet, cur.pieceId);
   const order = saved[key] ? saved[key].order : nextOrder(cur.city);
-  saved[key] = { topleft: c.topleft, topright: c.topright, bottomleft: c.bottomleft, state: cur.state, order, imgUrl: cur.imgUrl };
-  saveLocal();
+  // NOTE: we deliberately do NOT persist imgUrl here -- for split pieces it's a full
+  // base64-encoded PNG and storing it blows past the browser's localStorage quota
+  // (which then silently breaks ALL future saves, not just this one). It's cheap to
+  // recompute from the crop definition on load/export instead (see getItemImgUrl).
+  saved[key] = { topleft: c.topleft, topright: c.topright, bottomleft: c.bottomleft, state: cur.state, order };
+  if (!saveLocal()) return; // storage full -- bail out rather than pretending this saved
   renderList();
   redrawPreview();
   populateSheetSel(cur.city);

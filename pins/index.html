@@ -158,8 +158,23 @@ let placements = {}; // key "id" -> {lat, lon}
 function loadLocal(){
   try { const raw = localStorage.getItem(LS_KEY); if (raw) placements = JSON.parse(raw); } catch(e){}
 }
+let saveFlashTimer = null;
+function flashSaved(){
+  const el = document.getElementById('status');
+  if (!el) return;
+  el.textContent = 'Saved ✓';
+  el.style.color = 'var(--ok)';
+  clearTimeout(saveFlashTimer);
+  saveFlashTimer = setTimeout(() => { el.textContent = ''; el.style.color = ''; }, 1500);
+}
 function saveLocal(){
-  try { localStorage.setItem(LS_KEY, JSON.stringify(placements)); } catch(e){}
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify(placements));
+    flashSaved();
+  } catch(e){
+    const el = document.getElementById('status');
+    if (el){ el.textContent = 'SAVE FAILED -- tell Claude'; el.style.color = 'var(--warn)'; }
+  }
 }
 loadLocal();
 
@@ -172,7 +187,13 @@ function loadCustom(){
   try { const raw = localStorage.getItem(CUSTOM_LS_KEY); if (raw) customPins = JSON.parse(raw); } catch(e){}
 }
 function saveCustom(){
-  try { localStorage.setItem(CUSTOM_LS_KEY, JSON.stringify(customPins)); } catch(e){}
+  try {
+    localStorage.setItem(CUSTOM_LS_KEY, JSON.stringify(customPins));
+    flashSaved();
+  } catch(e){
+    const el = document.getElementById('status');
+    if (el){ el.textContent = 'SAVE FAILED -- tell Claude'; el.style.color = 'var(--warn)'; }
+  }
 }
 loadCustom();
 function allPins(city){

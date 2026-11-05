@@ -183,6 +183,22 @@ function loadLocal(){
     const raw = localStorage.getItem(LS_KEY);
     if (raw) saved = JSON.parse(raw);
   } catch(e){}
+  // One-time cleanup: entries saved before this fix may still be carrying a huge
+  // embedded base64 image (see saveLocal/getItemImgUrl). Strip it from whatever's
+  // already in memory and persist the slimmed-down version right away, so a save
+  // that touches just one sheet isn't still re-writing everyone else's old bloat
+  // (and failing because of it) on every write.
+  let strippedAny = false;
+  for (const key of Object.keys(saved)){
+    if (saved[key] && 'imgUrl' in saved[key]){
+      delete saved[key].imgUrl;
+      strippedAny = true;
+    }
+  }
+  if (strippedAny){
+    try { localStorage.setItem(LS_KEY, JSON.stringify(saved)); }
+    catch(e){ /* still over quota even after stripping -- saveLocal() will alert on the next real save */ }
+  }
 }
 function saveLocal(){
   try {

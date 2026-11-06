@@ -256,7 +256,12 @@ function selectPin(id){
   renderList();
   if (p){
     const pos = pinPos(p);
-    if (!map.getBounds().contains(pos)) map.panTo(pos);
+    // Always zoom in close and center on the selected pin. A bounds-check-only
+    // pan did nothing at the default city-wide view, since every pin is
+    // technically "on screen" there (just tiny, in a dense downtown cluster)
+    // -- which made list clicks silently no-op and left buildings impossible
+    // to actually find.
+    map.setView(pos, Math.max(map.getZoom(), 19), {animate: true});
   }
 }
 

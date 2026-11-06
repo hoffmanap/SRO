@@ -18,6 +18,24 @@
   "placement": "hand-placed via georeferencer tool"
  },
  {
+  "sheet": "4",
+  "file": "sheet_4.webp",
+  "topleft": [
+   31.464418760904067,
+   -100.43600340517342
+  ],
+  "topright": [
+   31.46159973163946,
+   -100.43478598589404
+  ],
+  "bottomleft": [
+   31.463588003227784,
+   -100.43864736562271
+  ],
+  "order": 2,
+  "placement": "hand-placed via georeferencer tool"
+ },
+ {
   "sheet": "3",
   "file": "sheet_3.webp",
   "topleft": [
@@ -36,22 +54,40 @@
   "placement": "hand-placed via georeferencer tool"
  },
  {
-  "sheet": "4",
-  "file": "sheet_4.webp",
+  "sheet": "17c",
+  "file": "sheet_17c.png",
   "topleft": [
-   31.464418760904067,
-   -100.43600340517342
+   31.462623676477918,
+   -100.43221921910143
   ],
   "topright": [
-   31.46159973163946,
-   -100.43478598589404
+   31.46072453777863,
+   -100.4313898090276
   ],
   "bottomleft": [
-   31.463588003227784,
-   -100.43864736562271
+   31.461919012183337,
+   -100.43443679772291
   ],
-  "order": 2,
-  "placement": "hand-placed via georeferencer tool"
+  "order": 12,
+  "placement": "hand-placed via georeferencer tool (split piece c of sheet 17)"
+ },
+ {
+  "sheet": "17a",
+  "file": "sheet_17a.png",
+  "topleft": [
+   31.468030772652284,
+   -100.43722997736246
+  ],
+  "topright": [
+   31.468802494861382,
+   -100.43482035405722
+  ],
+  "bottomleft": [
+   31.466785586430202,
+   -100.4366818069688
+  ],
+  "order": 28,
+  "placement": "hand-placed via georeferencer tool (split piece a of sheet 17)"
  },
  {
   "sheet": "14",
@@ -123,6 +159,24 @@
    -100.4364967351302
   ],
   "order": 6,
+  "placement": "hand-placed via georeferencer tool"
+ },
+ {
+  "sheet": "8",
+  "file": "sheet_8.webp",
+  "topleft": [
+   31.4681982811881,
+   -100.4408186204407
+  ],
+  "topright": [
+   31.465794531767607,
+   -100.43926745602711
+  ],
+  "bottomleft": [
+   31.466503747134297,
+   -100.44442802718062
+  ],
+  "order": 15,
   "placement": "hand-placed via georeferencer tool"
  },
  {
@@ -216,24 +270,6 @@
   "placement": "hand-placed via georeferencer tool"
  },
  {
-  "sheet": "17c",
-  "file": "sheet_17c.png",
-  "topleft": [
-   31.462623676477918,
-   -100.43221921910143
-  ],
-  "topright": [
-   31.46072453777863,
-   -100.4313898090276
-  ],
-  "bottomleft": [
-   31.461919012183337,
-   -100.43443679772291
-  ],
-  "order": 12,
-  "placement": "hand-placed via georeferencer tool (split piece c of sheet 17)"
- },
- {
   "sheet": "18",
   "file": "sheet_18.webp",
   "topleft": [
@@ -268,24 +304,6 @@
   ],
   "order": 14,
   "placement": "hand-placed via georeferencer tool (split piece d of sheet 6)"
- },
- {
-  "sheet": "8",
-  "file": "sheet_8.webp",
-  "topleft": [
-   31.4681982811881,
-   -100.4408186204407
-  ],
-  "topright": [
-   31.465794531767607,
-   -100.43926745602711
-  ],
-  "bottomleft": [
-   31.466503747134297,
-   -100.44442802718062
-  ],
-  "order": 15,
-  "placement": "hand-placed via georeferencer tool"
  },
  {
   "sheet": "12",
@@ -502,23 +520,5 @@
   ],
   "order": 27,
   "placement": "hand-placed via georeferencer tool (split piece b of sheet 19)"
- },
- {
-  "sheet": "17a",
-  "file": "sheet_17a.png",
-  "topleft": [
-   31.468030772652284,
-   -100.43722997736246
-  ],
-  "topright": [
-   31.468802494861382,
-   -100.43482035405722
-  ],
-  "bottomleft": [
-   31.466785586430202,
-   -100.4366818069688
-  ],
-  "order": 28,
-  "placement": "hand-placed via georeferencer tool (split piece a of sheet 17)"
  }
 ]
